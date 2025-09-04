@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import HomePage from '@/app/page';
+import HomePage from '@/app/[locale]/page';
 
 describe('HomePage', () => {
   it('renders intro text', () => {
