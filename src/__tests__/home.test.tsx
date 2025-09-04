@@ -11,8 +11,8 @@ jest.mock('react-firebase-hooks/auth', () => ({
 }));
 
 describe('HomePage', () => {
-  it('renders intro text', () => {
+  it('renders register', () => {
     render(<HomePage />);
-    expect(screen.getByText(/get started by editing/i)).toBeInTheDocument();
+    expect(screen.getByText(/register/i)).toBeInTheDocument();
   });
 });
