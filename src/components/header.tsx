@@ -19,7 +19,7 @@ export default function Header() {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window,
+    target: typeof window !== 'undefined' ? window : undefined,
   });
 
   return (
