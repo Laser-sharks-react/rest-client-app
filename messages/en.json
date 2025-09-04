@@ -13,6 +13,16 @@
     "alreadyHaveAccount": "Already have an account?",
     "login": "Log In"
   },
+  "NotFoundPage": {
+    "title": "404 - Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "goHome": "Go to Home"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "Try refreshing the page or go back to the home page.",
+    "goHome": "Go to Home"
+  },
   "Header": {
     "appName": "REST Client",
     "home": "Home",
