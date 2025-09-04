@@ -1,5 +1,26 @@
 {
   "HomePage": {
     "title": "Welcome!"
+  },
+  "LoginPage": {
+    "title": "Log In",
+    "noAccount": "Don't have an account?",
+    "signup": "Sign Up",
+    "login": "Log In"
+  },
+  "SignUpPage": {
+    "title": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Log In"
+  },
+  "Header": {
+    "appName": "REST Client",
+    "home": "Home",
+    "signup": "Sign Up",
+    "login": "Log In"
+  },
+  "Footer": {
+    "rss": "Rolling Scopes School",
+    "github": "GitHub"
   }
 }
