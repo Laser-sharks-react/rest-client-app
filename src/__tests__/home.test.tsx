@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import HomePage from '@/app/page';
 
 describe('HomePage', () => {
-  it('renders intro text', () => {
+  it('renders home page', () => {
     render(<HomePage />);
-    expect(screen.getByText(/get started by editing/i)).toBeInTheDocument();
+    expect(screen.getByText(/register/i)).toBeInTheDocument();
   });
 });
