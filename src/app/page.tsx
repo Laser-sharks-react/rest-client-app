@@ -1,6 +1,6 @@
 'use client';
 
-import { auth, logout, registerWithEmailAndPassword } from '@/firebase';
+import { auth, registerWithEmailAndPassword } from '@/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
 
