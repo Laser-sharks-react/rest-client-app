@@ -19,6 +19,7 @@
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
     "@mui/material-nextjs": "^7.3.2",
+    "classnames": "^2.5.1",
     "next": "15.5.2",
     "next-intl": "^4.3.5",
     "react": "19.1.0",
