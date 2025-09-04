@@ -1,8 +1,9 @@
 import NextLink from 'next/link';
+
 import Image from 'next/image';
 import RSSLogo from '../../public/rss-logo.svg';
 
-import { Box, Container, Stack, IconButton } from '@mui/material';
+import { Box, Container, Stack, IconButton, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { useTranslations } from 'next-intl';
 
@@ -25,6 +26,13 @@ export function Footer() {
             <GitHubIcon />
           </IconButton>
 
+          <Typography
+            className="flex items-center text-center"
+            variant="body2"
+            color="textSecondary"
+          >
+            2025
+          </Typography>
           <IconButton
             component={NextLink}
             target="_blank"
