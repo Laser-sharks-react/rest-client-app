@@ -1,0 +1,36 @@
+{
+  "HomePage": {
+    "title": "Welcome!"
+  },
+  "LoginPage": {
+    "title": "Log In",
+    "noAccount": "Don't have an account?",
+    "signup": "Sign Up",
+    "login": "Log In"
+  },
+  "SignUpPage": {
+    "title": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Log In"
+  },
+  "NotFoundPage": {
+    "title": "404 - Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "goHome": "Go to Home"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "Try refreshing the page or go back to the home page.",
+    "goHome": "Go to Home"
+  },
+  "Header": {
+    "appName": "REST Client",
+    "home": "Home",
+    "signup": "Sign Up",
+    "login": "Log In"
+  },
+  "Footer": {
+    "rss": "Rolling Scopes School",
+    "github": "GitHub"
+  }
+}
