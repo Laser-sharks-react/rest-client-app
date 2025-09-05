@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import HomePage from '@/app/page';
+import HomePage from '@/app/[locale]/page';
+import { NextIntlClientProvider } from 'next-intl';
+import messages from '../../messages/en.json';
 
 jest.mock('@/firebase', () => ({
   auth: {},
@@ -11,8 +13,12 @@ jest.mock('react-firebase-hooks/auth', () => ({
 }));
 
 describe('HomePage', () => {
-  it('renders register', () => {
-    render(<HomePage />);
-    expect(screen.getByText(/register/i)).toBeInTheDocument();
+  it('renders intro text', () => {
+    render(
+      <NextIntlClientProvider locale="en" messages={messages}>
+        <HomePage />
+      </NextIntlClientProvider>
+    );
+    expect(screen.getByText(messages.HomePage.title)).toBeInTheDocument();
   });
 });
