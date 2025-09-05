@@ -5,6 +5,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { NextIntlClientProvider } from 'next-intl';
 import { MainLayout } from '@/components/main-layout';
 import { getMessages } from 'next-intl/server';
+import { CssBaseline } from '@mui/material';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Rest Client App',
-  description: 'by Laser Sharks',
+  title: process.env.APP_NAME,
+  description: `by ${process.env.TEAM_NAME}`,
 };
 
 type Props = {
@@ -37,6 +38,7 @@ export default async function RootLayout({ children, params }: Props) {
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+            <CssBaseline />
             <MainLayout>{children}</MainLayout>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>

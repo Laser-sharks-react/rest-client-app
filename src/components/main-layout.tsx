@@ -7,10 +7,10 @@ interface Props {
 
 export function MainLayout({ children }: Props) {
   return (
-    <div>
+    <>
       <Header />
-      {children}
+      <main>{children}</main>
       <Footer />
-    </div>
+    </>
   );
 }
