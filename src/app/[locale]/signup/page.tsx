@@ -13,8 +13,6 @@ export default function SignUp() {
         {t('title')}
       </Typography>
 
-      
-
       <Typography>{t('alreadyHaveAccount')}</Typography>
       <Link component={IntlLink} href={ROUTES.login}>
         {t('login')}

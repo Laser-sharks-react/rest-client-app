@@ -7,33 +7,31 @@ import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
-import { auth, registerWithEmailAndPassword } from '@/firebase';
+import { auth, logInWithEmailAndPassword } from '@/firebase';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
   const [user, loading, error] = useAuthState(auth);
-  const [success, setSuccess] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const router = useRouter();
 
-  const handleRegister = async () => {
+  const handleLogin = async () => {
     try {
-      await registerWithEmailAndPassword(name, email, password);
-      setSuccess(true);
+      await logInWithEmailAndPassword(email, password);
     } catch (err: unknown) {
       console.error(err);
-      setSuccess(false);
     }
   };
 
   useEffect(() => {
     if (loading) return;
     if (user) {
-      setSuccess(true);
+      void router.push(ROUTES.rest);
     }
-    if (error) setSuccess(false);
-  }, [user, loading, error]);
+  }, [loading, router, user]);
 
   return (
     <Container className="h-screen">
@@ -64,15 +62,10 @@ export default function Login() {
         />
         <button
           className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
-          onClick={handleRegister}
+          onClick={handleLogin}
         >
-          Register
+          Login
         </button>
-        {success && (
-          <p className="text-green-600 font-medium">
-            ✅ User successfully registered!
-          </p>
-        )}
         {error && (
           <p className="text-red-600 font-medium">
             ❌ {error.message || 'An error occurred'}
