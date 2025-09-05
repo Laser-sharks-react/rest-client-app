@@ -3,6 +3,15 @@ import HomePage from '@/app/[locale]/page';
 import { NextIntlClientProvider } from 'next-intl';
 import messages from '../../messages/en.json';
 
+jest.mock('@/firebase', () => ({
+  auth: {},
+  registerWithEmailAndPassword: jest.fn(),
+}));
+
+jest.mock('react-firebase-hooks/auth', () => ({
+  useAuthState: () => [null, false, null],
+}));
+
 describe('HomePage', () => {
   it('renders intro text', () => {
     render(
