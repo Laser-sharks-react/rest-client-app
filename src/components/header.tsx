@@ -22,8 +22,10 @@ export default function Header() {
     target: typeof window !== 'undefined' ? window : undefined,
   });
 
+  const appName = process.env.NEXT_PUBLIC_APP_NAME;
+
   return (
-    <AppBar position="sticky" color="default" elevation={0}>
+    <AppBar position="sticky" color="inherit" elevation={0}>
       <Toolbar
         className={cx(
           'flex justify-between transition-all duration-300 ease-in-out',
@@ -34,7 +36,7 @@ export default function Header() {
         )}
       >
         <Typography component={NextLink} href={ROUTES.home}>
-          {t('appName')}
+          {appName}
         </Typography>
 
         <Button

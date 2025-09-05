@@ -3,9 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { NextIntlClientProvider } from 'next-intl';
-import { MainLayout } from '@/components/main-layout';
 import { getMessages } from 'next-intl/server';
 import { CssBaseline } from '@mui/material';
+import Header from '@/components/header';
+import { Footer } from '@/components/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: process.env.APP_NAME,
-  description: `by ${process.env.TEAM_NAME}`,
+  title: process.env.NEXT_PUBLIC_APP_NAME,
+  description: `by ${process.env.NEXT_PUBLIC_TEAM_NAME}`,
 };
 
 type Props = {
@@ -39,7 +40,9 @@ export default async function RootLayout({ children, params }: Props) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <CssBaseline />
-            <MainLayout>{children}</MainLayout>
+            <Header />
+            <main>{children}</main>
+            <Footer />
           </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
