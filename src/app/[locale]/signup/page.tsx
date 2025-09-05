@@ -12,6 +12,9 @@ export default function SignUp() {
       <Typography variant="h4" component="h2" gutterBottom>
         {t('title')}
       </Typography>
+
+      
+
       <Typography>{t('alreadyHaveAccount')}</Typography>
       <Link component={IntlLink} href={ROUTES.login}>
         {t('login')}
