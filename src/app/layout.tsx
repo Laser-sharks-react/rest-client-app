@@ -31,6 +31,7 @@ export default async function RootLayout({ children }: Props) {
       >
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <CssBaseline />
+
           {children}
         </AppRouterCacheProvider>
       </body>
