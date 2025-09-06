@@ -27,6 +27,7 @@ export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const [user, loading] = useAuthState(auth);
   const {
@@ -39,6 +40,7 @@ export default function Login() {
     try {
       await login(data.email, data.password);
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
+      router.replace(ROUTES.home);
     } catch (err) {
       enqueueSnackbar(
         `${t('loginUserError')} ${err instanceof Error ? err.message : ''}`,
