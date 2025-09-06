@@ -34,7 +34,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const login = async (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password);
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
 const register = async (name: string, email: string, password: string) => {
