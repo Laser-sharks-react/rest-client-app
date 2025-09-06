@@ -22,11 +22,14 @@ import { useSignUpForm } from '@/modules/auth/useSignUpForm';
 import type { SignUpFormValues } from '@/modules/auth/types';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useRouter } from 'next/router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function SignUp() {
   const t = useTranslations('SignUpPage');
   const tForm = useTranslations('Form');
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const {
     register,
@@ -37,7 +40,12 @@ export default function SignUp() {
   const handleSignUp = async (data: SignUpFormValues) => {
     try {
       await registerUser(data.name, data.email, data.password);
+
+      if (!auth.currentUser) {
+        await signInWithEmailAndPassword(auth, data.email, data.password);
+      }
       enqueueSnackbar(t('signupUserSuccess'), { variant: 'success' });
+      router.replace(ROUTES.home);
     } catch (err) {
       enqueueSnackbar(
         `${t('signupUserError')} ${err instanceof Error ? err.message : ''}`,
