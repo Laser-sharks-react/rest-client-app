@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 
-export default async function Page() {
-  const t = await getTranslations('HomePage');
+export default function Page() {
+  const t = useTranslations('HomePage');
   return <Container className="h-[100dvh]">{t('title')}</Container>;
 }
