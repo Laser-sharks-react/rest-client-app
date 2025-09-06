@@ -27,10 +27,16 @@
     "appName": "REST Client",
     "home": "Главная",
     "signup": "Регистрирация",
-    "login": "Войти"
+    "login": "Войти",
+    "logout": "Выйти"
   },
   "Footer": {
     "rss": "Rolling Scopes School",
     "github": "GitHub"
+  },
+  "RestClientLayout": {
+    "request": "Запрос",
+    "history": "История",
+    "variables": "Переменные"
   }
 }

@@ -4,4 +4,7 @@ export const ROUTES = {
   login: '/login',
   proxy: '/api/proxy',
   rest: '/rest',
+  request: '/request',
+  history: '/history',
+  variables: '/variables',
 };

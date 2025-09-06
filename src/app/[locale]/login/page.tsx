@@ -29,7 +29,7 @@ export default function Login() {
   useEffect(() => {
     if (loading) return;
     if (user) {
-      void router.push(ROUTES.rest);
+      void router.push(ROUTES.home);
     }
   }, [loading, router, user]);
 
