@@ -22,6 +22,7 @@ import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/modules/auth/useLoginForm';
 import type { FormValues } from '@/modules/auth/types';
+import { redirect } from 'next/navigation';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
@@ -35,6 +36,10 @@ export default function Login() {
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
   } = useLoginForm();
+
+  if (user) {
+    redirect(ROUTES.home);
+  }
 
   const handleRegister = async (data: FormValues) => {
     try {
@@ -75,7 +80,12 @@ export default function Login() {
               error={!!errors.email}
             />
             <FormHelperText
-              sx={{ minHeight: 24, m: 0, fontSize: '10px', lineHeight: '1.2' }}
+              sx={{
+                minHeight: 24,
+                m: 0,
+                fontSize: '10px',
+                lineHeight: '1.2',
+              }}
               error={!!errors.email}
             >
               {errors.email?.message ?? ' '}
@@ -113,7 +123,12 @@ export default function Login() {
               }}
             />
             <FormHelperText
-              sx={{ minHeight: 24, m: 0, fontSize: '10px', lineHeight: '1.2' }}
+              sx={{
+                minHeight: 24,
+                m: 0,
+                fontSize: '10px',
+                lineHeight: '1.2',
+              }}
               error={!!errors.password}
             >
               {errors.password?.message ?? ' '}
