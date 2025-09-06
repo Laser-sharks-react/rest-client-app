@@ -12,12 +12,12 @@ import { enqueueSnackbar } from 'notistack';
 
 export default function SignUp() {
   const t = useTranslations('SignUpPage');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const handleLogin = async () => {
+  const handleSignUp = async () => {
     try {
       await register(name, email, password);
       enqueueSnackbar(t('signupUserSuccess'), { variant: 'success' });
@@ -54,7 +54,8 @@ export default function SignUp() {
       />
       <Button
         className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
-        onClick={handleLogin}
+        onClick={handleSignUp}
+        disabled={loading}
       >
         {t('signup')}
       </Button>

@@ -1,21 +1,20 @@
 'use client';
 
-import { Link as IntlLink } from '@/i18n/navigation';
+import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import { ROUTES } from '@/sources/routes';
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState } from 'react';
-import { auth, login, register } from '@/firebase';
+import { auth, login } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
 
   const handleRegister = async () => {
     try {
