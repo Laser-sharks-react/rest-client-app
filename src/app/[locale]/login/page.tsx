@@ -1,28 +1,31 @@
 'use client';
 
-import { Link as IntlLink } from '@/i18n/navigation';
+import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import { ROUTES } from '@/sources/routes';
-import { Container, Typography } from '@mui/material';
+import { Button, Container, TextField, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
-import { auth, logInWithEmailAndPassword } from '@/firebase';
-import { useRouter } from 'next/navigation';
+import { auth, login } from '@/firebase';
+import { enqueueSnackbar } from 'notistack';
+import router from 'next/router';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const router = useRouter();
 
   const handleLogin = async () => {
     try {
-      await logInWithEmailAndPassword(email, password);
+      await login(email, password);
+      enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
     } catch (err: unknown) {
-      console.error(err);
+      enqueueSnackbar(
+        `${t('loginUserError')} ${err instanceof Error ? err.message : ''}`,
+        { variant: 'error' }
+      );
     }
   };
 
@@ -38,40 +41,26 @@ export default function Login() {
       <Typography variant="h4" component="h2" gutterBottom>
         {t('title')}
       </Typography>
-      <div className="flex flex-col gap-y-4 items-center justify-center min-h-screen bg-gray-100">
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          placeholder="Full Name"
-          className="text-black"
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-          className="text-black"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          placeholder="Password"
-          className="text-black"
-        />
-        <button
-          className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-        {error && (
-          <p className="text-red-600 font-medium">
-            ❌ {error.message || 'An error occurred'}
-          </p>
-        )}
-      </div>
+
+      <TextField
+        type="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        label="E-mail Address"
+      />
+      <TextField
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        label="Password"
+      />
+      <Button
+        disabled={loading}
+        className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
+        onClick={handleLogin}
+      >
+        {t('login')}
+      </Button>
       <Typography>{t('noAccount')}</Typography>
       <Link component={IntlLink} href={ROUTES.signup}>
         {t('signup')}

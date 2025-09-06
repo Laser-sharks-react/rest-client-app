@@ -2,17 +2,27 @@
   "HomePage": {
     "title": "Добро пожаловать!"
   },
+
   "LoginPage": {
     "title": "Войти",
     "noAccount": "Нет аккаунта?",
     "signup": "Зарегистрироваться",
-    "login": "Войти"
+    "login": "Войти",
+    "loginUser": "Входим...",
+    "loginUserSuccess": "Вход выполнен успешно.",
+    "loginUserError": "Ошибка входа пользователя."
   },
+
   "SignUpPage": {
     "title": "Регистрация",
     "alreadyHaveAccount": "Уже есть аккаунт?",
-    "login": "Войти"
+    "login": "Войти",
+    "signup": "Зарегистрироваться",
+    "signupUser": "Регистрируем нового пользователя...",
+    "signupUserSuccess": "Пользователь успешно зарегистрирован.",
+    "signupUserError": "Ошибка регистрации пользователя."
   },
+
   "NotFoundPage": {
     "title": "404 - Страница не найдена",
     "description": "Страница, которую вы ищете, не существует.",
@@ -34,9 +44,24 @@
     "rss": "Rolling Scopes School",
     "github": "GitHub"
   },
+
   "RestClientLayout": {
     "request": "Запрос",
     "history": "История",
     "variables": "Переменные"
+  },
+
+  "snackbar": {
+    "passwordReset": "Отправка письма для сброса пароля...",
+    "passwordResetSuccess": "Письмо для сброса пароля отправлено.",
+    "passwordResetError": "Ошибка сброса пароля.",
+
+    "requestLog": "Сохраняем запрос...",
+    "requestLogSuccess": "Запрос успешно сохранен.",
+    "requestLogError": "Ошибка сохранения запроса.",
+
+    "logout": "Выход...",
+    "logoutSuccess": "Выход выполнен успешно.",
+    "logoutError": "Ошибка выхода."
   }
 }

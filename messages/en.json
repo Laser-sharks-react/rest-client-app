@@ -2,27 +2,53 @@
   "HomePage": {
     "title": "Welcome!"
   },
+
   "LoginPage": {
     "title": "Log In",
     "noAccount": "Don't have an account?",
     "signup": "Sign Up",
-    "login": "Log In"
+    "login": "Log In",
+    "loginUser": "Logging in user...",
+    "loginUserSuccess": "User logged in successfully.",
+    "loginUserError": "User login failed. "
   },
+
   "SignUpPage": {
     "title": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
-    "login": "Log In"
+    "login": "Log In",
+    "signup": "Sign Up",
+    "signupUser": "Signing up user...",
+    "signupUserSuccess": "User signed up successfully.",
+    "signupUserError": "User sign up failed."
   },
+
   "NotFoundPage": {
     "title": "404 - Page Not Found",
     "description": "The page you are looking for does not exist.",
     "goHome": "Go to Home"
   },
+
   "ErrorPage": {
     "title": "Something went wrong",
     "description": "Try refreshing the page or go back to the home page.",
     "goHome": "Go to Home"
   },
+
+  "snackbar": {
+    "passwordReset": "Sending password reset email...",
+    "passwordResetSuccess": "Password reset email sent.",
+    "passwordResetError": "Password reset failed.",
+
+    "requestLog": "Saving request...",
+    "requestLogSuccess": "Request saved successfully.",
+    "requestLogError": "Request saving failed.",
+
+    "logout": "Logging out...",
+    "logoutSuccess": "Logged out successfully.",
+    "logoutError": "Logout failed."
+  },
+
   "Header": {
     "appName": "REST Client",
     "home": "Home",

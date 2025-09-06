@@ -23,6 +23,7 @@
     "firebase": "^12.2.1",
     "next": "15.5.2",
     "next-intl": "^4.3.5",
+    "notistack": "^3.0.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-firebase-hooks": "^5.1.1",
