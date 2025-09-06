@@ -44,13 +44,12 @@ export default function Login() {
           gutterBottom
           className="text-[22px] leading-snug text-black"
         >
-          {t('title')}
+          {t('title')}{' '}
         </Typography>
         <form className="rounded-xl border border-zinc-300 p-5 space-y-3">
           <FormControl fullWidth>
-            <FormLabel htmlFor="email">{t('e-mail')}</FormLabel>
+            <FormLabel>{t('e-mail')}</FormLabel>
             <TextField
-              id="email"
               type="email"
               variant="outlined"
               value={email}
