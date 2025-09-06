@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import HomePage from '@/app/[locale]/page';
+import HomePage from '@/app/[locale]/signup/page';
 import { NextIntlClientProvider } from 'next-intl';
 import messages from '../../messages/en.json';
 
