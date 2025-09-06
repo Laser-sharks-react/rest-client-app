@@ -13,7 +13,7 @@ export function LangSelector() {
 
   return (
     <>
-      <Button variant="contained" onClick={e => setAnchorEl(e.currentTarget)}>
+      <Button onClick={e => setAnchorEl(e.currentTarget)} sx={{ minWidth: 0 }}>
         <LanguageIcon />
       </Button>
 

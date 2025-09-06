@@ -6,27 +6,35 @@ import { Button, Container, TextField, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { auth, login } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
+  const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async () => {
+  const handleLogin = async () => {
     try {
       await login(email, password);
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
-    } catch (err) {
+    } catch (err: unknown) {
       enqueueSnackbar(
         `${t('loginUserError')} ${err instanceof Error ? err.message : ''}`,
         { variant: 'error' }
       );
     }
   };
+
+  useEffect(() => {
+    if (loading) return;
+    if (user) {
+      void router.push(ROUTES.home);
+    }
+  }, [loading, router, user]);
 
   return (
     <Container className="h-screen">
@@ -49,7 +57,7 @@ export default function Login() {
       <Button
         disabled={loading}
         className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
-        onClick={handleRegister}
+        onClick={handleLogin}
       >
         {t('login')}
       </Button>
