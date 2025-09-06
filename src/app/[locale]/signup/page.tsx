@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { Link as IntlLink } from '@/i18n/navigation';
+import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import Link from '@mui/material/Link';
 import { ROUTES } from '@/sources/routes';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -22,7 +22,7 @@ import { useSignUpForm } from '@/modules/auth/useSignUpForm';
 import type { SignUpFormValues } from '@/modules/auth/types';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useRouter } from 'next/router';
+
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function SignUp() {
