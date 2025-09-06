@@ -12,6 +12,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { ROUTES } from '@/sources/routes';
 import { useTranslations } from 'next-intl';
 import cx from 'classnames';
+import { LangSelector } from './lang-selector';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -38,6 +39,7 @@ export default function Header() {
         <Typography component={NextLink} href={ROUTES.home}>
           {appName}
         </Typography>
+        <LangSelector />
 
         <Button
           component={NextLink}
