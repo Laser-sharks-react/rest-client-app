@@ -7,6 +7,7 @@ import { getMessages } from 'next-intl/server';
 import { CssBaseline } from '@mui/material';
 import Header from '@/components/header';
 import { Footer } from '@/components/footer';
+import { ClientProviders } from '@/components/client-layout';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -40,6 +41,7 @@ export default async function RootLayout({ children, params }: Props) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <CssBaseline />
+            <ClientProviders />
             <Header />
             <main>{children}</main>
             <Footer />
