@@ -10,7 +10,9 @@
     "login": "Log In",
     "loginUser": "Logging in user...",
     "loginUserSuccess": "User logged in successfully.",
-    "loginUserError": "User login failed. "
+    "loginUserError": "User login failed.",
+    "e-mail": "E-mail",
+    "password": "Password"
   },
 
   "SignUpPage": {
@@ -20,7 +22,10 @@
     "signup": "Sign Up",
     "signupUser": "Signing up user...",
     "signupUserSuccess": "User signed up successfully.",
-    "signupUserError": "User sign up failed."
+    "signupUserError": "User sign up failed.",
+    "name": "Your name",
+    "e-mail": "E-mail",
+    "password": "Password"
   },
 
   "NotFoundPage": {

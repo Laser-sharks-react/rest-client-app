@@ -2,7 +2,14 @@
 
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import { ROUTES } from '@/sources/routes';
-import { Button, Container, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  FormControl,
+  FormLabel,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -29,34 +36,56 @@ export default function Login() {
   };
 
   return (
-    <Container className="h-screen">
-      <Typography variant="h4" component="h2" gutterBottom>
-        {t('title')}
-      </Typography>
+    <Container className="h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-4">
+        <Typography
+          variant="h4"
+          component="h2"
+          gutterBottom
+          className="text-[22px] leading-snug text-black"
+        >
+          {t('title')}
+        </Typography>
+        <form className="rounded-xl border border-zinc-300 p-5 space-y-3">
+          <FormControl fullWidth>
+            <FormLabel htmlFor="email">{t('e-mail')}</FormLabel>
+            <TextField
+              id="email"
+              type="email"
+              variant="outlined"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              size="small"
+            />
+          </FormControl>
 
-      <TextField
-        type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        label="E-mail Address"
-      />
-      <TextField
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        label="Password"
-      />
-      <Button
-        disabled={loading}
-        className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
-        onClick={handleRegister}
-      >
-        {t('login')}
-      </Button>
-      <Typography>{t('noAccount')}</Typography>
-      <Link component={IntlLink} href={ROUTES.signup}>
-        {t('signup')}
-      </Link>
+          <FormControl fullWidth>
+            <FormLabel htmlFor="password">{t('password')}</FormLabel>
+            <TextField
+              id="password"
+              type="password"
+              variant="outlined"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              size="small"
+            />
+          </FormControl>
+          <Button
+            disabled={loading}
+            className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
+            onClick={handleRegister}
+            variant="contained"
+          >
+            {t('login')}
+          </Button>
+          <Typography>
+            {t('noAccount')}
+            <Link component={IntlLink} href={ROUTES.signup} className="ml-4">
+              {t('signup')}
+            </Link>
+          </Typography>
+        </form>
+      </div>
     </Container>
   );
 }
