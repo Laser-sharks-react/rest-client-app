@@ -10,7 +10,9 @@
     "login": "Войти",
     "loginUser": "Входим...",
     "loginUserSuccess": "Вход выполнен успешно.",
-    "loginUserError": "Ошибка входа пользователя."
+    "loginUserError": "Ошибка входа пользователя.",
+    "e-mail": "E-mail",
+    "password": "Пароль"
   },
 
   "SignUpPage": {
@@ -20,7 +22,10 @@
     "signup": "Зарегистрироваться",
     "signupUser": "Регистрируем нового пользователя...",
     "signupUserSuccess": "Пользователь успешно зарегистрирован.",
-    "signupUserError": "Ошибка регистрации пользователя."
+    "signupUserError": "Ошибка регистрации пользователя.",
+    "name": "Ваше имя",
+    "e-mail": "E-mail",
+    "password": "Пароль"
   },
 
   "NotFoundPage": {

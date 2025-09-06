@@ -49,8 +49,9 @@ export default function SignUp() {
         </Typography>
         <form className="rounded-xl border border-zinc-300 p-5 space-y-3">
           <FormControl fullWidth>
-            <FormLabel>Full Name</FormLabel>
+            <FormLabel htmlFor="name">{t('name')}</FormLabel>
             <TextField
+              id="name"
               variant="outlined"
               value={name}
               onChange={e => setName(e.target.value)}
@@ -59,8 +60,9 @@ export default function SignUp() {
           </FormControl>
 
           <FormControl fullWidth>
-            <FormLabel>E-mail Address</FormLabel>
+            <FormLabel htmlFor="email">{t('e-mail')}</FormLabel>
             <TextField
+              id="email"
               type="email"
               variant="outlined"
               value={email}
@@ -70,8 +72,9 @@ export default function SignUp() {
           </FormControl>
 
           <FormControl fullWidth>
-            <FormLabel>Password</FormLabel>
+            <FormLabel htmlFor="password">{t('password')}</FormLabel>
             <TextField
+              id="password"
               type="password"
               variant="outlined"
               value={password}
