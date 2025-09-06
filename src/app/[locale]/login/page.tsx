@@ -9,10 +9,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
 import { auth, login } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
-import router from 'next/router';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
+  const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

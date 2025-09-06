@@ -42,11 +42,7 @@
 
     "requestLog": "Saving request...",
     "requestLogSuccess": "Request saved successfully.",
-    "requestLogError": "Request saving failed.",
-
-    "logout": "Logging out...",
-    "logoutSuccess": "Logged out successfully.",
-    "logoutError": "Logout failed."
+    "requestLogError": "Request saving failed."
   },
 
   "Header": {
@@ -54,7 +50,9 @@
     "home": "Home",
     "signup": "Sign Up",
     "login": "Log In",
-    "logout": "Log out"
+    "logout": "Log out",
+    "logoutSuccess": "Logged out successfully.",
+    "logoutError": "Logout failed."
   },
   "Footer": {
     "rss": "Rolling Scopes School",

@@ -1,3 +1,4 @@
+import { ClientProviders } from '@/components/client-layout';
 import { Footer } from '@/components/footer';
 import Header from '@/components/header';
 import { RestClientNavbar } from '@/components/rest-client-navbar';
@@ -15,6 +16,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { messages } = await getMessages();
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <ClientProviders />
       <Header />
       <RestClientNavbar />
       <main>{children}</main>

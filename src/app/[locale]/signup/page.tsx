@@ -2,7 +2,7 @@
 
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { Link as IntlLink } from '@/i18n/navigation';
+import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import Link from '@mui/material/Link';
 import { ROUTES } from '@/sources/routes';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -12,6 +12,7 @@ import { enqueueSnackbar } from 'notistack';
 
 export default function SignUp() {
   const t = useTranslations('SignUpPage');
+  const router = useRouter();
   const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +22,7 @@ export default function SignUp() {
     try {
       await register(name, email, password);
       enqueueSnackbar(t('signupUserSuccess'), { variant: 'success' });
+      if (user) router.replace(ROUTES.home);
     } catch (err) {
       enqueueSnackbar(
         `${t('signupUserError')} ${err instanceof Error ? err.message : ''}`,
@@ -61,7 +63,7 @@ export default function SignUp() {
         {t('signup')}
       </Button>
       <Typography>{t('alreadyHaveAccount')}</Typography>
-      
+
       <Link component={IntlLink} href={ROUTES.login}>
         {t('login')}
       </Link>

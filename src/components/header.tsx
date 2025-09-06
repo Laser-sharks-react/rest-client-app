@@ -16,6 +16,7 @@ import cx from 'classnames';
 import { LangSelector } from './lang-selector';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logout } from '@/firebase';
+import { enqueueSnackbar } from 'notistack';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -31,8 +32,12 @@ export default function Header() {
   const onLogout = () => {
     try {
       logout();
+      enqueueSnackbar(t('logoutSuccess'), { variant: 'success' });
     } catch (err) {
-      if (err instanceof Error) console.log(err.message);
+      enqueueSnackbar(
+        `${t('logoutError')} ${err instanceof Error ? err.message : ''}`,
+        { variant: 'error' }
+      );
     }
   };
 

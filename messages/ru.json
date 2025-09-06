@@ -38,7 +38,9 @@
     "home": "Главная",
     "signup": "Регистрирация",
     "login": "Войти",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "logoutSuccess": "Выход выполнен успешно.",
+    "logoutError": "Ошибка выхода."
   },
   "Footer": {
     "rss": "Rolling Scopes School",
@@ -58,10 +60,6 @@
 
     "requestLog": "Сохраняем запрос...",
     "requestLogSuccess": "Запрос успешно сохранен.",
-    "requestLogError": "Ошибка сохранения запроса.",
-
-    "logout": "Выход...",
-    "logoutSuccess": "Выход выполнен успешно.",
-    "logoutError": "Ошибка выхода."
+    "requestLogError": "Ошибка сохранения запроса."
   }
 }
