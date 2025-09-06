@@ -33,40 +33,23 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const logInWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-  }
+const login = async (email: string, password: string) => {
+  signInWithEmailAndPassword(auth, email, password);
 };
 
-const registerWithEmailAndPassword = async (
-  name: string,
-  email: string,
-  password: string
-) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, 'users'), {
-      uid: user.uid,
-      name,
-      authProvider: 'local',
-      email,
-    });
-  } catch (err) {
-    console.error(err);
-  }
+const register = async (name: string, email: string, password: string) => {
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  const user = res.user;
+  await addDoc(collection(db, 'users'), {
+    uid: user.uid,
+    name,
+    authProvider: 'local',
+    email,
+  });
 };
 
-const sendPasswordReset = async (email: string) => {
-  try {
-    await sendPasswordResetEmail(auth, email);
-    console.log('Password reset link sent!');
-  } catch (err) {
-    console.error(err);
-  }
+const resetPassword = async (email: string) => {
+  await sendPasswordResetEmail(auth, email);
 };
 
 const logout = () => {
@@ -74,25 +57,10 @@ const logout = () => {
 };
 
 async function saveRequest(log: RequestLog) {
-  try {
-    await addDoc(collection(db, 'requests'), {
-      ...log,
-      createdAt: serverTimestamp(),
-    });
-    console.log('Request saved!');
-  } catch (error) {
-    console.error('Error saving request:', error);
-  }
+  await addDoc(collection(db, 'requests'), {
+    ...log,
+    createdAt: serverTimestamp(),
+  });
 }
 
-export {
-  auth,
-  db,
-  logInWithEmailAndPassword,
-  registerWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordReset,
-  logout,
-  sendPasswordResetEmail,
-  saveRequest,
-};
+export { auth, db, login, register, resetPassword, logout, saveRequest };
