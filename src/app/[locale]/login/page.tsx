@@ -15,14 +15,12 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState } from 'react';
-import { auth, login } from '@/firebase';
+import { login } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/modules/auth/useLoginForm';
 import type { FormValues } from '@/modules/auth/types';
-import { redirect } from 'next/navigation';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
@@ -30,16 +28,11 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const [user, loading] = useAuthState(auth);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
   } = useLoginForm();
-
-  if (user) {
-    redirect(ROUTES.home);
-  }
 
   const handleRegister = async (data: FormValues) => {
     try {
@@ -139,7 +132,7 @@ export default function Login() {
             type="submit"
             className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
             variant="contained"
-            disabled={loading || isSubmitting || !isValid}
+            disabled={isSubmitting || !isValid}
           >
             {tForm('login')}
           </Button>
