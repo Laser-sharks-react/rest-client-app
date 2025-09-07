@@ -1,59 +1,34 @@
-import { NextResponse, type NextRequest } from 'next/server';
+import { type NextRequest } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { jwtVerify } from 'jose';
-import { ROUTES } from './sources/routes';
-import { isLocale } from './i18n/utils';
+import { getLocaleFromPath, stripLocale } from '@/utils/i18nPath';
+import { getUserIdFromRequest } from '@/utils/authSession';
+import {
+  buildAccessPatterns,
+  isProtectedPath,
+  isPublicPath,
+} from '@/utils/access';
+import { redirectWithLocale } from '@/utils/redirect';
+import { ROUTES } from '@/sources/routes';
 
 const handleI18n = createIntlMiddleware(routing);
-const secret = new TextEncoder().encode(process.env.SESSION_SECRET!);
-
-function buildPatterns() {
-  return {
-    protected: [ROUTES.history],
-    public: [ROUTES.login, ROUTES.signup],
-  };
-}
-
-export function extractLocale(
-  req: NextRequest
-): (typeof routing.locales)[number] {
-  const [, first] = req.nextUrl.pathname.split('/');
-  return isLocale(first) ? first : routing.defaultLocale;
-}
 
 export default async function middleware(req: NextRequest) {
   const i18nResponse = handleI18n(req);
 
-  const locale = extractLocale(req);
-  const { protected: protectedPatterns, public: publicPatterns } =
-    buildPatterns();
+  const locale = getLocaleFromPath(req.nextUrl.pathname);
+  const pathnameNoLocale = stripLocale(req.nextUrl.pathname);
+  const patterns = buildAccessPatterns();
+  const userId = await getUserIdFromRequest(req);
 
-  const pathname = req.nextUrl.pathname;
-  const isProtected = protectedPatterns.includes(pathname);
-  const isPublic = publicPatterns.includes(pathname);
+  const protectedRoute = isProtectedPath(pathnameNoLocale, patterns);
+  const publicRoute = isPublicPath(pathnameNoLocale, patterns);
 
-  const raw = req.cookies.get('session')?.value;
-  let userId = null;
-  if (raw) {
-    try {
-      const { payload } = await jwtVerify(raw, secret);
-      userId = payload?.userId;
-    } catch {
-      userId = null;
-    }
+  if (protectedRoute && !userId) {
+    return redirectWithLocale(req, locale, ROUTES.login);
   }
-
-  if (isProtected && !userId) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${locale}/${ROUTES.login}`;
-    return NextResponse.redirect(url);
-  }
-
-  if (isPublic && userId) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${locale}/${ROUTES.home}`;
-    return NextResponse.redirect(url);
+  if (publicRoute && userId) {
+    return redirectWithLocale(req, locale, ROUTES.home);
   }
 
   return i18nResponse;
