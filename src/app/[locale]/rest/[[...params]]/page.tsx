@@ -8,7 +8,7 @@ import { auth } from '@/firebase';
 import { ROUTES } from '@/sources/routes';
 import { useEffect } from 'react';
 
-const RestClient = dynamic(() => import('../../../features/rest-client'), {
+const RestClient = dynamic(() => import('../../../../features/rest-client'), {
   ssr: false,
   loading: () => <CircularProgress />,
 });
