@@ -26,8 +26,6 @@ type ErrorResponse = {
 export type ApiResponse = SuccessResponse | ErrorResponse | null;
 
 export default function RestClient() {
-  const t = useTranslations('RestClientPage');
-
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
