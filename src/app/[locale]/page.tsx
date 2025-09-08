@@ -10,7 +10,7 @@ export default function Page() {
   const [user] = useAuthState(auth);
 
   return (
-    <Container className="h-[100dvh]">
+    <Container className="mt-20 flex items-center justify-center text-center">
       {t('title')}
       {user ? `, ${user.displayName}` : ''}!
     </Container>
