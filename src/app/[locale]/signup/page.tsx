@@ -14,11 +14,11 @@ import {
 import { useTranslations } from 'next-intl';
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import Link from '@mui/material/Link';
-import { ROUTES } from '@/sources/constants';
+import { ROUTES } from '@/lib/constants';
 import { auth, register as registerUser } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
 import { useSignUpForm } from '@/modules/auth/useSignUpForm';
-import type { SignUpFormValues } from '@/modules/auth/types';
+import type { SignUpFormValues } from '@/lib/types';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { signInWithEmailAndPassword } from 'firebase/auth';

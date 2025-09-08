@@ -1,9 +1,8 @@
-// src/modules/auth/useLoginForm.ts
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { buildLoginSchema } from './validation';
-import type { FormValues } from './types';
+import type { FormValues } from '../types';
 import { useTranslations } from 'next-intl';
+import { buildLoginSchema } from '../schemas/login-schema';
 
 export const useLoginForm = () => {
   const t = useTranslations('FormErrors');

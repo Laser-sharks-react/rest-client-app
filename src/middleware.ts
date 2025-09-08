@@ -5,7 +5,7 @@ import { parsePath } from '@/utils/parse-path';
 import { getUserIdFromRequest } from '@/utils/get-user-id-from-request';
 import { isProtectedRoute, isPublicRoute } from '@/utils/access-routes';
 import { redirectWithLocale } from '@/utils/redirect';
-import { ROUTES } from '@/sources/constants';
+import { ROUTES } from '@/lib/constants';
 
 const handleI18n = createIntlMiddleware(routing);
 

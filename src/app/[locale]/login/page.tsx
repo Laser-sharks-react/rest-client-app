@@ -1,7 +1,7 @@
 'use client';
 
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
-import { ROUTES } from '@/sources/constants';
+import { ROUTES } from '@/lib/constants';
 import {
   Button,
   Container,
@@ -19,8 +19,8 @@ import { useState } from 'react';
 import { login } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useLoginForm } from '@/modules/auth/useLoginForm';
-import type { FormValues } from '@/modules/auth/types';
+import { useLoginForm } from '@/lib/hooks/useLoginForm';
+import type { FormValues } from '@/lib/types';
 
 export default function Login() {
   const t = useTranslations('LoginPage');

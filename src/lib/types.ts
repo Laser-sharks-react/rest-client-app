@@ -1,12 +1,12 @@
 import type { useTranslations } from 'next-intl';
 
-export interface FormValues {
+export type FormValues = {
   email: string;
   password: string;
-}
+};
 
-export interface SignUpFormValues extends FormValues {
+export type SignUpFormValues = {
   name: string;
-}
+} & FormValues;
 
 export type TFunc = ReturnType<typeof useTranslations>;
