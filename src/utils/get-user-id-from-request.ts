@@ -1,7 +1,7 @@
 import { type NextRequest } from 'next/server';
 
 import { jwtVerify } from 'jose';
-import { getSessionCookie } from './session-token';
+import { getSessionToken } from './session-token';
 import { ALG } from '@/sources/constants';
 
 function getSigningSecret(): Uint8Array | null {
@@ -12,7 +12,7 @@ function getSigningSecret(): Uint8Array | null {
 export async function getUserIdFromRequest(
   req: NextRequest
 ): Promise<string | null> {
-  const token = getSessionCookie(req);
+  const token = getSessionToken(req);
   const secret = getSigningSecret();
   if (!token || !secret) return null;
 
