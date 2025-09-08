@@ -1,17 +1,23 @@
-export const getHeadersFromForm = (form: FormData) => {
-  return Array.from(form.entries()).reduce<Record<string, string>>(
-    (acc, [name, key]) => {
-      if (!name.startsWith('header-key-')) return acc;
-      if (typeof key !== 'string' || !key) return acc;
+import type { Header } from '@/components/request-headers';
 
-      const index = name.split('-').pop();
-      const value = form.get(`header-value-${index}`);
+export const getHeadersFromForm = (form: FormData): Header[] => {
+  const entries: Header[] = [];
+  const keys = form.getAll('Key').map(String);
+  const values = form.getAll('Value').map(String);
 
-      if (typeof value === 'string') {
-        acc[key] = value;
-      }
-      return acc;
-    },
-    {}
-  );
+
+  keys.forEach((key, i) => {
+    const trimmedKey = key.trim();
+    const trimmedValue = (values[i] ?? '').trim();
+
+    if (trimmedKey !== '' || trimmedValue !== '') {
+      entries.push({
+        id: crypto.randomUUID(),
+        key: trimmedKey,
+        value: trimmedValue,
+      });
+    }
+  });
+
+  return entries;
 };

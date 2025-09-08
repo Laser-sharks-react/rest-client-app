@@ -1,74 +1,62 @@
+'use client';
+
 import { Card, IconButton, TextField } from '@mui/material';
 import { Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import React from 'react';
 
+export type Header = { id: string; key: string; value: string };
+
 type Props = {
-  headers: Record<string, string>;
-  setHeaders: React.Dispatch<React.SetStateAction<Record<string, string>>>;
-  headersCount: number;
-  setHeadersCount: React.Dispatch<React.SetStateAction<number>>;
+  headers: Header[];
+  setHeaders: React.Dispatch<React.SetStateAction<Header[]>>;
 };
 
-export const RequestHeaders = ({
-  headers,
-  setHeadersCount,
-  headersCount,
-  setHeaders,
-}: Props) => {
+export const RequestHeaders = ({ headers, setHeaders }: Props) => {
+  const addHeader = () => {
+    setHeaders(prev => [
+      ...prev,
+      { id: crypto.randomUUID(), key: '', value: '' },
+    ]);
+  };
+
+  const updateHeader = (id: string, field: 'key' | 'value', value: string) => {
+    setHeaders(prev =>
+      prev.map(h => (h.id === id ? { ...h, [field]: value } : h))
+    );
+  };
+
+  const deleteHeader = (id: string) => {
+    setHeaders(prev => prev.filter(h => h.id !== id));
+  };
+
   return (
     <Card className="p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center">
         <span className="font-semibold">Headers</span>
-        <IconButton onClick={() => setHeadersCount(c => c + 1)}>
+        <IconButton onClick={addHeader}>
           <AddIcon />
         </IconButton>
       </div>
-      {Array.from({ length: headersCount }).map((_, i) => {
-        const keys = Object.keys(headers);
-        const key = keys[i] ?? '';
-        const value = headers[key] ?? '';
-        return (
-          <div key={i} className="flex gap-2 items-center">
-            <TextField
-              label="Key"
-              name={`header-key-${i}`}
-              value={key}
-              onChange={e =>
-                setHeaders(prev => {
-                  const newH = { ...prev };
-                  const oldKey = keys[i];
-                  if (oldKey && oldKey !== e.target.value) {
-                    delete newH[oldKey];
-                  }
-                  newH[e.target.value] = value;
-                  return newH;
-                })
-              }
-            />
-            <TextField
-              label="Value"
-              name={`header-value-${i}`}
-              value={value}
-              onChange={e =>
-                setHeaders(prev => ({
-                  ...prev,
-                  [key]: e.target.value,
-                }))
-              }
-            />
-            <IconButton
-              onClick={() => {
-                const newH = { ...headers };
-                delete newH[key];
-                setHeaders(newH);
-                setHeadersCount(c => Math.max(0, c - 1));
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </div>
-        );
-      })}
+
+      {headers.map(({ id, key, value }) => (
+        <div key={id} className="flex gap-2 items-center">
+          <TextField
+            label="Key"
+            name="Key"
+            value={key}
+            onChange={e => updateHeader(id, 'key', e.target.value)}
+          />
+          <TextField
+            label="Value"
+            value={value}
+            name="Value"
+            onChange={e => updateHeader(id, 'value', e.target.value)}
+          />
+          <IconButton onClick={() => deleteHeader(id)}>
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      ))}
     </Card>
   );
 };

@@ -8,9 +8,11 @@ import { allowedMethods, defaultMethod } from '@/sources/constants';
 import { base64Decode } from '@/utils/base64';
 import { getRawDataFromForm } from '@/utils/getRawDataFromForm';
 import { getNewUrl } from '@/utils/getNewUrl';
+import type { Header } from '@/components/request-headers';
 import { RequestHeaders } from '@/components/request-headers';
 import { CustomResponse } from '@/components/custom-response';
 import { RequestSender } from '@/components/request-sender';
+import { headersArrayToObj } from '@/utils/headersArrayToObj';
 
 type SuccessResponse = {
   status: number;
@@ -32,8 +34,7 @@ export default function RestClient() {
   const [method, setMethod] = useState(defaultMethod);
   const [url, setUrl] = useState('');
   const [body, setBody] = useState('');
-  const [headers, setHeaders] = useState<Record<string, string>>({});
-  const [headersCount, setHeadersCount] = useState(0);
+  const [headers, setHeaders] = useState<Header[]>([]);
 
   const [response, setResponse] = useState<ApiResponse>(null);
 
@@ -42,13 +43,15 @@ export default function RestClient() {
       url: string,
       method: string,
       body: string,
-      headers: Record<string, string>
+      headers: Header[]
     ) {
       try {
+        const headersObj = headersArrayToObj(headers);
+
         const res = await fetch(ROUTES.proxy, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url, method, body, headers }),
+          body: JSON.stringify({ url, method, body, headers: headersObj }),
         });
         const json = await res.json();
         setResponse({ status: res.status, ok: res.ok, json });
@@ -64,17 +67,23 @@ export default function RestClient() {
     if (method && allowedMethods.includes(method) && url) {
       setMethod(method);
       setUrl(base64Decode(decodeURIComponent(url)));
+
       if (body) {
         setBody(base64Decode(decodeURIComponent(body)));
       }
-      const newHeaders: Record<string, string> = {};
+
+      const newHeaders: Header[] = [];
       searchParams.forEach((value, key) => {
-        newHeaders[key] = value;
+        newHeaders.push({ id: crypto.randomUUID(), key, value });
       });
       setHeaders(newHeaders);
-      setHeadersCount(Object.keys(newHeaders).length);
 
-      void fetchData(base64Decode(url), method, base64Decode(body), newHeaders);
+      void fetchData(
+        base64Decode(url),
+        method,
+        body ? base64Decode(body) : '',
+        newHeaders
+      );
     }
   }, [params, searchParams]);
 
@@ -84,7 +93,9 @@ export default function RestClient() {
 
     const { method, url, body, headers } = getRawDataFromForm(formData);
 
-    const newUrl = getNewUrl(method, url, body, headers);
+    const headersObj = headersArrayToObj(headers);
+
+    const newUrl = getNewUrl(method, url, body, headersObj);
     router.push(newUrl);
   }
 
@@ -98,6 +109,7 @@ export default function RestClient() {
           setUrl={setUrl}
         />
       </div>
+
       <TextField
         label="Request Body"
         multiline
@@ -108,12 +120,7 @@ export default function RestClient() {
         onChange={e => setBody(e.target.value)}
       />
 
-      <RequestHeaders
-        headers={headers}
-        setHeaders={setHeaders}
-        headersCount={headersCount}
-        setHeadersCount={setHeadersCount}
-      />
+      <RequestHeaders headers={headers} setHeaders={setHeaders} />
 
       {response && <CustomResponse response={response} />}
     </form>
