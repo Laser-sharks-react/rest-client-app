@@ -6,7 +6,6 @@ import { ROUTES } from '@/sources/routes';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { allowedMethods, defaultMethod } from '@/sources/constants';
 import { base64Decode } from '@/utils/base64';
-import { useTranslations } from 'next-intl';
 import { getRawDataFromForm } from '@/utils/getRawDataFromForm';
 import { getNewUrl } from '@/utils/getNewUrl';
 import { RequestHeaders } from '@/components/request-headers';
