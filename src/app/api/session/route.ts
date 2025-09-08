@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { type JWTPayload, SignJWT } from 'jose';
-import { ALG, COOKIE_TIME } from './constants';
+import { ALG, COOKIE_TIME } from '@/sources/constants';
+import { setSessionCookie } from '@/utils/session-token';
 
 const secret = new TextEncoder().encode(process.env.SESSION_SECRET!);
 
@@ -23,24 +24,13 @@ export async function POST(req: Request) {
   }
   const token = await sign({ userId }, COOKIE_TIME);
   const res = NextResponse.json({ ok: true });
-  res.cookies.set('session', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: COOKIE_TIME,
-  });
-  return res;
+  const resWithCookie = setSessionCookie(res, token);
+
+  return resWithCookie;
 }
 
 export async function DELETE() {
   const res = NextResponse.json({ ok: true });
-  res.cookies.set('session', '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 0,
-  });
-  return res;
+  const resWithCookie = setSessionCookie(res, '', 0);
+  return resWithCookie;
 }

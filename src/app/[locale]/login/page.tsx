@@ -1,7 +1,7 @@
 'use client';
 
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
-import { ROUTES } from '@/sources/routes';
+import { ROUTES } from '@/sources/constants';
 import {
   Button,
   Container,
