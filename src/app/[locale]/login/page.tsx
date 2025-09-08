@@ -1,6 +1,6 @@
 'use client';
 
-import { Link as IntlLink, useRouter } from '@/i18n/navigation';
+import { Link as IntlLink } from '@/i18n/navigation';
 import { ROUTES } from '@/lib/constants';
 import {
   Button,
@@ -16,25 +16,26 @@ import {
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useState } from 'react';
-import { login } from '@/firebase';
+import { login } from '@/lib/firebase';
 import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/lib/hooks/useLoginForm';
 import type { FormValues } from '@/lib/types';
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
   } = useLoginForm();
+  const router = useRouter();
 
-  const handleRegister = async (data: FormValues) => {
+  const handleLogin = async (data: FormValues) => {
     try {
       await login(data.email, data.password);
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
@@ -60,7 +61,7 @@ export default function Login() {
         </Typography>
         <form
           className="rounded-xl border border-zinc-300 p-5 space-y-3"
-          onSubmit={handleSubmit(handleRegister)}
+          onSubmit={handleSubmit(handleLogin)}
         >
           <FormControl fullWidth>
             <FormLabel htmlFor="email">{tForm('e-mail')}</FormLabel>

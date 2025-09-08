@@ -15,33 +15,31 @@ import { useTranslations } from 'next-intl';
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import Link from '@mui/material/Link';
 import { ROUTES } from '@/lib/constants';
-import { auth, register as registerUser } from '@/firebase';
+import { login, register as registerUser } from '@/lib/firebase';
 import { enqueueSnackbar } from 'notistack';
-import { useSignUpForm } from '@/modules/auth/useSignUpForm';
 import type { SignUpFormValues } from '@/lib/types';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useSignUpForm } from '@/lib/hooks/useSignUpForm';
 
 export default function SignUp() {
   const t = useTranslations('SignUpPage');
   const tForm = useTranslations('Form');
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
   } = useSignUpForm();
+  const router = useRouter();
 
   const handleSignUp = async (data: SignUpFormValues) => {
     try {
       await registerUser(data.name, data.email, data.password);
-
-      if (!auth.currentUser) {
-        await signInWithEmailAndPassword(auth, data.email, data.password);
-      }
       enqueueSnackbar(t('signupUserSuccess'), { variant: 'success' });
+
+      await login(data.email, data.password);
+      enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
       router.replace(ROUTES.home);
     } catch (err) {
       enqueueSnackbar(
@@ -97,7 +95,7 @@ export default function SignUp() {
               sx={{ minHeight: 24, m: 0, fontSize: '10px', lineHeight: '1.2' }}
               error={!!errors.email}
             >
-              {errors.email?.message ?? ' '}
+              {errors.email?.message}
             </FormHelperText>
           </FormControl>
 
