@@ -1,10 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { TextField, Select, MenuItem, Button, Card } from '@mui/material';
+import { TextField, Select, MenuItem, Button } from '@mui/material';
 import { ROUTES } from '@/sources/routes';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { allowedMethods, defaultMethod } from '@/sources/constants';
 import { base64Decode } from '@/utils/base64';
@@ -12,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import { getRawDataFromForm } from '@/utils/getRawDataFromForm';
 import { getNewUrl } from '@/utils/getNewUrl';
 import { RequestHeaders } from '@/components/request-headers';
+import { CustomResponse } from '@/components/custom-response';
 
 type SuccessResponse = {
   status: number;
@@ -23,7 +22,7 @@ type ErrorResponse = {
   error: string;
 };
 
-type ApiResponse = SuccessResponse | ErrorResponse | null;
+export type ApiResponse = SuccessResponse | ErrorResponse | null;
 
 export default function RestClient() {
   const t = useTranslations('RestClientPage');
@@ -134,20 +133,7 @@ export default function RestClient() {
         setHeadersCount={setHeadersCount}
       />
 
-      {response && (
-        <Card className="p-4">
-          <div className="overflow-auto max-h-96">
-            <SyntaxHighlighter
-              language="json"
-              style={prism}
-              wrapLongLines
-              customStyle={{ fontSize: '0.875rem', borderRadius: '0.5rem' }}
-            >
-              {JSON.stringify(response, null, 2)}
-            </SyntaxHighlighter>
-          </div>
-        </Card>
-      )}
+      {response && <CustomResponse response={response} />}
     </form>
   );
 }
