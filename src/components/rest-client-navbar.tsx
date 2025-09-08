@@ -9,25 +9,15 @@ import {
   ScheduleOutlined,
 } from '@mui/icons-material';
 import cx from 'classnames';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase';
-import { useEffect } from 'react';
 
 export function RestClientNavbar() {
   const t = useTranslations('RestClientLayout');
-  const [user] = useAuthState(auth);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
     target: typeof window !== 'undefined' ? window : undefined,
   });
-
-  if (!user) return null;
 
   return (
     <Toolbar
