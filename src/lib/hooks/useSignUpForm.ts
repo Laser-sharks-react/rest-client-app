@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { buildSignUpSchema } from './validation';
-import type { SignUpFormValues } from './types';
+
 import { useTranslations } from 'next-intl';
+import { buildSignUpSchema } from '../schemas/sign-up-schema';
+import { type SignUpFormValues } from '../types';
 
 export const useSignUpForm = () => {
   const t = useTranslations('FormErrors');

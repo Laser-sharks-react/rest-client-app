@@ -1,4 +1,4 @@
-import { ROUTES } from '@/sources/constants';
+import { ROUTES } from '@/lib/constants';
 
 export type AccessRoutes = {
   protected: string[];
