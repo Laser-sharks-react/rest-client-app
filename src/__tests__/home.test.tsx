@@ -3,7 +3,7 @@ import HomePage from '@/app/[locale]/page';
 import { NextIntlClientProvider } from 'next-intl';
 import messagesEN from '../../messages/en.json';
 
-jest.mock('@/firebase', () => ({
+jest.mock('@/lib/firebase', () => ({
   auth: {},
   registerWithEmailAndPassword: jest.fn(),
 }));
