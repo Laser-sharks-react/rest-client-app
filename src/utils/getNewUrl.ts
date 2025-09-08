@@ -1,4 +1,6 @@
 import { base64Encode } from '@/utils/base64';
+import { defaultMethod } from '@/sources/constants';
+import { ROUTES } from '@/sources/routes';
 
 export const getNewUrl = (
   method: string,
@@ -9,10 +11,10 @@ export const getNewUrl = (
   const encodedUrl = base64Encode(url);
   const cleanBody = body.trim();
   const encodedBody =
-    method !== 'GET' && cleanBody ? '/' + base64Encode(cleanBody) : '';
+    method !== defaultMethod && cleanBody ? '/' + base64Encode(cleanBody) : '';
   const query = new URLSearchParams(headers).toString();
 
-  return `/rest/${method}/${encodedUrl}${encodedBody}${
+  return `${ROUTES.rest}/${method}/${encodedUrl}${encodedBody}${
     query ? `?${query}` : ''
   }`;
 };

@@ -1,14 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import {
-  TextField,
-  Select,
-  MenuItem,
-  Button,
-  Card,
-  IconButton,
-} from '@mui/material';
+import { TextField, Select, MenuItem, Button, Card } from '@mui/material';
 import { ROUTES } from '@/sources/routes';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism';
@@ -16,9 +9,9 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { allowedMethods, defaultMethod } from '@/sources/constants';
 import { base64Decode } from '@/utils/base64';
 import { useTranslations } from 'next-intl';
-import { Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import { getRawDataFromForm } from '@/utils/getRawDataFromForm';
 import { getNewUrl } from '@/utils/getNewUrl';
+import { RequestHeaders } from '@/components/request-headers';
 
 type SuccessResponse = {
   status: number;
@@ -134,60 +127,12 @@ export default function RestClient() {
         onChange={e => setBody(e.target.value)}
       />
 
-      <Card className="p-4 flex flex-col gap-2">
-        <div className="flex justify-between items-center">
-          <span className="font-semibold">Headers</span>
-          <IconButton onClick={() => setHeadersCount(c => c + 1)}>
-            <AddIcon />
-          </IconButton>
-        </div>
-        {Array.from({ length: headersCount }).map((_, i) => {
-          const keys = Object.keys(headers);
-          const key = keys[i] ?? '';
-          const value = headers[key] ?? '';
-          return (
-            <div key={i} className="flex gap-2 items-center">
-              <TextField
-                label="Key"
-                name={`header-key-${i}`}
-                value={key}
-                onChange={e =>
-                  setHeaders(prev => {
-                    const newH = { ...prev };
-                    const oldKey = keys[i];
-                    if (oldKey && oldKey !== e.target.value) {
-                      delete newH[oldKey];
-                    }
-                    newH[e.target.value] = value;
-                    return newH;
-                  })
-                }
-              />
-              <TextField
-                label="Value"
-                name={`header-value-${i}`}
-                value={value}
-                onChange={e =>
-                  setHeaders(prev => ({
-                    ...prev,
-                    [key]: e.target.value,
-                  }))
-                }
-              />
-              <IconButton
-                onClick={() => {
-                  const newH = { ...headers };
-                  delete newH[key];
-                  setHeaders(newH);
-                  setHeadersCount(c => Math.max(0, c - 1));
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
-          );
-        })}
-      </Card>
+      <RequestHeaders
+        headers={headers}
+        setHeaders={setHeaders}
+        headersCount={headersCount}
+        setHeadersCount={setHeadersCount}
+      />
 
       {response && (
         <Card className="p-4">
