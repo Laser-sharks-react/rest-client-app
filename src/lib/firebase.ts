@@ -34,7 +34,15 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const login = async (email: string, password: string) => {
-  return await signInWithEmailAndPassword(auth, email, password);
+  const cred = await signInWithEmailAndPassword(auth, email, password);
+
+  await fetch('/api/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId: cred.user.uid }),
+  });
+
+  return cred;
 };
 
 const register = async (name: string, email: string, password: string) => {
