@@ -5,7 +5,6 @@ export const getHeadersFromForm = (form: FormData): Header[] => {
   const keys = form.getAll('Key').map(String);
   const values = form.getAll('Value').map(String);
 
-
   keys.forEach((key, i) => {
     const trimmedKey = key.trim();
     const trimmedValue = (values[i] ?? '').trim();
