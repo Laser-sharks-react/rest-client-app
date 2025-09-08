@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { ROUTES } from '@/sources/routes';
+import { ROUTES } from '@/sources/constants';
 import { Container, Typography } from '@mui/material';
 
 export default async function NotFound() {

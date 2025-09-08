@@ -9,7 +9,7 @@ import {
   useScrollTrigger,
 } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import { ROUTES } from '@/sources/routes';
+import { ROUTES } from '@/sources/constants';
 import { useTranslations } from 'next-intl';
 import cx from 'classnames';
 

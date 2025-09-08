@@ -14,7 +14,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import Link from '@mui/material/Link';
-import { ROUTES } from '@/sources/routes';
+import { ROUTES } from '@/sources/constants';
 import { auth, register as registerUser } from '@/firebase';
 import { enqueueSnackbar } from 'notistack';
 import { useSignUpForm } from '@/modules/auth/useSignUpForm';
