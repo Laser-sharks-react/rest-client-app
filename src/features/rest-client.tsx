@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { TextField, Select, MenuItem, Button } from '@mui/material';
+import { TextField } from '@mui/material';
 import { ROUTES } from '@/sources/routes';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { allowedMethods, defaultMethod } from '@/sources/constants';
@@ -11,6 +11,7 @@ import { getRawDataFromForm } from '@/utils/getRawDataFromForm';
 import { getNewUrl } from '@/utils/getNewUrl';
 import { RequestHeaders } from '@/components/request-headers';
 import { CustomResponse } from '@/components/custom-response';
+import { RequestSender } from '@/components/request-sender';
 
 type SuccessResponse = {
   status: number;
@@ -65,7 +66,7 @@ export default function RestClient() {
 
     if (method && allowedMethods.includes(method) && url) {
       setMethod(method);
-      setUrl(base64Decode(url));
+      setUrl(base64Decode(decodeURIComponent(url)));
       if (body) {
         setBody(base64Decode(decodeURIComponent(body)));
       }
@@ -93,29 +94,13 @@ export default function RestClient() {
   return (
     <form onSubmit={sendRequest} className="p-4 flex flex-col gap-4">
       <div className="flex gap-2">
-        <Select
-          name="method"
-          value={method}
-          onChange={e => setMethod(e.target.value)}
-        >
-          {allowedMethods.map(m => (
-            <MenuItem key={m} value={m}>
-              {m}
-            </MenuItem>
-          ))}
-        </Select>
-        <TextField
-          fullWidth
-          value={url}
-          onChange={e => setUrl(e.target.value)}
-          label="Endpoint URL"
-          name="url"
+        <RequestSender
+          method={method}
+          setMethod={setMethod}
+          url={url}
+          setUrl={setUrl}
         />
-        <Button type="submit" variant="contained">
-          {t('button')}
-        </Button>
       </div>
-
       <TextField
         label="Request Body"
         multiline
