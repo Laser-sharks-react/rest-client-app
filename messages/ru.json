@@ -16,7 +16,9 @@
     "alreadyHaveAccount": "Уже есть аккаунт?",
     "signupUser": "Регистрируем нового пользователя...",
     "signupUserSuccess": "Пользователь успешно зарегистрирован.",
-    "signupUserError": "Ошибка регистрации пользователя."
+    "signupUserError": "Ошибка регистрации пользователя.",
+    "loginUserSuccess": "Вход выполнен успешно.",
+    "loginUserError": "Ошибка входа пользователя."
   },
 
   "NotFoundPage": {

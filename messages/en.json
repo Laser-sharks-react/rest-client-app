@@ -16,7 +16,9 @@
     "alreadyHaveAccount": "Already have an account?",
     "signupUser": "Signing up user...",
     "signupUserSuccess": "User signed up successfully.",
-    "signupUserError": "User sign up failed."
+    "signupUserError": "User sign up failed.",
+    "loginUserSuccess": "User logged in successfully.",
+    "loginUserError": "User login failed."
   },
 
   "NotFoundPage": {
