@@ -100,15 +100,16 @@ export default function RestClient() {
   }
 
   return (
-    <form onSubmit={sendRequest} className="p-4 flex flex-col gap-4">
-      <div className="flex gap-2">
-        <RequestSender
-          method={method}
-          setMethod={setMethod}
-          url={url}
-          setUrl={setUrl}
-        />
-      </div>
+    <form
+      onSubmit={sendRequest}
+      className="p-4 flex flex-col gap-4 min-h-[600px]"
+    >
+      <RequestSender
+        method={method}
+        setMethod={setMethod}
+        url={url}
+        setUrl={setUrl}
+      />
 
       <TextField
         label="Request Body"
@@ -122,7 +123,13 @@ export default function RestClient() {
 
       <RequestHeaders headers={headers} setHeaders={setHeaders} />
 
-      {response && <CustomResponse response={response} />}
+      <div className="min-h-[200px]">
+        {response ? (
+          <CustomResponse response={response} />
+        ) : (
+          <span className="text-gray-400">Loading...</span>
+        )}
+      </div>
     </form>
   );
 }

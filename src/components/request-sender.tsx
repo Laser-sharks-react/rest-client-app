@@ -14,7 +14,7 @@ export const RequestSender = ({ method, setMethod, setUrl, url }: Props) => {
   const t = useTranslations('RestClientPage');
 
   return (
-    <>
+    <div className="flex gap-2">
       <Select
         name="method"
         value={method}
@@ -36,6 +36,6 @@ export const RequestSender = ({ method, setMethod, setUrl, url }: Props) => {
       <Button type="submit" variant="contained">
         {t('button')}
       </Button>
-    </>
+    </div>
   );
 };
