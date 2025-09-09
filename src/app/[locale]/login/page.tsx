@@ -21,11 +21,13 @@ import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/lib/hooks/use-login-form';
 import type { FormValues } from '@/lib/types';
+import { useSnackbar } from 'notistack';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
   const [showPassword, setShowPassword] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,
