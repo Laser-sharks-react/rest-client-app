@@ -1,8 +1,12 @@
+import { type HttpMethod } from './types';
+
 export const ROUTES = {
   signup: '/signup',
+  proxy: '/api/proxy',
   home: '/',
   login: '/login',
   history: '/history',
+  rest: '/rest',
 };
 
 export const COOKIES = {
@@ -17,3 +21,13 @@ export const EMAIL_REGEX =
 
 export const PASSWORD_REGEX =
   /^(?=.*\p{L})(?=.*\p{N})(?=.*[^\p{L}\p{N}\s]).{8,}$/u;
+
+export const HTTP_METHODS: HttpMethod[] = [
+  'GET',
+  'POST',
+  'PUT',
+  'PATCH',
+  'DELETE',
+] as const;
+
+export const DEFAULT_HTTP_METHOD: HttpMethod = 'GET';

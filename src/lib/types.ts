@@ -10,3 +10,25 @@ export type SignUpFormValues = {
 } & FormValues;
 
 export type TFunc = ReturnType<typeof useTranslations>;
+
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+export interface HttpHeader {
+  id: string;
+  key: string;
+  value: string;
+}
+
+
+
+type SuccessResponse = {
+  status: number;
+  ok: boolean;
+  json: unknown;
+};
+
+type ErrorResponse = {
+  error: string;
+};
+
+export type ApiResponse = SuccessResponse | ErrorResponse | null;
