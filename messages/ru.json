@@ -2,17 +2,25 @@
   "HomePage": {
     "title": "Добро пожаловать!"
   },
+
   "LoginPage": {
     "title": "Войти",
     "noAccount": "Нет аккаунта?",
-    "signup": "Зарегистрироваться",
-    "login": "Войти"
+    "loginUser": "Входим...",
+    "loginUserSuccess": "Вход выполнен успешно.",
+    "loginUserError": "Ошибка входа пользователя."
   },
+
   "SignUpPage": {
     "title": "Регистрация",
     "alreadyHaveAccount": "Уже есть аккаунт?",
-    "login": "Войти"
+    "signupUser": "Регистрируем нового пользователя...",
+    "signupUserSuccess": "Пользователь успешно зарегистрирован.",
+    "signupUserError": "Ошибка регистрации пользователя.",
+    "loginUserSuccess": "Вход выполнен успешно.",
+    "loginUserError": "Ошибка входа пользователя."
   },
+
   "NotFoundPage": {
     "title": "404 - Страница не найдена",
     "description": "Страница, которую вы ищете, не существует.",
@@ -32,6 +40,43 @@
   "Footer": {
     "rss": "Rolling Scopes School",
     "github": "GitHub"
+  },
+
+  "snackbar": {
+    "passwordReset": "Отправка письма для сброса пароля...",
+    "passwordResetSuccess": "Письмо для сброса пароля отправлено.",
+    "passwordResetError": "Ошибка сброса пароля.",
+
+    "requestLog": "Сохраняем запрос...",
+    "requestLogSuccess": "Запрос успешно сохранен.",
+    "requestLogError": "Ошибка сохранения запроса.",
+
+    "logout": "Выход...",
+    "logoutSuccess": "Выход выполнен успешно.",
+    "logoutError": "Ошибка выхода."
+  },
+
+  "Form": {
+    "signup": "Зарегистрироваться",
+    "login": "Войти",
+    "name": "Ваше имя",
+    "e-mail": "E-mail",
+    "password": "Пароль",
+    "hidePassword": "Спрятать пароль",
+    "showPassword": "Показать пароль"
+  },
+
+  "FormErrors": {
+    "required": "Это поле обязательно для заполнения",
+    "name": {
+      "min": "Имя должно содержать минимум 1 символ"
+    },
+    "email": {
+      "format": "Введите корректный адрес электронной почты"
+    },
+    "password": {
+      "strong": "Пароль должен содержать минимум 8 символов, хотя бы одну букву, одну цифру и один специальный символ"
+    }
   },
   "RestClientPage": {
     "button": "Отправить"

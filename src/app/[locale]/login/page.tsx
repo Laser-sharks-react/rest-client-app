@@ -1,81 +1,150 @@
 'use client';
 
 import { Link as IntlLink } from '@/i18n/navigation';
-import { ROUTES } from '@/sources/routes';
-import { Container, Typography } from '@mui/material';
+import { ROUTES } from '@/lib/constants';
+import {
+  Button,
+  Container,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useEffect, useState } from 'react';
-import { auth, logInWithEmailAndPassword } from '@/firebase';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { login } from '@/lib/firebase';
+import { enqueueSnackbar } from 'notistack';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useLoginForm } from '@/lib/hooks/useLoginForm';
+import type { FormValues } from '@/lib/types';
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
-  const [user, loading, error] = useAuthState(auth);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const tForm = useTranslations('Form');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useLoginForm();
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleLogin = async (data: FormValues) => {
     try {
-      await logInWithEmailAndPassword(email, password);
-    } catch (err: unknown) {
-      console.error(err);
+      await login(data.email, data.password);
+      enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
+      router.replace(ROUTES.home);
+    } catch (err) {
+      enqueueSnackbar(
+        `${t('loginUserError')} ${err instanceof Error ? err.message : ''}`,
+        { variant: 'error' }
+      );
     }
   };
 
-  useEffect(() => {
-    if (loading) return;
-    if (user) {
-      void router.push(ROUTES.rest);
-    }
-  }, [loading, router, user]);
-
   return (
-    <Container className="h-screen">
-      <Typography variant="h4" component="h2" gutterBottom>
-        {t('title')}
-      </Typography>
-      <div className="flex flex-col gap-y-4 items-center justify-center min-h-screen bg-gray-100">
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          placeholder="Full Name"
-          className="text-black"
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-          className="text-black"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          placeholder="Password"
-          className="text-black"
-        />
-        <button
-          className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
-          onClick={handleLogin}
+    <Container className="h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-4">
+        <Typography
+          variant="h4"
+          component="h2"
+          gutterBottom
+          className="text-[22px] leading-snug text-black"
         >
-          Login
-        </button>
-        {error && (
-          <p className="text-red-600 font-medium">
-            ❌ {error.message || 'An error occurred'}
-          </p>
-        )}
+          {t('title')}
+        </Typography>
+        <form
+          className="rounded-xl border border-zinc-300 p-5 space-y-3"
+          onSubmit={handleSubmit(handleLogin)}
+        >
+          <FormControl fullWidth>
+            <FormLabel htmlFor="email">{tForm('e-mail')}</FormLabel>
+            <TextField
+              id="email"
+              type="email"
+              variant="outlined"
+              size="small"
+              {...register('email')}
+              error={!!errors.email}
+            />
+            <FormHelperText
+              sx={{
+                minHeight: 24,
+                m: 0,
+                fontSize: '10px',
+                lineHeight: '1.2',
+              }}
+              error={!!errors.email}
+            >
+              {errors.email?.message ?? ' '}
+            </FormHelperText>
+          </FormControl>
+
+          <FormControl fullWidth>
+            <FormLabel htmlFor="password">{tForm('password')}</FormLabel>
+            <TextField
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              variant="outlined"
+              size="small"
+              {...register('password')}
+              error={!!errors.password}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        aria-label={
+                          showPassword
+                            ? tForm('hidePassword')
+                            : tForm('showPassword')
+                        }
+                        onMouseDown={e => e.preventDefault()}
+                        onClick={() => setShowPassword(prev => !prev)}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
+            />
+            <FormHelperText
+              sx={{
+                minHeight: 24,
+                m: 0,
+                fontSize: '10px',
+                lineHeight: '1.2',
+              }}
+              error={!!errors.password}
+            >
+              {errors.password?.message ?? ' '}
+            </FormHelperText>
+          </FormControl>
+
+          <Button
+            type="submit"
+            className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
+            variant="contained"
+            disabled={isSubmitting || !isValid}
+          >
+            {tForm('login')}
+          </Button>
+          <Typography>
+            {t('noAccount')}
+            <Link component={IntlLink} href={ROUTES.signup} className="ml-4">
+              {tForm('signup')}
+            </Link>
+          </Typography>
+        </form>
       </div>
-      <Typography>{t('noAccount')}</Typography>
-      <Link component={IntlLink} href={ROUTES.signup}>
-        {t('signup')}
-      </Link>
     </Container>
   );
 }
