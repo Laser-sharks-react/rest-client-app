@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { ROUTES } from '@/sources/routes';
-import { useParams, useRouter } from 'next/navigation';
-import { base64Decode } from '@/utils/base64';
+import { useRouter } from 'next/navigation';
 import { getNewUrl } from '@/utils/getNewUrl';
 import { RequestHeaders } from '@/components/request-headers';
 import { CustomResponse } from '@/components/custom-response';
