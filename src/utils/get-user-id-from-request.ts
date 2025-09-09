@@ -12,7 +12,6 @@ export async function getUserIdFromRequest(
 
   try {
     const { payload } = await jwtVerify(token, secret, { algorithms: [ALG] });
-
     const userId = payload.userId;
     const isValidUserId = typeof userId === 'string' && userId.length > 0;
 
