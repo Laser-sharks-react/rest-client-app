@@ -12,15 +12,17 @@ import {
   generatePython,
   generateXHR,
 } from '@/utils/code-generators';
+import { useTranslations } from 'next-intl';
 
 export const GeneratedCodeSection = () => {
   const { method, url, body, headers } = useRequestStore();
+  const t = useTranslations('RestClientPage');
 
   const [lang, setLang] = useState<(typeof LANGUAGES)[number]>('cURL');
 
   const code = useMemo(() => {
     if (!url || !method) {
-      return '// Not enough details to generate code';
+      return t('notEnoughData');
     }
 
     const headersObj = Object.fromEntries(
@@ -47,7 +49,7 @@ export const GeneratedCodeSection = () => {
       default:
         return '// Unsupported language';
     }
-  }, [lang, url, method, body, headers]);
+  }, [url, method, headers, lang, t, body]);
 
   return (
     <Box className="border rounded-md p-3 mt-4">

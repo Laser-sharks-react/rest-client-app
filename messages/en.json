@@ -81,6 +81,7 @@
     }
   },
   "RestClientPage": {
-    "button": "Send"
+    "button": "Send",
+    "notEnoughData": "// Not enough details to generate code"
   }
 }
