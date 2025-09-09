@@ -8,11 +8,13 @@ export const getNewUrl = (
   body: string,
   headers: HttpHeader[]
 ) => {
-  const encodedUrl = base64Encode(url);
+  const encodedUrl = encodeURIComponent(base64Encode(url));
 
   const cleanBody = body.trim();
   const encodedBody =
-    method !== 'GET' && cleanBody ? '/' + base64Encode(cleanBody) : '';
+    method !== 'GET' && cleanBody
+      ? '/' + encodeURIComponent(base64Encode(cleanBody))
+      : '';
 
   const headersObj = headersArrayToObj(headers);
   const query = new URLSearchParams(headersObj).toString();

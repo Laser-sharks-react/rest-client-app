@@ -11,7 +11,7 @@ export function RequestBody() {
   const { body, setBody } = useRequestStore();
 
   useEffect(() => {
-    if (bodyParam) setBody(base64Decode(bodyParam));
+    if (bodyParam) setBody(base64Decode(decodeURIComponent(bodyParam)));
   }, []);
 
   return (
