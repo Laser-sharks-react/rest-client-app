@@ -1,6 +1,6 @@
 'use client';
 
-import { Link as IntlLink } from '@/i18n/navigation';
+import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import { ROUTES } from '@/lib/constants';
 import {
   Button,
@@ -21,7 +21,6 @@ import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/lib/hooks/use-login-form';
 import type { FormValues } from '@/lib/types';
-import { useRouter } from 'next/router';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
