@@ -8,9 +8,11 @@ import { useRequestStore } from '@/store/request-store';
 
 export const RequestHeaders = () => {
   const searchParams = useSearchParams();
-  const { headers, addHeader, removeHeader, updateHeader } = useRequestStore();
+  const { headers, addHeader, removeHeader, updateHeader, clearHeaders } =
+    useRequestStore();
 
   useEffect(() => {
+    clearHeaders();
     searchParams.forEach((value, key) => {
       addHeader({ key, value });
     });
