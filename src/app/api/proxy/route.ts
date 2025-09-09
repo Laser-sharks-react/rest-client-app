@@ -1,4 +1,4 @@
-import { defaultMethod } from '@/sources/constants';
+import { DEFAULT_HTTP_METHOD } from '@/sources/constants';
 
 export async function POST(req: Request) {
   const { url, method, body, headers } = await req.json();
@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const res = await fetch(url, {
       method,
       headers,
-      body: method !== defaultMethod ? body : undefined,
+      body: method !== DEFAULT_HTTP_METHOD ? body : undefined,
     });
 
     const contentType = res.headers.get('content-type') || '';

@@ -1,20 +1,21 @@
 import { base64Encode } from '@/utils/base64';
-import { defaultMethod } from '@/sources/constants';
-import { ROUTES } from '@/sources/routes';
+import type { HttpMethod, HttpHeader } from '@/sources/types';
+import { headersArrayToObj } from './headersArrayToObj';
 
 export const getNewUrl = (
-  method: string,
+  method: HttpMethod,
   url: string,
   body: string,
-  headers: Record<string, string>
+  headers: HttpHeader[]
 ) => {
   const encodedUrl = base64Encode(url);
+
   const cleanBody = body.trim();
   const encodedBody =
-    method !== defaultMethod && cleanBody ? '/' + base64Encode(cleanBody) : '';
-  const query = new URLSearchParams(headers).toString();
+    method !== 'GET' && cleanBody ? '/' + base64Encode(cleanBody) : '';
 
-  return `${ROUTES.rest}/${method}/${encodedUrl}${encodedBody}${
-    query ? `?${query}` : ''
-  }`;
+  const headersObj = headersArrayToObj(headers);
+  const query = new URLSearchParams(headersObj).toString();
+
+  return `/${method}/${encodedUrl}${encodedBody}${query ? `?${query}` : ''}`;
 };

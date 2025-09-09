@@ -2,38 +2,25 @@
 
 import { Card, IconButton, TextField } from '@mui/material';
 import { Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useRequestStore } from '@/store/request-store';
 
-export type Header = { id: string; key: string; value: string };
+export const RequestHeaders = () => {
+  const searchParams = useSearchParams();
+  const { headers, addHeader, removeHeader, updateHeader } = useRequestStore();
 
-type Props = {
-  headers: Header[];
-  setHeaders: React.Dispatch<React.SetStateAction<Header[]>>;
-};
-
-export const RequestHeaders = ({ headers, setHeaders }: Props) => {
-  const addHeader = () => {
-    setHeaders(prev => [
-      ...prev,
-      { id: crypto.randomUUID(), key: '', value: '' },
-    ]);
-  };
-
-  const updateHeader = (id: string, field: 'key' | 'value', value: string) => {
-    setHeaders(prev =>
-      prev.map(h => (h.id === id ? { ...h, [field]: value } : h))
-    );
-  };
-
-  const deleteHeader = (id: string) => {
-    setHeaders(prev => prev.filter(h => h.id !== id));
-  };
+  useEffect(() => {
+    searchParams.forEach((value, key) => {
+      addHeader({ key, value });
+    });
+  }, []);
 
   return (
     <Card className="p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center">
         <span className="font-semibold">Headers</span>
-        <IconButton onClick={addHeader}>
+        <IconButton onClick={() => addHeader()}>
           <AddIcon />
         </IconButton>
       </div>
@@ -52,7 +39,7 @@ export const RequestHeaders = ({ headers, setHeaders }: Props) => {
             name="Value"
             onChange={e => updateHeader(id, 'value', e.target.value)}
           />
-          <IconButton onClick={() => deleteHeader(id)}>
+          <IconButton onClick={() => removeHeader(id)}>
             <DeleteIcon />
           </IconButton>
         </div>

@@ -1,7 +1,7 @@
+import { type ApiResponse } from '@/sources/types';
 import { Card } from '@mui/material';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import type { ApiResponse } from '@/features/rest-client';
 
 type Props = {
   response: ApiResponse | null;

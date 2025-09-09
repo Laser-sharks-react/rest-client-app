@@ -1,17 +1,23 @@
 import { Button, MenuItem, Select, TextField } from '@mui/material';
-import React from 'react';
-import { allowedMethods } from '@/sources/constants';
+import React, { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
+import { base64Decode } from '@/utils/base64';
+import { useRequestStore } from '@/store/request-store';
+import { isHttpMethod } from '@/sources/types';
+import { DEFAULT_HTTP_METHOD, HTTP_METHODS } from '@/sources/constants';
 
-type Props = {
-  method: string;
-  setMethod: React.Dispatch<React.SetStateAction<string>>;
-  url: string;
-  setUrl: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export const RequestSender = ({ method, setMethod, setUrl, url }: Props) => {
+export const RequestSender = () => {
   const t = useTranslations('RestClientPage');
+  const params = useParams();
+  const [methodParam, urlParam] = params.params ?? [];
+
+  const { setMethod, setUrl, method, url } = useRequestStore();
+
+  useEffect(() => {
+    setMethod(isHttpMethod(methodParam) ? methodParam : DEFAULT_HTTP_METHOD);
+    setUrl(urlParam ? base64Decode(decodeURIComponent(urlParam)) : '');
+  }, []);
 
   return (
     <div className="flex gap-2">
@@ -20,7 +26,7 @@ export const RequestSender = ({ method, setMethod, setUrl, url }: Props) => {
         value={method}
         onChange={e => setMethod(e.target.value)}
       >
-        {allowedMethods.map(m => (
+        {HTTP_METHODS.map(m => (
           <MenuItem key={m} value={m}>
             {m}
           </MenuItem>
