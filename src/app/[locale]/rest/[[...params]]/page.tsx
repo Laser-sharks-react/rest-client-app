@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ROUTES } from '@/sources/routes';
+import { ROUTES } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
-import { getNewUrl } from '@/utils/getNewUrl';
+import { getNewUrl } from '@/utils/get-new-url';
 import { RequestHeaders } from '@/components/request-headers';
 import { CustomResponse } from '@/components/custom-response';
 import { RequestSender } from '@/components/request-sender';
-import { headersArrayToObj } from '@/utils/headersArrayToObj';
+import { headersArrayToObj } from '@/utils/headers-array-to-obj';
 import { RequestBody } from '@/components/request-body';
 import { useRequestStore } from '@/store/request-store';
-import type { HttpHeader, ApiResponse, HttpMethod } from '@/sources/types';
+import type { HttpHeader, ApiResponse, HttpMethod } from '@/lib/types';
 
 export default function RequestPage() {
   const router = useRouter();

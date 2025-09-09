@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { base64Decode } from '@/utils/base64';
 import { useRequestStore } from '@/store/request-store';
-import { isHttpMethod } from '@/sources/types';
-import { DEFAULT_HTTP_METHOD, HTTP_METHODS } from '@/sources/constants';
+import { DEFAULT_HTTP_METHOD, HTTP_METHODS } from '@/lib/constants';
+import { isHttpMethod } from '@/utils/is-http-method';
 
 export const RequestSender = () => {
   const t = useTranslations('RestClientPage');

@@ -1,4 +1,4 @@
-import { DEFAULT_HTTP_METHOD } from '@/sources/constants';
+import { DEFAULT_HTTP_METHOD } from '@/lib/constants';
 
 export async function POST(req: Request) {
   const { url, method, body, headers } = await req.json();

@@ -20,7 +20,7 @@ import { enqueueSnackbar } from 'notistack';
 import type { SignUpFormValues } from '@/lib/types';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useSignUpForm } from '@/lib/hooks/useSignUpForm';
+import { useSignUpForm } from '@/lib/hooks/use-sign-up-form';
 
 export default function SignUp() {
   const t = useTranslations('SignUpPage');

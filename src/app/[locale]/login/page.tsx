@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { login } from '@/lib/firebase';
 import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useLoginForm } from '@/lib/hooks/useLoginForm';
+import { useLoginForm } from '@/lib/hooks/use-login-form';
 import type { FormValues } from '@/lib/types';
 import { useRouter } from 'next/router';
 
