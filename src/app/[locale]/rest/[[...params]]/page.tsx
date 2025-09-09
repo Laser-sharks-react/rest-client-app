@@ -11,6 +11,7 @@ import { headersArrayToObj } from '@/utils/headers-array-to-obj';
 import { RequestBody } from '@/components/request-body';
 import { useRequestStore } from '@/store/request-store';
 import type { HttpHeader, ApiResponse, HttpMethod } from '@/lib/types';
+import { GeneratedCodeSection } from '@/components/generated-code-section';
 
 export default function RequestPage() {
   const router = useRouter();
@@ -66,6 +67,7 @@ export default function RequestPage() {
       <div className="min-h-[200px]">
         {response && <CustomResponse response={response} />}
       </div>
+      <GeneratedCodeSection />
     </form>
   );
 }
