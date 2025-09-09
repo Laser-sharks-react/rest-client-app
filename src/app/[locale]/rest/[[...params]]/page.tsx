@@ -1,35 +1,72 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useRouter } from 'next/navigation';
-import { CircularProgress } from '@mui/material';
-import { auth } from '@/firebase';
+import React, { useEffect, useState } from 'react';
 import { ROUTES } from '@/sources/routes';
-import { useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { base64Decode } from '@/utils/base64';
+import { getNewUrl } from '@/utils/getNewUrl';
+import { RequestHeaders } from '@/components/request-headers';
+import { CustomResponse } from '@/components/custom-response';
+import { RequestSender } from '@/components/request-sender';
+import { headersArrayToObj } from '@/utils/headersArrayToObj';
+import { RequestBody } from '@/components/request-body';
+import { useRequestStore } from '@/store/request-store';
+import type { HttpHeader, ApiResponse, HttpMethod } from '@/sources/types';
 
-const RestClient = dynamic(() => import('../../../../features/rest-client'), {
-  ssr: false,
-  loading: () => <CircularProgress />,
-});
-
-export default function RestPage() {
-  const [user, loading] = useAuthState(auth);
+export default function RequestPage() {
   const router = useRouter();
+  const { body, method, url, headers } = useRequestStore();
+
+  const [response, setResponse] = useState<ApiResponse>(null);
+
+  async function fetchData(
+    url: string,
+    method: HttpMethod,
+    body: string,
+    headers: HttpHeader[]
+  ) {
+    try {
+      const headersObj = headersArrayToObj(headers);
+
+      const res = await fetch(ROUTES.proxy, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url, method, body, headers: headersObj }),
+      });
+      const json = await res.json();
+      setResponse({ status: res.status, ok: res.ok, json });
+    } catch (e) {
+      setResponse(
+        e instanceof Error ? { error: e.message } : { error: String(e) }
+      );
+    }
+  }
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push(ROUTES.login);
-    }
-  }, [loading, user, router]);
+    if (url) void fetchData(url, method, body, headers);
+  }, []);
 
-  if (loading) {
-    return <CircularProgress />;
+  async function sendRequest(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const newUrl = getNewUrl(method, url, body, headers);
+    router.push(`${ROUTES.rest}${newUrl}`);
+
+    await fetchData(url, method, body, headers);
   }
 
-  if (!user) {
-    return null;
-  }
+  return (
+    <form
+      onSubmit={sendRequest}
+      className="p-4 flex flex-col gap-4 min-h-[600px]"
+    >
+      <RequestSender />
+      <RequestBody />
+      <RequestHeaders />
 
-  return <RestClient />;
+      <div className="min-h-[200px]">
+        {response && <CustomResponse response={response} />}
+      </div>
+    </form>
+  );
 }
