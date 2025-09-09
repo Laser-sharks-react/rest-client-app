@@ -31,3 +31,14 @@ export const HTTP_METHODS: HttpMethod[] = [
 ] as const;
 
 export const DEFAULT_HTTP_METHOD: HttpMethod = 'GET';
+
+export const LANGUAGES = [
+  'cURL',
+  'JavaScript Fetch',
+  'JavaScript XHR',
+  'NodeJS',
+  'Python',
+  'Java',
+  'C#',
+  'Go',
+];
