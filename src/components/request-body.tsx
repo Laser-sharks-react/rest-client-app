@@ -1,8 +1,12 @@
+'use client';
+
 import { useRequestStore } from '@/store/request-store';
 import { base64Decode } from '@/utils/base64';
-import { TextField } from '@mui/material';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
+
+import JsonEditor from './json-editor';
+import { CircularProgress, Typography } from '@mui/material';
 
 export function RequestBody() {
   const params = useParams();
@@ -13,16 +17,11 @@ export function RequestBody() {
   useEffect(() => {
     if (bodyParam) setBody(base64Decode(decodeURIComponent(bodyParam)));
   }, []);
-
+  if (!body) return <CircularProgress />;
   return (
-    <TextField
-      label="Request Body"
-      multiline
-      minRows={6}
-      fullWidth
-      name="body"
-      value={body}
-      onChange={e => setBody(e.target.value)}
-    />
+    <>
+      <Typography variant="h6">Body</Typography>
+      <JsonEditor initial={body} onValidChange={setBody} />
+    </>
   );
 }
