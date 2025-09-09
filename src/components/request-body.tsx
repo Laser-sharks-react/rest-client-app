@@ -10,14 +10,15 @@ import { CircularProgress, Typography } from '@mui/material';
 
 export function RequestBody() {
   const params = useParams();
-  const [method, url, bodyParam] = params.params ?? [];
+  const [_method, url, bodyParam] = params.params ?? [];
 
-  const { body, setBody } = useRequestStore();
+  const { body, method, setBody } = useRequestStore();
 
   useEffect(() => {
     if (bodyParam) setBody(base64Decode(decodeURIComponent(bodyParam)));
   }, []);
-  if (!body) return <CircularProgress />;
+
+  if (method === 'GET') return null;
   return (
     <>
       <Typography variant="h6">Body</Typography>

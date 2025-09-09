@@ -2,7 +2,7 @@ import { type HttpMethod } from './types';
 
 export const ROUTES = {
   signup: '/signup',
-  proxy: '/proxy',
+  proxy: '/api/proxy',
   home: '/',
   login: '/login',
   history: '/history',
