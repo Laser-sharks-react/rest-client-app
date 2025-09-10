@@ -17,14 +17,15 @@ import { useTranslations } from 'next-intl';
 import Link from '@mui/material/Link';
 import { useState } from 'react';
 import { login } from '@/lib/firebase';
-import { enqueueSnackbar } from 'notistack';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/lib/hooks/use-login-form';
 import type { FormValues } from '@/lib/types';
+import { useSnackbar } from 'notistack';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
   const {

@@ -19,8 +19,6 @@ export interface HttpHeader {
   value: string;
 }
 
-
-
 type SuccessResponse = {
   status: number;
   ok: boolean;
