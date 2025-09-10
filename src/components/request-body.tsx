@@ -6,11 +6,11 @@ import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import JsonEditor from './json-editor';
-import { CircularProgress, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export function RequestBody() {
   const params = useParams();
-  const [_method, url, bodyParam] = params.params ?? [];
+  const [_method, _url, bodyParam] = params.params ?? [];
 
   const { body, method, setBody } = useRequestStore();
 

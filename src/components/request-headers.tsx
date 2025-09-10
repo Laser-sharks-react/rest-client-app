@@ -13,9 +13,10 @@ export const RequestHeaders = () => {
 
   useEffect(() => {
     clearHeaders();
-    searchParams.forEach((value, key) => {
-      addHeader({ key, value });
-    });
+    if (searchParams)
+      searchParams.forEach((value, key) => {
+        addHeader({ key, value });
+      });
   }, []);
 
   return (

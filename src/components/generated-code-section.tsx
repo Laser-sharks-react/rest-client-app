@@ -1,6 +1,5 @@
-import { LANGUAGES } from '@/lib/constants';
 import { useRequestStore } from '@/store/request-store';
-import { Box, Tabs, Tab } from '@mui/material';
+import { Box, Tabs, Tab, Card } from '@mui/material';
 import { useMemo, useState } from 'react';
 import {
   generateCSharp,
@@ -13,8 +12,9 @@ import {
   generateXHR,
 } from '@/utils/code-generators';
 import { useTranslations } from 'next-intl';
-import type { Language } from '@/lib/types';
+import type { Language } from '@/lib/types/request';
 import { headersArrayToObj } from '@/utils/headers-array-to-obj';
+import { LANGUAGES } from '@/lib/constants/request';
 
 export const GeneratedCodeSection = () => {
   const { method, url, body, headers } = useRequestStore();
@@ -52,7 +52,7 @@ export const GeneratedCodeSection = () => {
   }, [url, method, headers, lang, t, body]);
 
   return (
-    <Box className="border rounded-md p-3 mt-4">
+    <Card>
       <Tabs
         value={lang}
         onChange={(_, newValue) => setLang(newValue)}
@@ -66,6 +66,6 @@ export const GeneratedCodeSection = () => {
       <pre className="bg-zinc-100 p-3 mt-2 rounded text-sm overflow-x-auto">
         {code}
       </pre>
-    </Box>
+    </Card>
   );
 };

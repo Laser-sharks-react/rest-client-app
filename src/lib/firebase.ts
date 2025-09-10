@@ -10,7 +10,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { signOut } from 'firebase/auth';
 import type { Timestamp } from 'firebase/firestore';
 import { serverTimestamp } from '@firebase/database';
-import { ROUTES } from './constants';
+import { ROUTES } from './constants/routes';
 
 type RequestLog = {
   userId: string;

@@ -1,7 +1,7 @@
 import { type NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 import { getSessionSecret, getSessionToken } from './session-token';
-import { ALG } from '@/lib/constants';
+import { ALG } from '@/lib/constants/cookie';
 
 export async function getUserIdFromRequest(
   req: NextRequest

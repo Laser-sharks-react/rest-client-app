@@ -1,4 +1,4 @@
-import { type ApiResponse } from '@/lib/types';
+import { type ApiResponse } from '@/lib/types/response';
 import { Card } from '@mui/material';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism';

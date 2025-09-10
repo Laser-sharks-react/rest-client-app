@@ -1,7 +1,6 @@
 'use client';
 
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
-import { ROUTES } from '@/lib/constants';
 import {
   Button,
   Container,
@@ -19,15 +18,15 @@ import { useState } from 'react';
 import { login } from '@/lib/firebase';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useLoginForm } from '@/lib/hooks/use-login-form';
-import type { FormValues } from '@/lib/types';
+import type { FormValues } from '@/lib/types/types';
 import { useSnackbar } from 'notistack';
+import { ROUTES } from '@/lib/constants/routes';
 
 export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
-  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,

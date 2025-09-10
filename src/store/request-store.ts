@@ -1,4 +1,4 @@
-import { type HttpHeader, type HttpMethod } from '@/lib/types';
+import type { HttpHeader, HttpMethod } from '@/lib/types/request';
 import { create } from 'zustand';
 
 export interface State {

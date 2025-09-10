@@ -10,13 +10,13 @@ import {
   Stack,
 } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
-import { ROUTES } from '@/lib/constants';
 import { useTranslations } from 'next-intl';
 import cx from 'classnames';
 import { LangSelector } from './lang-selector';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, logout } from '@/firebase';
+import { auth, logout } from '@/lib/firebase';
 import { enqueueSnackbar } from 'notistack';
+import { ROUTES } from '@/lib/constants/routes';
 
 export default function Header() {
   const t = useTranslations('Header');

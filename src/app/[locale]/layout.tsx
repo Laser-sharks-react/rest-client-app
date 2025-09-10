@@ -2,6 +2,7 @@ import { ClientProviders } from '@/components/client-layout';
 import { Footer } from '@/components/footer';
 import Header from '@/components/header';
 import { RestClientNavbar } from '@/components/rest-client-navbar';
+import { Container } from '@mui/material';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { type ReactNode } from 'react';
@@ -19,7 +20,9 @@ export default async function LocaleLayout({ children, params }: Props) {
       <ClientProviders />
       <Header />
       <RestClientNavbar />
-      <main>{children}</main>
+      <Container component="main" sx={{ bgcolor: 'aliceblue' }}>
+        {children}
+      </Container>
       <Footer />
     </NextIntlClientProvider>
   );

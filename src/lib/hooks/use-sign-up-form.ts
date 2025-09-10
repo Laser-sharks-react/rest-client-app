@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useTranslations } from 'next-intl';
 import { buildSignUpSchema } from '../schemas/sign-up-schema';
-import { type SignUpFormValues } from '../types';
+import { type SignUpFormValues } from '../types/types';
 
 export const useSignUpForm = () => {
   const t = useTranslations('FormErrors');

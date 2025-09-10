@@ -1,6 +1,6 @@
 import { base64Encode } from '@/utils/base64';
 import { headersArrayToObj } from './headers-array-to-obj';
-import type { HttpHeader, HttpMethod } from '@/lib/types';
+import type { HttpHeader, HttpMethod } from '@/lib/types/request';
 
 export const getNewUrl = (
   method: HttpMethod,

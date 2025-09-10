@@ -14,17 +14,18 @@ import {
 import { useTranslations } from 'next-intl';
 import { Link as IntlLink, useRouter } from '@/i18n/navigation';
 import Link from '@mui/material/Link';
-import { ROUTES } from '@/lib/constants';
 import { login, register as registerUser } from '@/lib/firebase';
-import { enqueueSnackbar } from 'notistack';
-import type { SignUpFormValues } from '@/lib/types';
+import { useSnackbar } from 'notistack';
+import type { SignUpFormValues } from '@/lib/types/types';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useSignUpForm } from '@/lib/hooks/use-sign-up-form';
+import { ROUTES } from '@/lib/constants/routes';
 
 export default function SignUp() {
   const t = useTranslations('SignUpPage');
   const tForm = useTranslations('Form');
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
