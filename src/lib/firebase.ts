@@ -10,6 +10,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { signOut } from 'firebase/auth';
 import type { Timestamp } from 'firebase/firestore';
 import { serverTimestamp } from '@firebase/database';
+import { ROUTES } from './constants';
 
 type RequestLog = {
   userId: string;
@@ -36,7 +37,7 @@ const db = getFirestore(app);
 const login = async (email: string, password: string) => {
   const cred = await signInWithEmailAndPassword(auth, email, password);
 
-  await fetch('/api/session', {
+  await fetch(ROUTES.session, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ userId: cred.user.uid }),
