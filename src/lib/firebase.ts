@@ -1,14 +1,20 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, updateProfile } from 'firebase/auth';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import {
+  getAuth,
+  updateProfile,
+  sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { signOut } from 'firebase/auth';
-import type { Timestamp } from 'firebase/firestore';
+import {
+  type Timestamp,
+  getFirestore,
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+} from 'firebase/firestore';
 import { serverTimestamp } from '@firebase/database';
 import { ROUTES } from './constants/routes';
 
@@ -34,6 +40,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const COLLECTIONS = {
+  users: 'users',
+  requests: 'requests',
+};
+
 const login = async (email: string, password: string) => {
   const cred = await signInWithEmailAndPassword(auth, email, password);
 
@@ -49,7 +60,7 @@ const login = async (email: string, password: string) => {
 const register = async (name: string, email: string, password: string) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
-  await setDoc(doc(db, 'users', user.uid), {
+  await setDoc(doc(db, COLLECTIONS.users, user.uid), {
     uid: user.uid,
     name,
     authProvider: 'local',
@@ -67,7 +78,7 @@ const logout = () => {
 };
 
 async function saveRequest(log: RequestLog) {
-  await addDoc(collection(db, 'requests'), {
+  await addDoc(collection(db, COLLECTIONS.requests), {
     ...log,
     createdAt: serverTimestamp(),
   });
