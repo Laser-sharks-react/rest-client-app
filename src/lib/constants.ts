@@ -1,8 +1,9 @@
-import { type HttpMethod } from './types';
+import type { Language, HttpMethod } from './types';
 
 export const ROUTES = {
   signup: '/signup',
   proxy: '/api/proxy',
+  session: '/api/session',
   home: '/',
   login: '/login',
   history: '/history',
@@ -31,3 +32,14 @@ export const HTTP_METHODS: HttpMethod[] = [
 ] as const;
 
 export const DEFAULT_HTTP_METHOD: HttpMethod = 'GET';
+
+export const LANGUAGES: Language[] = [
+  'cURL',
+  'JavaScript Fetch',
+  'JavaScript XHR',
+  'NodeJS',
+  'Python',
+  'Java',
+  'C#',
+  'Go',
+];

@@ -9,7 +9,6 @@ export const getNewUrl = (
   headers: HttpHeader[]
 ) => {
   const encodedUrl = encodeURIComponent(base64Encode(url));
-  console.log(body);
   const cleanBody = body.trim();
   const encodedBody =
     method !== 'GET' && cleanBody
