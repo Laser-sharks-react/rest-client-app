@@ -13,21 +13,21 @@ import {
   generateXHR,
 } from '@/utils/code-generators';
 import { useTranslations } from 'next-intl';
+import type { Language } from '@/lib/types';
+import { headersArrayToObj } from '@/utils/headers-array-to-obj';
 
 export const GeneratedCodeSection = () => {
   const { method, url, body, headers } = useRequestStore();
   const t = useTranslations('RestClientPage');
 
-  const [lang, setLang] = useState<(typeof LANGUAGES)[number]>('cURL');
+  const [lang, setLang] = useState<Language>('cURL');
 
   const code = useMemo(() => {
     if (!url || !method) {
       return t('notEnoughData');
     }
 
-    const headersObj = Object.fromEntries(
-      headers.filter(h => h.key).map(h => [h.key, h.value])
-    );
+    const headersObj = headersArrayToObj(headers);
 
     switch (lang) {
       case 'cURL':

@@ -19,7 +19,15 @@ export interface HttpHeader {
   value: string;
 }
 
-
+export type Language =
+  | 'cURL'
+  | 'JavaScript Fetch'
+  | 'JavaScript XHR'
+  | 'NodeJS'
+  | 'Python'
+  | 'Java'
+  | 'C#'
+  | 'Go';
 
 type SuccessResponse = {
   status: number;
