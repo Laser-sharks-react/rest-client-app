@@ -1,14 +1,7 @@
-import type { HttpHeader, HttpMethod } from '@/lib/types/request';
+import type { HttpHeader, HttpMethod, RequestState } from '@/lib/types/request';
 import { create } from 'zustand';
 
-export interface State {
-  method: HttpMethod;
-  url: string;
-  body: string;
-  headers: HttpHeader[];
-}
-
-interface Store extends State {
+interface Store extends RequestState {
   setMethod: (m: HttpMethod) => void;
   setUrl: (u: string) => void;
   setBody: (b: string) => void;
@@ -21,7 +14,7 @@ interface Store extends State {
   reset: () => void;
 }
 
-const initialState: State = {
+const initialState: RequestState = {
   method: 'GET',
   url: '',
   body: '',

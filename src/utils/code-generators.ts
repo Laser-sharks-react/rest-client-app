@@ -1,39 +1,25 @@
-export function generateCurl(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
-  const h = Object.entries(headers)
-    .map(([k, v]) => `-H "${k}: ${v}"`)
-    .join(' ');
+import type { RequestState } from '@/lib/types/request';
+import { headersArrayToObj } from './headers-array-to-obj';
+
+export function generateCurl({ url, method, headers, body }: RequestState) {
+  const h = headers.map(({ key, value }) => `-H "${key}: ${value}"`).join(' ');
   const data = body ? `--data '${body}'` : '';
   return `curl -X ${method} "${url}" ${h} ${data}`.trim();
 }
 
-export function generateFetch(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generateFetch({ url, method, headers, body }: RequestState) {
   return `fetch("${url}", {
   method: "${method}",
-  headers: ${JSON.stringify(headers, null, 2)},
+  headers: ${JSON.stringify(headersArrayToObj(headers), null, 2)},
   ${body ? `body: ${JSON.stringify(body)},` : ''}
 });`;
 }
 
-export function generateXHR(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generateXHR({ url, method, headers, body }: RequestState) {
   return `var xhr = new XMLHttpRequest();
 xhr.open("${method}", "${url}");
-${Object.entries(headers)
-  .map(([k, v]) => `xhr.setRequestHeader("${k}", "${v}");`)
+${headers
+  .map(({ key, value }) => `xhr.setRequestHeader("${key}", "${value}");`)
   .join('\n')}
 xhr.onload = export function() {
   console.log(xhr.responseText);
@@ -41,33 +27,23 @@ xhr.onload = export function() {
 ${body ? `xhr.send(${JSON.stringify(body)});` : 'xhr.send();'}`;
 }
 
-export function generateNode(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generateNode({ url, method, headers, body }: RequestState) {
   return `const fetch = require("node-fetch");
 
 fetch("${url}", {
   method: "${method}",
-  headers: ${JSON.stringify(headers, null, 2)},
+  headers: ${JSON.stringify(headersArrayToObj(headers), null, 2)},
   ${body ? `body: ${JSON.stringify(body)},` : ''}
 })
   .then(res => res.text())
   .then(console.log);`;
 }
 
-export function generatePython(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generatePython({ url, method, headers, body }: RequestState) {
   return `import requests
 
 url = "${url}"
-headers = ${JSON.stringify(headers, null, 2)}
+headers = ${JSON.stringify(headersArrayToObj(headers), null, 2)}
 response = requests.request("${method}", url, headers=headers${
     body ? `, data='${body}'` : ''
   })
@@ -75,20 +51,15 @@ response = requests.request("${method}", url, headers=headers${
 print(response.text)`;
 }
 
-export function generateJava(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generateJava({ url, method, headers, body }: RequestState) {
   return `import java.net.*;
 import java.io.*;
 
 URL url = new URL("${url}");
 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 conn.setRequestMethod("${method}");
-${Object.entries(headers)
-  .map(([k, v]) => `conn.setRequestProperty("${k}", "${v}");`)
+${headers
+  .map(({ key, value }) => `conn.setRequestProperty("${key}", "${value}");`)
   .join('\n')}
 ${body ? 'conn.setDoOutput(true);\ntry(OutputStream os = conn.getOutputStream()) { os.write("'.concat(body, '".getBytes()); }') : ''}
 
@@ -103,12 +74,7 @@ in.close();
 System.out.println(response.toString());`;
 }
 
-export function generateCSharp(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generateCSharp({ url, method, headers, body }: RequestState) {
   return `using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -117,8 +83,8 @@ class Program {
   static async Task Main() {
     var client = new HttpClient();
     var request = new HttpRequestMessage(HttpMethod.${method}, "${url}");
-${Object.entries(headers)
-  .map(([k, v]) => `    request.Headers.Add("${k}", "${v}");`)
+${headers
+  .map(({ key, value }) => `    request.Headers.Add("${key}", "${value}");`)
   .join('\n')}
 ${body ? `    request.Content = new StringContent("${body}");` : ''}
     var response = await client.SendAsync(request);
@@ -127,12 +93,7 @@ ${body ? `    request.Content = new StringContent("${body}");` : ''}
 }`;
 }
 
-export function generateGo(
-  url: string,
-  method: string,
-  headers: Record<string, string>,
-  body?: string
-) {
+export function generateGo({ url, method, headers, body }: RequestState) {
   return `package main
 
 import (
@@ -147,8 +108,8 @@ func main() {
   req, _ := http.NewRequest("${method}", "${url}", ${
     body ? `strings.NewReader("${body}")` : 'nil'
   })
-${Object.entries(headers)
-  .map(([k, v]) => `  req.Header.Add("${k}", "${v}")`)
+${headers
+  .map(({ key, value }) => `  req.Header.Add("${key}", "${value}")`)
   .join('\n')}
   res, _ := client.Do(req)
   defer res.Body.Close()

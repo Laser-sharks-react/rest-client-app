@@ -1,3 +1,10 @@
+export type RequestState = {
+  url: string;
+  method: HttpMethod;
+  body: string;
+  headers: HttpHeader[];
+};
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export interface HttpHeader {
