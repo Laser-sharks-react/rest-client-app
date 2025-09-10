@@ -1,4 +1,4 @@
-import { base64Encode } from '@/utils/base64';
+import { base64Encode } from '@/lib/utils/base64';
 import { headersArrayToObj } from './headers-array-to-obj';
 import type { RequestState } from '@/lib/types/request';
 

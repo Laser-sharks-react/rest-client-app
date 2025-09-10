@@ -9,9 +9,9 @@ import {
 import React, { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { base64Decode } from '@/utils/base64';
+import { base64Decode } from '@/lib/utils/base64';
 import { useRequestStore } from '@/store/request-store';
-import { isHttpMethod } from '@/utils/is-http-method';
+import { isHttpMethod } from '@/lib/utils/is-http-method';
 import { DEFAULT_HTTP_METHOD, HTTP_METHODS } from '@/lib/constants/request';
 
 export const RequestSender = () => {

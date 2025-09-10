@@ -1,4 +1,4 @@
-import { headersArrayToObj } from '@/utils/headers-array-to-obj';
+import { headersArrayToObj } from '@/lib/utils/headers-array-to-obj';
 import { ROUTES } from '../constants/routes';
 import type { RequestState } from '../types/request';
 import { useState } from 'react';

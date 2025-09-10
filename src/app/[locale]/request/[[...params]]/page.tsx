@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { getNewUrl } from '@/utils/get-new-url';
+import { getNewUrl } from '@/lib/utils/get-new-url';
 import { RequestHeaders } from '@/components/request-headers';
 import { CustomResponse } from '@/components/custom-response';
 import { RequestSender } from '@/components/request-sender';

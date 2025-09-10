@@ -1,7 +1,7 @@
 'use client';
 
 import { useRequestStore } from '@/store/request-store';
-import { base64Decode } from '@/utils/base64';
+import { base64Decode } from '@/lib/utils/base64';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 

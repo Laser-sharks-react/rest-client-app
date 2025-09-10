@@ -10,7 +10,7 @@ import {
   generateNode,
   generatePython,
   generateXHR,
-} from '@/utils/code-generators';
+} from '@/lib/utils/code-generators';
 import { useTranslations } from 'next-intl';
 import type { Language } from '@/lib/types/request';
 import { LANGUAGES } from '@/lib/constants/request';
