@@ -1,6 +1,19 @@
 {
   "HomePage": {
-    "title": "Welcome!"
+    "title": "Welcome!",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "aboutProjectTitle": "About the project",
+    "aboutProjectText": "Our project is a tool for working with APIs, inspired by Postman.",
+    "aboutTeamTitle": "Our team",
+    "teamLeadDescription": "She leads the process, distributes tasks, and inspires.",
+    "dev1Description": "Frontend developer, loves to come up with new features.",
+    "dev2Description": "Frontend developer, writes code and maintains stability.",
+    "aboutCourseTitle": "About the course",
+    "aboutCourseText": "We are developing this project as part of our training to improve our teamwork and development skills.",
+    "developer1": "Anastasiia",
+    "developer2": "Anastasiia",
+    "developer3": "Aizhan"
   },
 
   "LoginPage": {

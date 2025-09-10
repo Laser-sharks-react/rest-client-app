@@ -1,6 +1,19 @@
 {
   "HomePage": {
-    "title": "Добро пожаловать!"
+    "title": "Добро пожаловать!",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "aboutProjectTitle": "О проекте",
+    "aboutProjectText": "Наш проект — инструмент для работы с API, вдохновлённый Postman.",
+    "aboutTeamTitle": "Наша команда",
+    "teamLeadDescription": "Руководит процессом, распределяет задачи и вдохновляет.",
+    "dev1Description": "Frontend-разработчик, любит придумывать новые фичи.",
+    "dev2Description": "Frontend-разработчик, пишет код и поддерживает стабильность.",
+    "aboutCourseTitle": "О курсе",
+    "aboutCourseText": "Мы разрабатываем этот проект в рамках обучения, чтобы прокачать навыки командной работы и разработки.",
+    "developer1": "Анастасия",
+    "developer2": "Анастасия",
+    "developer3": "Айжан"
   },
 
   "LoginPage": {
