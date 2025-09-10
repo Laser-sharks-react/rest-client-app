@@ -14,7 +14,6 @@ export default async function NotFound() {
       <NextLink href={ROUTES.home} className="text-blue-500 hover:underline">
         {t('goHome')}
       </NextLink>
-      </NextLink>
     </Container>
   );
 }
