@@ -18,6 +18,6 @@ export async function POST(req: Request) {
 
 export async function DELETE() {
   const res = NextResponse.json({ ok: true });
-  const resWithSession = setSessionToken(res, '', 0);
-  return resWithSession;
+  setSessionToken(res, '', 0);
+  return res;
 }
