@@ -3,7 +3,6 @@ import { createSessionToken, setSessionToken } from '@/utils/session-token';
 
 export async function POST(req: Request) {
   const { userId } = await req.json();
-
   if (!userId)
     return NextResponse.json(
       { ok: false, error: 'userId required' },
@@ -12,13 +11,13 @@ export async function POST(req: Request) {
 
   const token = await createSessionToken({ userId });
   const res = NextResponse.json({ ok: true });
-  const resWithSession = setSessionToken(res, token);
+  setSessionToken(res, token);
 
-  return resWithSession;
+  return res;
 }
 
 export async function DELETE() {
   const res = NextResponse.json({ ok: true });
-  const resWithSession = setSessionToken(res, '', 0);
-  return resWithSession;
+  setSessionToken(res, '', 0);
+  return res;
 }
