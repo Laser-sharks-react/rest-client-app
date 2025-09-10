@@ -27,6 +27,7 @@ export default function Login() {
   const tForm = useTranslations('Form');
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,

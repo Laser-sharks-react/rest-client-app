@@ -38,7 +38,7 @@ export default function JsonEditor({
 
   useEffect(() => {
     try {
-      const parsed = JSON.parse(code);
+      JSON.parse(code);
       setError(null);
       onValidChange?.(code);
     } catch (e: unknown) {
