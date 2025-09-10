@@ -1,5 +1,7 @@
 @layer theme, base, mui, components, utilities;
 @import 'tailwindcss';
+@import 'prismjs/themes/prism-tomorrow.css';
+@import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
 @theme inline {
   --color-background: var(--background);

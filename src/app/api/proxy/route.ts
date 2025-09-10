@@ -1,27 +1,28 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { DEFAULT_HTTP_METHOD } from '@/lib/constants';
 
-export async function POST(req: NextRequest) {
-  const { url, method, headers, body } = await req.json();
+export async function POST(req: Request) {
+  const { url, method, body, headers } = await req.json();
 
   try {
     const res = await fetch(url, {
       method,
       headers,
-      body: method !== 'GET' ? body : undefined,
+      body: method !== DEFAULT_HTTP_METHOD ? body : undefined,
     });
 
-    const text = await res.text();
-    return new NextResponse(text, {
-      status: res.status,
-      headers: {
-        'Content-Type': res.headers.get('content-type') || 'text/plain',
-      },
-    });
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      return NextResponse.json({ error: err.message }, { status: 500 });
+    const contentType = res.headers.get('content-type') || '';
+
+    let data;
+    if (contentType.includes('application/json')) {
+      data = await res.json();
+    } else {
+      data = await res.text();
     }
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return Response.json({ status: res.status, ok: res.ok, json: data });
+  } catch (e) {
+    return Response.json(
+      { error: e instanceof Error ? e.message : String(e) },
+      { status: 500 }
+    );
   }
 }

@@ -6,21 +6,19 @@
   "LoginPage": {
     "title": "Log In",
     "noAccount": "Don't have an account?",
-    "signup": "Sign Up",
-    "login": "Log In",
     "loginUser": "Logging in user...",
     "loginUserSuccess": "User logged in successfully.",
-    "loginUserError": "User login failed. "
+    "loginUserError": "User login failed."
   },
 
   "SignUpPage": {
     "title": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
-    "login": "Log In",
-    "signup": "Sign Up",
     "signupUser": "Signing up user...",
     "signupUserSuccess": "User signed up successfully.",
-    "signupUserError": "User sign up failed."
+    "signupUserError": "User sign up failed.",
+    "loginUserSuccess": "User logged in successfully.",
+    "loginUserError": "User login failed."
   },
 
   "NotFoundPage": {
@@ -62,5 +60,32 @@
     "request": "Request",
     "history": "History",
     "variables": "Variables"
+  },
+
+  "Form": {
+    "signup": "Sign Up",
+    "login": "Log In",
+    "name": "Your name",
+    "e-mail": "E-mail",
+    "password": "Password",
+    "hidePassword": "Hide password",
+    "showPassword": "Show password"
+  },
+
+  "FormErrors": {
+    "required": "This field is required",
+    "name": {
+      "min": "Name should contain at least 1 character"
+    },
+    "email": {
+      "format": "Please enter a valid e-mail address"
+    },
+    "password": {
+      "strong": "Password must be at least 8 characters long, contain one letter, one number, and one special character"
+    }
+  },
+  "RestClientPage": {
+    "button": "Send",
+    "notEnoughData": "// Not enough details to generate code"
   }
 }

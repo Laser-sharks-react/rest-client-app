@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/navigation';
-import { ROUTES } from '@/sources/routes';
+import NextLink from 'next/link';
+import { ROUTES } from '@/lib/constants';
 import { Container, Typography } from '@mui/material';
 
 export default async function NotFound() {
@@ -11,9 +11,9 @@ export default async function NotFound() {
       <Typography variant="h5">{t('title')}</Typography>
       <Typography variant="body1">{t('description')}</Typography>
 
-      <Link href={ROUTES.home} className="text-blue-500 hover:underline">
+      <NextLink href={ROUTES.home} className="text-blue-500 hover:underline">
         {t('goHome')}
-      </Link>
+      </NextLink>
     </Container>
   );
 }
