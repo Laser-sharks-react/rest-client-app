@@ -15,11 +15,12 @@ import cx from 'classnames';
 import { LangSelector } from './lang-selector';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logout } from '@/lib/firebase';
-import { enqueueSnackbar } from 'notistack';
 import { ROUTES } from '@/lib/constants/routes';
+import { useSnackbar } from 'notistack';
 
 export default function Header() {
   const t = useTranslations('Header');
+  const { enqueueSnackbar } = useSnackbar();
   const [user] = useAuthState(auth);
   const trigger = useScrollTrigger({
     disableHysteresis: true,
