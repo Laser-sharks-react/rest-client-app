@@ -34,12 +34,12 @@ export default function SignUp() {
   } = useSignUpForm();
   const router = useRouter();
 
-  const handleSignUp = async (data: SignUpFormValues) => {
+  const handleSignUp = async ({ email, name, password }: SignUpFormValues) => {
     try {
-      await registerUser(data.name, data.email, data.password);
+      await registerUser(name, email, password);
       enqueueSnackbar(t('signupUserSuccess'), { variant: 'success' });
 
-      await login(data.email, data.password);
+      await login(email, password);
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
       router.replace(ROUTES.home);
     } catch (err) {

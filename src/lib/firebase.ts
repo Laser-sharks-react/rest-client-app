@@ -75,6 +75,9 @@ const resetPassword = async (email: string) => {
 
 const logout = () => {
   void signOut(auth);
+  void fetch(ROUTES.session, {
+    method: 'DELETE',
+  });
 };
 
 async function saveRequest(log: RequestLog) {
