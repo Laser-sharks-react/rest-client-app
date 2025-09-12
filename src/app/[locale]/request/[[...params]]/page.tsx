@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { getNewUrl } from '@/lib/utils/get-new-url';
 import { RequestHeaders } from '@/components/request-headers';
@@ -16,13 +16,9 @@ import { useProxyResponse } from '@/lib/hooks/use-proxy-response';
 export default function RequestPage() {
   const router = useRouter();
   const request = useRequestStore();
-  const { fetchData, isLoading, response } = useProxyResponse();
+  const { response, isLoading, fetchData } = useProxyResponse();
 
-  useEffect(() => {
-    if (request.url) void fetchData(request);
-  }, []);
-
-  async function sendRequest(e: React.FormEvent<HTMLFormElement>) {
+  async function sendRequest(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const newUrl = getNewUrl(request);
