@@ -23,14 +23,13 @@ export default function Header() {
   const t = useTranslations('Header');
   const { enqueueSnackbar } = useSnackbar();
   const [user] = useAuthState(auth);
+
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
     target: typeof window !== 'undefined' ? window : undefined,
   });
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
 
   const onLogout = () => {

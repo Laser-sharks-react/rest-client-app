@@ -1,3 +1,9 @@
+import { VariablesList } from '@/components/variables-list';
+
 export default function VariablesPage() {
-  return <>Variables</>;
+  return (
+    <>
+      <VariablesList />
+    </>
+  );
 }
