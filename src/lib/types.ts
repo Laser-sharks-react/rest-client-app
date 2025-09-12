@@ -1,4 +1,5 @@
 import type { useTranslations } from 'next-intl';
+import { HTTP_METHODS } from './constants';
 
 export type FormValues = {
   email: string;
@@ -42,6 +43,7 @@ type ErrorResponse = {
 export type ApiResponse = SuccessResponse | ErrorResponse | null;
 
 export type RequestRecord = {
+  id: string;
   uid: string;
   endpoint: string;
   method: HttpMethod;
@@ -54,8 +56,15 @@ export type RequestRecord = {
   restore: {
     url: string;
     method: HttpMethod;
-    headers: Array<{ key: string; value: string }>;
-    body?: string;
-    params?: Array<{ key: string; value: string }>;
+    headers: Record<string, string>;
+    body: string | null;
   };
 };
+
+export function isMethod(value: unknown): value is HttpMethod {
+  if (typeof value !== 'string') return false;
+  for (const method of HTTP_METHODS) {
+    if (method === value) return true;
+  }
+  return false;
+}
