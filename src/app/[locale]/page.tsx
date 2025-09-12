@@ -67,9 +67,11 @@ export default function Page() {
               alignItems="center"
               textAlign="center"
             >
-              <Avatar sx={{ bgcolor: 'primary.main', mb: 1 }}>
-                <PersonIcon />
-              </Avatar>
+              <Avatar
+                src="/images/starkoans_avatar.jpeg"
+                alt="Developer 1"
+                sx={{ width: 64, height: 64, mb: 1 }}
+              />
               <Typography variant="subtitle1">{t('developer1')}</Typography>
               <Typography variant="body2">
                 {t('teamLeadDescription')}
@@ -83,9 +85,11 @@ export default function Page() {
               alignItems="center"
               textAlign="center"
             >
-              <Avatar sx={{ bgcolor: 'secondary.main', mb: 1 }}>
-                <PersonIcon />
-              </Avatar>
+              <Avatar
+                src="/images/aissatsana_avatar.jpeg"
+                alt="Developer 2"
+                sx={{ width: 64, height: 64, mb: 1 }}
+              />
               <Typography variant="subtitle1">{t('developer2')}</Typography>
               <Typography variant="body2">{t('dev1Description')}</Typography>
             </Box>
@@ -97,9 +101,11 @@ export default function Page() {
               alignItems="center"
               textAlign="center"
             >
-              <Avatar sx={{ bgcolor: 'success.main', mb: 1 }}>
-                <PersonIcon />
-              </Avatar>
+              <Avatar
+                src="/images/ulistonee_avatar.jpeg"
+                alt="Developer 3"
+                sx={{ width: 64, height: 64, mb: 1 }}
+              />
               <Typography variant="subtitle1">{t('developer3')}</Typography>
               <Typography variant="body2">{t('dev2Description')}</Typography>
             </Box>
