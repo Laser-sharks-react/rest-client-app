@@ -15,7 +15,7 @@ import { isHttpMethod } from '@/lib/utils/is-http-method';
 import { DEFAULT_HTTP_METHOD, HTTP_METHODS } from '@/lib/constants/request';
 
 export const RequestSender = () => {
-  const t = useTranslations('RequestPage');
+  const t = useTranslations('RequestSender');
   const params = useParams();
   const [methodParam, urlParam] = params.params ?? [];
 
@@ -50,7 +50,7 @@ export const RequestSender = () => {
           name="url"
         />
         <Button type="submit" variant="contained" disabled={!url}>
-          {t('send')}
+          {t('button')}
         </Button>
       </Stack>
     </Card>

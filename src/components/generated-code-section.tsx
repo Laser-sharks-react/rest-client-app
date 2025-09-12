@@ -17,7 +17,7 @@ import { LANGUAGES } from '@/lib/constants/request';
 
 export const GeneratedCodeSection = () => {
   const request = useRequestStore();
-  const t = useTranslations('RequestPage');
+  const t = useTranslations('RequestSender');
 
   const [lang, setLang] = useState<Language>('cURL');
 

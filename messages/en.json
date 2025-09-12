@@ -84,7 +84,7 @@
       "strong": "Password must be at least 8 characters long, contain one letter, one number, and one special character"
     }
   },
-  "RestClientPage": {
+  "RequestSender": {
     "button": "Send",
     "notEnoughData": "// Not enough details to generate code"
   }

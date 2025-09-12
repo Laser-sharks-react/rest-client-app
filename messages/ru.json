@@ -88,8 +88,8 @@
     }
   },
 
-  "RequestPage": {
-    "send": "Отправить",
+  "RequestSender": {
+    "button": "Отправить",
     "notEnoughData": "// Недостаточно данных для генерации кода"
   }
 }
