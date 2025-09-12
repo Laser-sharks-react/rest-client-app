@@ -1,20 +1,17 @@
-import { type NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
+import { ALG } from '@/lib/constants';
 import { getSessionSecret, getSessionToken } from './session-token';
-import { ALG } from '@/lib/constants/cookie';
 
-export async function getUserIdFromRequest(
-  req: NextRequest
-): Promise<string | null> {
+export async function getUserId(): Promise<string | null> {
   const token = await getSessionToken();
-  const secret = getSessionSecret();
-  if (!token || !secret) return null;
+  if (!token) return null;
 
   try {
-    const { payload } = await jwtVerify(token, secret, { algorithms: [ALG] });
+    const { payload } = await jwtVerify(token, getSessionSecret(), {
+      algorithms: [ALG],
+    });
     const userId = payload.userId;
     const isValidUserId = typeof userId === 'string' && userId.length > 0;
-
     return isValidUserId ? userId : null;
   } catch {
     return null;

@@ -1,5 +1,7 @@
 import 'server-only';
 import Link from 'next/link';
+import { fetchUserHistory } from '@/lib/utils/fetch-user-history';
+import { getUserId } from '@/lib/utils/get-user-id';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,8 +10,13 @@ export const dynamic = 'force-dynamic';
 // });
 
 export default async function HistoryPage() {
-  //   const user = await getUserId();
-  //   const rows = await fetchUserHistory(user.uid);
+  const uid = await getUserId();
+  if (!uid) {
+    return <div className="p-6">Unauthorized</div>;
+  }
+
+  const realRows = await fetchUserHistory(uid, 200);
+  console.log(realRows);
   const rows = [];
 
   if (!rows.length) {
