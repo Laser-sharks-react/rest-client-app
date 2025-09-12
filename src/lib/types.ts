@@ -40,3 +40,22 @@ type ErrorResponse = {
 };
 
 export type ApiResponse = SuccessResponse | ErrorResponse | null;
+
+export type RequestRecord = {
+  uid: string;
+  endpoint: string;
+  method: HttpMethod;
+  status: number | null;
+  latencyMs: number | null;
+  reqBytes: number;
+  resBytes: number;
+  error: string | null;
+  time: number;
+  restore: {
+    url: string;
+    method: HttpMethod;
+    headers: Array<{ key: string; value: string }>;
+    body?: string;
+    params?: Array<{ key: string; value: string }>;
+  };
+};
