@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
-import { EMAIL_REGEX, PASSWORD_REGEX } from '../constants';
-import { type TFunc } from '../types';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '../constants/validation';
+import { type TFunc } from '../types/types';
 
 export const buildLoginSchema = (t: TFunc) =>
   yup.object({

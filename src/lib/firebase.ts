@@ -1,16 +1,22 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
 import {
+  getAuth,
+  updateProfile,
+  sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { signOut } from 'firebase/auth';
-import type { Timestamp } from 'firebase/firestore';
+import {
+  type Timestamp,
+  getFirestore,
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+} from 'firebase/firestore';
 import { serverTimestamp } from '@firebase/database';
-import { ROUTES } from './constants';
+import { ROUTES } from './constants/routes';
 
 type RequestLog = {
   userId: string;
@@ -34,6 +40,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const COLLECTIONS = {
+  users: 'users',
+  requests: 'requests',
+};
+
 const login = async (email: string, password: string) => {
   const cred = await signInWithEmailAndPassword(auth, email, password);
 
@@ -47,14 +58,15 @@ const login = async (email: string, password: string) => {
 };
 
 const register = async (name: string, email: string, password: string) => {
-  const res = await createUserWithEmailAndPassword(auth, email, password);
-  const user = res.user;
-  await addDoc(collection(db, 'users'), {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
+  await setDoc(doc(db, COLLECTIONS.users, user.uid), {
     uid: user.uid,
     name,
     authProvider: 'local',
     email,
   });
+  await updateProfile(user, { displayName: name });
 };
 
 const resetPassword = async (email: string) => {
@@ -63,10 +75,13 @@ const resetPassword = async (email: string) => {
 
 const logout = () => {
   void signOut(auth);
+  void fetch(ROUTES.session, {
+    method: 'DELETE',
+  });
 };
 
 async function saveRequest(log: RequestLog) {
-  await addDoc(collection(db, 'requests'), {
+  await addDoc(collection(db, COLLECTIONS.requests), {
     ...log,
     createdAt: serverTimestamp(),
   });

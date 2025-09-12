@@ -12,7 +12,11 @@ export const RequestHeaders = () => {
     useRequestStore();
 
   useEffect(() => {
+    const hasParams = searchParams.toString() !== '';
+    if (!hasParams) return;
+
     clearHeaders();
+
     searchParams.forEach((value, key) => {
       addHeader({ key, value });
     });

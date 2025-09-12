@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "title": "Добро пожаловать!"
+    "title": "Добро пожаловать"
   },
 
   "LoginPage": {
@@ -35,11 +35,20 @@
     "appName": "REST Client",
     "home": "Главная",
     "signup": "Регистрирация",
-    "login": "Войти"
+    "login": "Войти",
+    "logout": "Выйти",
+    "logoutSuccess": "Выход выполнен успешно.",
+    "logoutError": "Ошибка выхода."
   },
   "Footer": {
     "rss": "Rolling Scopes School",
     "github": "GitHub"
+  },
+
+  "RestClientLayout": {
+    "request": "Запрос",
+    "history": "История",
+    "variables": "Переменные"
   },
 
   "snackbar": {
@@ -78,7 +87,8 @@
       "strong": "Пароль должен содержать минимум 8 символов, хотя бы одну букву, одну цифру и один специальный символ"
     }
   },
-  "RestClientPage": {
+
+  "RequestSender": {
     "button": "Отправить",
     "notEnoughData": "// Недостаточно данных для генерации кода"
   }

@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import NextLink from 'next/link';
-import { ROUTES } from '@/lib/constants';
 import { Container, Typography } from '@mui/material';
+import { ROUTES } from '@/lib/constants/routes';
 
 export default async function NotFound() {
   const t = await getTranslations('NotFoundPage');

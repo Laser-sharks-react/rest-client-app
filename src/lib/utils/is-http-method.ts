@@ -1,4 +1,4 @@
-import type { HttpMethod } from '@/lib/types';
+import type { HttpMethod } from '@/lib/types/request';
 
 export function isHttpMethod(value: unknown): value is HttpMethod {
   return (
