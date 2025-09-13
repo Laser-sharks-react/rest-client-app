@@ -26,7 +26,7 @@ export const RequestSender = () => {
       setMethod(isHttpMethod(methodParam) ? methodParam : DEFAULT_HTTP_METHOD);
     if (urlParam)
       setUrl(urlParam ? base64Decode(decodeURIComponent(urlParam)) : '');
-  }, []);
+  }, [methodParam, setMethod, setUrl, urlParam]);
 
   return (
     <Card sx={{ p: 2 }}>
