@@ -16,7 +16,7 @@ export function RequestBody() {
 
   useEffect(() => {
     if (bodyParam) setBody(base64Decode(decodeURIComponent(bodyParam)));
-  }, []);
+  }, [bodyParam, setBody]);
 
   if (method === 'GET') return null;
   return (
