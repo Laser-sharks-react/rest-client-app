@@ -20,7 +20,7 @@ export const RequestHeaders = () => {
     searchParams.forEach((value, key) => {
       addHeader({ key, value });
     });
-  }, []);
+  }, [addHeader, clearHeaders, searchParams]);
 
   return (
     <Card className="p-4 flex flex-col gap-2">

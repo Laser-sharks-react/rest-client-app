@@ -25,7 +25,7 @@ import { ROUTES } from '@/lib/constants/routes';
 export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
-  const tErrors = useTranslations('FormErrors')
+  const tErrors = useTranslations('FormErrors');
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
