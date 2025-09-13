@@ -29,7 +29,6 @@ export default function Header() {
     target: typeof window !== 'undefined' ? window : undefined,
   });
   useEffect(() => {
-    console.log(user);
   }, [user]);
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
 

@@ -30,5 +30,5 @@ export function useProxyResponse() {
     }
   }
 
-  return { response, isLoading, fetchData };
+  return { response, isLoading, fetchData, setResponse };
 }

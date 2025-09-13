@@ -14,9 +14,9 @@
   "SignUpPage": {
     "title": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
-    "signupUser": "Signing up user...",
-    "signupUserSuccess": "User signed up successfully.",
-    "signupUserError": "User sign up failed.",
+    "signUpUser": "Signing up user...",
+    "signUpUserSuccess": "User signed up successfully.",
+    "signUpUserError": "User sign up failed.",
     "loginUserSuccess": "User logged in successfully.",
     "loginUserError": "User login failed."
   },

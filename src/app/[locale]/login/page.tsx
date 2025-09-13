@@ -25,6 +25,7 @@ import { ROUTES } from '@/lib/constants/routes';
 export default function Login() {
   const t = useTranslations('LoginPage');
   const tForm = useTranslations('Form');
+  const tErrors = useTranslations('FormErrors')
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -35,9 +36,9 @@ export default function Login() {
   } = useLoginForm();
   const router = useRouter();
 
-  const handleLogin = async (data: FormValues) => {
+  const handleLogin = async ({ email, password }: FormValues) => {
     try {
-      await login(data.email, data.password);
+      await login(email, password);
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
       router.replace(ROUTES.home);
     } catch (err) {
@@ -82,7 +83,7 @@ export default function Login() {
               }}
               error={!!errors.email}
             >
-              {errors.email?.message ?? ' '}
+              {errors.email?.message ?? tErrors('email.format')}
             </FormHelperText>
           </FormControl>
 
@@ -125,7 +126,7 @@ export default function Login() {
               }}
               error={!!errors.password}
             >
-              {errors.password?.message ?? ' '}
+              {errors.password?.message ?? tErrors('password.strong')}
             </FormHelperText>
           </FormControl>
 
