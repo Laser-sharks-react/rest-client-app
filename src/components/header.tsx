@@ -28,8 +28,7 @@ export default function Header() {
     threshold: 0,
     target: typeof window !== 'undefined' ? window : undefined,
   });
-  useEffect(() => {
-  }, [user]);
+  useEffect(() => {}, [user]);
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
 
   const onLogout = () => {
