@@ -83,5 +83,26 @@
   "RestClientPage": {
     "button": "Send",
     "notEnoughData": "// Not enough details to generate code"
+  },
+
+  "HistoryPage": {
+    "unauthorized": "Unauthorized",
+    "title": "History & Analytics",
+    "noRequests": "You haven’t executed any requests yet.",
+    "restLink": " Open REST client"
+  },
+
+  "RequestList": {
+    "title": "Recent requests",
+    "method": "Method",
+    "endpoint": "Endpoint",
+    "status": "Status",
+    "latency": "Latency",
+    "sizes": "sizes",
+    "req": "req",
+    "res": "res",
+    "timestamp": "Timestamp",
+    "action": "Action",
+    "open": "Open"
   }
 }

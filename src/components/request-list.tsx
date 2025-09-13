@@ -13,25 +13,29 @@ import {
 } from '@mui/material';
 import type { RequestRecord } from '@/lib/types';
 import { formatBytes } from '@/utils/format-bytes';
+import { useTranslations } from 'next-intl';
 
-export default function RequestTable({ rows }: { rows: RequestRecord[] }) {
+export function RequestList({ rows }: { rows: RequestRecord[] }) {
+  const t = useTranslations('RequestList');
   return (
     <section>
       <Typography variant="h6" className="mb-2">
-        Recent requests
+        {t('title')}
       </Typography>
 
       <TableContainer component={Paper} className="rounded border">
         <Table size="small" aria-label="request history">
           <TableHead className="bg-gray-50">
             <TableRow>
-              <TableCell>Method</TableCell>
-              <TableCell>Endpoint</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Latency (ms)</TableCell>
-              <TableCell align="right">Sizes (req → res)</TableCell>
-              <TableCell align="right">Timestamp</TableCell>
-              <TableCell align="right">Action</TableCell>
+              <TableCell> {t('method')}</TableCell>
+              <TableCell> {t('endpoint')}</TableCell>
+              <TableCell align="right"> {t('status')}</TableCell>
+              <TableCell align="right"> {t('latency')}</TableCell>
+              <TableCell align="right">
+                {t('sizes')} ({t('req')} → {t('res')})
+              </TableCell>
+              <TableCell align="right"> {t('timestamp')}</TableCell>
+              <TableCell align="right"> {t('action')}</TableCell>
             </TableRow>
           </TableHead>
 
@@ -78,7 +82,7 @@ export default function RequestTable({ rows }: { rows: RequestRecord[] }) {
                     underline="hover"
                     className="text-blue-600"
                   >
-                    open
+                    {t('open')}
                   </MuiLink>
                 </TableCell>
               </TableRow>

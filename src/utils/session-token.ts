@@ -1,7 +1,7 @@
 import { ALG, COOKIE_TIME, COOKIES } from '@/lib/constants';
 import { type JWTPayload, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
-import { type NextResponse, type NextRequest } from 'next/server';
+import { type NextResponse } from 'next/server';
 
 export const SESSION_COOKIE = 'session';
 
