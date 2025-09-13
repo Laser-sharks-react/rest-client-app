@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
         restore: {
           url: '',
           method: 'GET',
-          headers: [],
+          headers: {},
           body: null,
         },
       });

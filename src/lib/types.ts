@@ -46,7 +46,7 @@ export type RequestRecord = {
   restore: {
     url: string;
     method: HttpMethod;
-    headers: Record<string, string>;
+    headers: HttpHeader[];
     body: string | null;
   };
 };

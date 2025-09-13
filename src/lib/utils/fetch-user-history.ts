@@ -1,6 +1,6 @@
 import 'server-only';
 import { dbAdmin } from '@/lib/firebase-admin';
-import { type RequestRecord, isMethod } from '@/lib/types';
+import { type HttpHeader, type RequestRecord, isMethod } from '@/lib/types';
 
 export async function fetchUserHistory(
   uid: string,
@@ -19,18 +19,16 @@ export async function fetchUserHistory(
 
     const restoreRaw =
       data && typeof data === 'object' && data.restore ? data.restore : {};
-
-    const headers: Record<string, string> =
+    const headers: HttpHeader[] =
       restoreRaw &&
       typeof restoreRaw.headers === 'object' &&
       !Array.isArray(restoreRaw.headers)
-        ? Object.fromEntries(
-            Object.entries(restoreRaw.headers).map(([key, value]) => [
-              String(key),
-              String(value),
-            ])
-          )
-        : {};
+        ? Object.entries(restoreRaw.headers).map(([key, value], index) => ({
+            id: `${doc.id}-${index}`,
+            key: String(key),
+            value: String(value),
+          }))
+        : [];
 
     const method = isMethod(data.method) ? data.method : 'GET';
     const restoreMethod = isMethod(restoreRaw.method)
