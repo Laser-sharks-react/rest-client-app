@@ -1,48 +1,75 @@
 'use client';
 
+import type { Variable } from '@/lib/types/variable';
+import { useVariables } from '@/lib/utils/variables';
+import { useVariablesStore } from '@/store/variables-store';
 import { Add, Delete } from '@mui/icons-material';
-import { Card, IconButton, Stack, TextField, Typography } from '@mui/material';
-
-type Variable = {
-  key: string;
-  value: string;
-};
+import {
+  Button,
+  Card,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 export function VariablesList() {
-  const onAdd = () => {};
-  const onUpdateKey = () => {};
-  const onUpdateValue = () => {};
-  const onRemove = () => {};
+  const {
+    variables,
+    removeVariable,
+    addVariable,
+    updateVariableKey,
+    updateVariableValue,
+  } = useVariablesStore();
+
+  const onAdd = () => {
+    addVariable({ key: '', value: '' });
+  };
+  const onUpdateKey = ({ key, id }: Omit<Variable, 'value'>) => {
+    updateVariableKey({ key, id });
+  };
+  const onUpdateValue = ({ value, id }: Omit<Variable, 'key'>) => {
+    updateVariableValue({ value, id });
+  };
+
+  const onRemove = (id: string) => {
+    removeVariable(id);
+  };
 
   return (
     <>
       <Card sx={{ p: 3, m: 3 }}>
         <Stack direction="row" gap={2} alignItems="center" mb={3}>
           <Typography variant="h5">Variables</Typography>
-          <IconButton onClick={onAdd}>
+          <Button
+            onClick={onAdd}
+            variant="contained"
+            sx={{ minWidth: 0, p: 1, borderRadius: 5 }}
+          >
             <Add />
-          </IconButton>
+          </Button>
         </Stack>
-
-        {[{ key: 'val', value: '123' }].map(({ key, value }, index) => (
-          <div key={index} className="flex gap-2 items-center">
-            <TextField
-              label="Key"
-              name="Key"
-              value={key}
-              onChange={onUpdateKey}
-            />
-            <TextField
-              label="Value"
-              value={value}
-              name="Value"
-              onChange={onUpdateValue}
-            />
-            <IconButton onClick={onRemove}>
-              <Delete />
-            </IconButton>
-          </div>
-        ))}
+        <Stack gap={2}>
+          {variables.map(({ id, key, value }, index) => (
+            <Stack key={index} direction="row" gap={2} alignItems="center">
+              <TextField
+                label="Key"
+                name="Key"
+                value={key}
+                onChange={e => onUpdateKey({ id, key: e.target.value })}
+              />
+              <TextField
+                label="Value"
+                value={value}
+                name="Value"
+                onChange={e => onUpdateValue({ id, value: e.target.value })}
+              />
+              <IconButton onClick={() => onRemove(id)} color="error">
+                <Delete />
+              </IconButton>
+            </Stack>
+          ))}
+        </Stack>
       </Card>
     </>
   );
