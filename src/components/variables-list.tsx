@@ -1,7 +1,6 @@
 'use client';
 
 import type { Variable } from '@/lib/types/variable';
-import { useVariables } from '@/lib/utils/variables';
 import { useVariablesStore } from '@/store/variables-store';
 import { Add, Delete } from '@mui/icons-material';
 import {
@@ -23,7 +22,7 @@ export function VariablesList() {
   } = useVariablesStore();
 
   const onAdd = () => {
-    addVariable({ key: '', value: '' });
+    addVariable();
   };
   const onUpdateKey = ({ key, id }: Omit<Variable, 'value'>) => {
     updateVariableKey({ key, id });
