@@ -2,7 +2,7 @@ import { headersArrayToObj } from '@/lib/utils/headers-array-to-obj';
 
 import { ROUTES } from '../constants/routes';
 import type { RequestState } from '../types/request';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ApiResponse } from '../types/response';
 import { transformRequestWithVariables } from '../utils/variables/transform-request-with-variables';
 
@@ -30,7 +30,6 @@ export function useProxyResponse() {
       const json = await res.json();
 
       setResponse({ status: res.status, ok: res.ok, json });
-      console.log(response);
     } catch (e) {
       setResponse(
         e instanceof Error ? { error: e.message } : { error: String(e) }
