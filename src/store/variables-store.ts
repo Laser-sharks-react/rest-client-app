@@ -1,4 +1,3 @@
-// store/useVariablesStore.ts
 import { LS_KEYS } from '@/lib/types/ls-keys';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
@@ -40,6 +39,7 @@ export const useVariablesStore = create<VarsState>()(
     {
       name: LS_KEYS.variables,
       storage: createJSONStorage(() => localStorage),
+      partialize: state => state.variables,
     }
   )
 );

@@ -1,5 +1,34 @@
-import type { RequestState } from '@/lib/types/request';
+import type { Language, RequestState } from '@/lib/types/request';
 import { headersArrayToObj } from './headers-array-to-obj';
+
+export function generateCode({
+  lang,
+  request,
+}: {
+  lang: Language;
+  request: RequestState;
+}) {
+  switch (lang) {
+    case 'cURL':
+      return generateCurl(request);
+    case 'JavaScript Fetch':
+      return generateFetch(request);
+    case 'JavaScript XHR':
+      return generateXHR(request);
+    case 'NodeJS':
+      return generateNode(request);
+    case 'Python':
+      return generatePython(request);
+    case 'Java':
+      return generateJava(request);
+    case 'C#':
+      return generateCSharp(request);
+    case 'Go':
+      return generateGo(request);
+    default:
+      return '// Unsupported language';
+  }
+}
 
 export function generateCurl({ url, method, headers, body }: RequestState) {
   const h = headers.map(({ key, value }) => `-H "${key}: ${value}"`).join(' ');
