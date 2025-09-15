@@ -1,5 +1,5 @@
 import type { useTranslations } from 'next-intl';
-import { HTTP_METHODS } from './constants';
+import { HTTP_METHODS } from '@/lib/constants/request';
 
 export type FormValues = {
   email: string;

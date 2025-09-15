@@ -1,5 +1,5 @@
 import { jwtVerify } from 'jose';
-import { ALG } from '@/lib/constants';
+import { ALG } from '@/lib/constants/cookie';
 import { getSessionSecret, getSessionToken } from './session-token';
 
 export async function getUserId(): Promise<string | null> {

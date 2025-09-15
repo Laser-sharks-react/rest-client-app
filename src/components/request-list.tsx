@@ -14,8 +14,8 @@ import {
 import type { RequestRecord } from '@/lib/types';
 import { formatBytes } from '@/lib/utils/format-bytes';
 import { useTranslations } from 'next-intl';
-import { getNewUrl } from '@/utils/get-new-url';
-import { ROUTES } from '@/lib/constants';
+import { getNewUrl } from '@/lib/utils/get-new-url';
+import { ROUTES } from '@/lib/constants/routes';
 
 export function RequestList({ rows }: { rows: RequestRecord[] }) {
   const t = useTranslations('RequestList');
@@ -80,12 +80,12 @@ export function RequestList({ rows }: { rows: RequestRecord[] }) {
                 <TableCell align="right">
                   <MuiLink
                     component={NextLink}
-                    href={`${ROUTES.rest}${getNewUrl(
-                      row.restore.method,
-                      row.restore.url,
-                      row.restore.body || '',
-                      row.restore.headers
-                    )}`}
+                    href={`${ROUTES.request}${getNewUrl({
+                      method: row.restore.method,
+                      url: row.restore.url,
+                      body: row.restore.body || '',
+                      headers: row.restore.headers,
+                    })}`}
                     underline="hover"
                     className="text-blue-600"
                   >
