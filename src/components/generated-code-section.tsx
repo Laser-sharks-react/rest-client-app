@@ -5,7 +5,7 @@ import { generateCode } from '@/lib/utils/code-generators';
 import { useTranslations } from 'next-intl';
 import type { Language } from '@/lib/types/request';
 import { LANGUAGES } from '@/lib/constants/request';
-import { transformRequestWithVariables } from '@/lib/utils/replace-variables';
+import { transformRequestWithVariables } from '@/lib/utils/variables/transform-request-with-variables';
 
 export const GeneratedCodeSection = () => {
   const request = useRequestStore();

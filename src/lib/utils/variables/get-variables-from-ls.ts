@@ -1,5 +1,5 @@
-import { LS_KEYS } from '../types/ls-keys';
-import type { Variable } from '../types/variable';
+import { LS_KEYS } from '@/lib/types/ls-keys';
+import type { Variable } from '@/lib/types/variable';
 
 export function getVariablesFromLS() {
   try {

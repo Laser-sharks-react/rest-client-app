@@ -4,7 +4,7 @@ import { ROUTES } from '../constants/routes';
 import type { RequestState } from '../types/request';
 import { useState } from 'react';
 import type { ApiResponse } from '../types/response';
-import { transformRequestWithVariables } from '../utils/replace-variables';
+import { transformRequestWithVariables } from '../utils/variables/transform-request-with-variables';
 
 export function useProxyResponse() {
   const [response, setResponse] = useState<ApiResponse>(null);
