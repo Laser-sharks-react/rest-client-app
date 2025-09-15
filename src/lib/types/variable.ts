@@ -10,3 +10,7 @@ export type VariableMatch = {
   end: number;
   raw: string;
 };
+
+export type VariablesState = {
+  variables: Variable[];
+};

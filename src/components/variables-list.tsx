@@ -13,26 +13,24 @@ import {
 } from '@mui/material';
 
 export function VariablesList() {
-  const {
-    variables,
-    removeVariable,
-    addVariable,
-    updateVariableKey,
-    updateVariableValue,
-  } = useVariablesStore();
+  const variables = useVariablesStore(s => s.variables);
+  const add = useVariablesStore(s => s.addVariable);
+  const remove = useVariablesStore(s => s.removeVariable);
+  const setKey = useVariablesStore(s => s.updateVariableKey);
+  const setValue = useVariablesStore(s => s.updateVariableValue);
 
   const onAdd = () => {
-    addVariable();
+    add();
   };
   const onUpdateKey = ({ key, id }: Omit<Variable, 'value'>) => {
-    updateVariableKey({ key, id });
+    setKey({ key, id });
   };
   const onUpdateValue = ({ value, id }: Omit<Variable, 'key'>) => {
-    updateVariableValue({ value, id });
+    setValue({ value, id });
   };
 
   const onRemove = (id: string) => {
-    removeVariable(id);
+    remove(id);
   };
 
   return (

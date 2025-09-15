@@ -1,18 +1,18 @@
 import { LS_KEYS } from '@/lib/types/ls-keys';
+import type { VariablesState } from '@/lib/types/variable';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 export type Variable = { id: string; key: string; value: string };
 
-type VarsState = {
-  variables: Variable[];
+type VariablesStore = VariablesState & {
   addVariable: (p?: Omit<Variable, 'id'>) => string;
   removeVariable: (id: string) => void;
   updateVariableKey: (p: { id: string; key: string }) => void;
   updateVariableValue: (p: { id: string; value: string }) => void;
 };
 
-export const useVariablesStore = create<VarsState>()(
+export const useVariablesStore = create<VariablesStore>()(
   persist(
     set => ({
       variables: [],
@@ -38,8 +38,9 @@ export const useVariablesStore = create<VarsState>()(
     }),
     {
       name: LS_KEYS.variables,
+      version: 1,
       storage: createJSONStorage(() => localStorage),
-      partialize: state => state.variables,
+      partialize: state => ({ variables: state.variables }),
     }
   )
 );
