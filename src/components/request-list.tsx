@@ -11,11 +11,12 @@ import {
   Typography,
   Link as MuiLink,
 } from '@mui/material';
-import type { RequestRecord } from '@/lib/types';
+import type { RequestRecord } from '@/lib/types/request';
 import { formatBytes } from '@/lib/utils/format-bytes';
 import { useTranslations } from 'next-intl';
 import { getNewUrl } from '@/lib/utils/get-new-url';
 import { ROUTES } from '@/lib/constants/routes';
+import { isRequestState } from '@/lib/utils/is-request-state';
 
 export function RequestList({ rows }: { rows: RequestRecord[] }) {
   const t = useTranslations('RequestList');
@@ -78,19 +79,16 @@ export function RequestList({ rows }: { rows: RequestRecord[] }) {
                 </TableCell>
 
                 <TableCell align="right">
-                  <MuiLink
-                    component={NextLink}
-                    href={`${ROUTES.request}${getNewUrl({
-                      method: row.restore.method,
-                      url: row.restore.url,
-                      body: row.restore.body || '',
-                      headers: row.restore.headers,
-                    })}`}
-                    underline="hover"
-                    className="text-blue-600"
-                  >
-                    {t('open')}
-                  </MuiLink>
+                  {isRequestState(row.restore) ? (
+                    <MuiLink
+                      component={NextLink}
+                      href={`${ROUTES.request}${getNewUrl(row.restore)}`}
+                      underline="hover"
+                      className="text-blue-600"
+                    >
+                      {t('open')}
+                    </MuiLink>
+                  ) : null}
                 </TableCell>
               </TableRow>
             ))}

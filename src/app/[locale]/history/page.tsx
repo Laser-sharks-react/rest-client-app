@@ -1,10 +1,10 @@
 import 'server-only';
 import NextLink from 'next/link';
 import { Container, Stack, Typography, Link as MUILink } from '@mui/material';
-import { fetchUserHistory } from '@/lib/utils/fetch-user-history';
 import { getUserId } from '@/lib/utils/get-user-id';
 import { RequestList } from '@/components/request-list';
 import { getTranslations } from 'next-intl/server';
+import { getUserRequests } from '@/lib/firebase-admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +15,7 @@ export default async function HistoryPage() {
     return <Typography> {t('unauthorized')}</Typography>;
   }
 
-  const rows = await fetchUserHistory(uid, 200);
+  const rows = await getUserRequests(uid, 200);
 
   return (
     <Container className="p-4">

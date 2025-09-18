@@ -1,4 +1,4 @@
-import type { HttpHeader } from '@/lib/types';
+import type { HttpHeader } from '@/lib/types/request';
 
 export function headersArrayToObj(
   headers: HttpHeader[]
