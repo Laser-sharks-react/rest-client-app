@@ -9,8 +9,7 @@ import {
 } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { ROUTES } from '@/lib/constants';
-import PersonIcon from '@mui/icons-material/Person';
+import { ROUTES } from '@/lib/constants/routes';
 
 export default function Page() {
   const t = useTranslations('HomePage');

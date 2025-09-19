@@ -1,6 +1,6 @@
 import * as yup from 'yup';
-import type { TFunc } from '../types';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '../constants';
+import type { TFunc } from '../types/types';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '../constants/validation';
 
 export const buildSignUpSchema = (t: TFunc) =>
   yup.object({

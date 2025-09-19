@@ -1,11 +1,11 @@
 import { type NextRequest } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { parsePath } from '@/utils/parse-path';
-import { getUserIdFromRequest } from '@/utils/get-user-id-from-request';
-import { isProtectedRoute, isPublicRoute } from '@/utils/access-routes';
-import { redirectWithLocale } from '@/utils/redirect';
-import { ROUTES } from '@/lib/constants';
+import { getUserIdFromRequest } from '@/lib/utils/get-user-id-from-request';
+import { isProtectedRoute, isPublicRoute } from '@/lib/utils/access-routes';
+import { redirectWithLocale } from '@/lib/utils/redirect';
+import { ROUTES } from '@/lib/constants/routes';
+import { parsePath } from '@/lib/utils/parse-path';
 
 const handleI18n = createIntlMiddleware(routing);
 

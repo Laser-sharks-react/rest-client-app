@@ -48,7 +48,10 @@
     "appName": "REST Client",
     "home": "Главная",
     "signup": "Регистрирация",
-    "login": "Войти"
+    "login": "Войти",
+    "logout": "Выйти",
+    "logoutSuccess": "Выход выполнен успешно.",
+    "logoutError": "Ошибка выхода."
   },
   "Footer": {
     "rss": "Rolling Scopes School",
@@ -92,6 +95,17 @@
     }
   },
   "RestClientPage": {
+    "button": "Отправить",
+    "notEnoughData": "// Недостаточно данных для генерации кода"
+  },
+
+  "RestClientLayout": {
+    "request": "Запрос",
+    "history": "История",
+    "variables": "Переменные"
+  },
+
+  "RequestSender": {
     "button": "Отправить",
     "notEnoughData": "// Недостаточно данных для генерации кода"
   }

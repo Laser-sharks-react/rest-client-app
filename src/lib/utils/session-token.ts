@@ -1,4 +1,4 @@
-import { ALG, COOKIE_TIME, COOKIES } from '@/lib/constants';
+import { ALG, COOKIE_TIME, COOKIES } from '@/lib/constants/cookie';
 import { type JWTPayload, SignJWT } from 'jose';
 import { type NextResponse, type NextRequest } from 'next/server';
 

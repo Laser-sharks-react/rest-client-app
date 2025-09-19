@@ -1,6 +1,5 @@
-import { LANGUAGES } from '@/lib/constants';
 import { useRequestStore } from '@/store/request-store';
-import { Box, Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, Card } from '@mui/material';
 import { useMemo, useState } from 'react';
 import {
   generateCSharp,
@@ -11,48 +10,46 @@ import {
   generateNode,
   generatePython,
   generateXHR,
-} from '@/utils/code-generators';
+} from '@/lib/utils/code-generators';
 import { useTranslations } from 'next-intl';
-import type { Language } from '@/lib/types';
-import { headersArrayToObj } from '@/utils/headers-array-to-obj';
+import type { Language } from '@/lib/types/request';
+import { LANGUAGES } from '@/lib/constants/request';
 
 export const GeneratedCodeSection = () => {
-  const { method, url, body, headers } = useRequestStore();
-  const t = useTranslations('RestClientPage');
+  const request = useRequestStore();
+  const t = useTranslations('RequestSender');
 
   const [lang, setLang] = useState<Language>('cURL');
 
   const code = useMemo(() => {
-    if (!url || !method) {
+    if (!request.url || !request.method) {
       return t('notEnoughData');
     }
 
-    const headersObj = headersArrayToObj(headers);
-
     switch (lang) {
       case 'cURL':
-        return generateCurl(url, method, headersObj, body);
+        return generateCurl(request);
       case 'JavaScript Fetch':
-        return generateFetch(url, method, headersObj, body);
+        return generateFetch(request);
       case 'JavaScript XHR':
-        return generateXHR(url, method, headersObj, body);
+        return generateXHR(request);
       case 'NodeJS':
-        return generateNode(url, method, headersObj, body);
+        return generateNode(request);
       case 'Python':
-        return generatePython(url, method, headersObj, body);
+        return generatePython(request);
       case 'Java':
-        return generateJava(url, method, headersObj, body);
+        return generateJava(request);
       case 'C#':
-        return generateCSharp(url, method, headersObj, body);
+        return generateCSharp(request);
       case 'Go':
-        return generateGo(url, method, headersObj, body);
+        return generateGo(request);
       default:
         return '// Unsupported language';
     }
-  }, [url, method, headers, lang, t, body]);
+  }, [request, lang, t]);
 
   return (
-    <Box className="border rounded-md p-3 mt-4">
+    <Card>
       <Tabs
         value={lang}
         onChange={(_, newValue) => setLang(newValue)}
@@ -66,6 +63,6 @@ export const GeneratedCodeSection = () => {
       <pre className="bg-zinc-100 p-3 mt-2 rounded text-sm overflow-x-auto">
         {code}
       </pre>
-    </Box>
+    </Card>
   );
 };

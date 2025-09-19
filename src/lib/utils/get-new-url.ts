@@ -1,13 +1,8 @@
-import { base64Encode } from '@/utils/base64';
+import { base64Encode } from '@/lib/utils/base64';
 import { headersArrayToObj } from './headers-array-to-obj';
-import type { HttpHeader, HttpMethod } from '@/lib/types';
+import type { RequestState } from '@/lib/types/request';
 
-export const getNewUrl = (
-  method: HttpMethod,
-  url: string,
-  body: string,
-  headers: HttpHeader[]
-) => {
+export const getNewUrl = ({ method, url, body, headers }: RequestState) => {
   const encodedUrl = encodeURIComponent(base64Encode(url));
   const cleanBody = body.trim();
   const encodedBody =
