@@ -10,7 +10,7 @@ type Actions = {
   updateHeaderKey: (p: { id: string; key: string }) => void;
   updateHeaderValue: (p: { id: string; value: string }) => void;
   removeHeader: (id: string) => void;
-
+  clearHeaders: () => void;
   reset: () => void;
 };
 
@@ -57,6 +57,8 @@ export const useRequestStore = create<RequestState & Actions>((set, get) => ({
     set(state => ({
       headers: state.headers.filter(header => header.id !== id),
     })),
+
+  clearHeaders: () => set({ headers: [] }),
 
   reset: () => set(initialState),
 }));

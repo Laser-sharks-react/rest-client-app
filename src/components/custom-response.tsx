@@ -14,11 +14,13 @@ export const CustomResponse = ({ response }: Props) => {
     <Card className="p-4">
       <Stack direction="row" gap={2} alignItems="center">
         <Typography variant="h5">{t('response')}</Typography>
-        <Chip
-          label={response.status}
-          color={response.status >= 400 ? 'error' : 'primary'}
-          size="small"
-        />
+        {response.status && (
+          <Chip
+            label={response.status}
+            color={response.status >= 400 ? 'error' : 'primary'}
+            size="small"
+          />
+        )}
       </Stack>
 
       <div className="overflow-auto max-h-96">

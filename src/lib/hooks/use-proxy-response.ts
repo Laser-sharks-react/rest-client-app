@@ -1,24 +1,26 @@
 import { headersArrayToObj } from '@/lib/utils/headers-array-to-obj';
-import type { RequestState } from '../types/request';
 import { useState } from 'react';
 import type { ApiResponse } from '../types/response';
+import { transformRequestWithVariables } from '../utils/variables/transform-request-with-variables';
 import { fetchProxyRequest } from '../utils/fetch-proxy-request';
+import type { RequestState } from '../types/request';
 
 export function useProxyResponse() {
   const [response, setResponse] = useState<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  async function fetchData({ body, headers, method, url }: RequestState) {
+  async function fetchData(request: RequestState) {
     try {
-      setResponse(null);
       setIsLoading(true);
 
-      const headersObj = headersArrayToObj(headers);
+      const { body, headers, method, url } =
+        transformRequestWithVariables(request);
+
       const res = await fetchProxyRequest({
         url,
         method,
         body,
-        headers: headersObj,
+        headers: headersArrayToObj(headers),
       });
       setResponse(res);
     } catch (e) {

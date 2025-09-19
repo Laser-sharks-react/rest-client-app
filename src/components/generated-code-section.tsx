@@ -1,14 +1,17 @@
 import { useRequestStore } from '@/store/request-store';
 import { Tabs, Tab, Card } from '@mui/material';
 import { useMemo, useState } from 'react';
-import { generateRequestCode } from '@/lib/utils/code-generators';
+import { generateCode } from '@/lib/utils/code-generators';
 import { useTranslations } from 'next-intl';
 import type { Language } from '@/lib/types/request';
 import { LANGUAGES } from '@/lib/constants/request';
+import { transformRequestWithVariables } from '@/lib/utils/variables/transform-request-with-variables';
 
 export const GeneratedCodeSection = () => {
-  const request = useRequestStore();
   const t = useTranslations('RequestSender');
+
+  const request = useRequestStore();
+  const transformed = transformRequestWithVariables(request);
 
   const [lang, setLang] = useState<Language>('cURL');
 
@@ -16,8 +19,9 @@ export const GeneratedCodeSection = () => {
     if (!request.url || !request.method) {
       return t('notEnoughData');
     }
-    return generateRequestCode(lang, request);
-  }, [request, lang, t]);
+
+    return generateCode({ lang, request: transformed });
+  }, [request, transformed, lang, t]);
 
   return (
     <Card>

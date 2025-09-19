@@ -17,8 +17,8 @@ export const fetchProxyRequest = async ({
         body: JSON.stringify({ url, method, body, headers }),
       }
     );
-    const json = await res.json();
-    return { status: res.status, ok: res.ok, json };
+    const response: ApiResponse = await res.json();
+    return response;
   } catch (e) {
     return {
       status: 500,

@@ -115,5 +115,11 @@
   "RequestHeaders": {
     "headers": "Headers"
   },
-  "Response": { "response": "Response" }
+  "Response": { "response": "Response" },
+
+  "VariablesList": {
+    "variables": "Variables",
+    "key": "Name",
+    "value": "Value"
+  }
 }

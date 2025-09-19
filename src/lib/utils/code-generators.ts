@@ -1,7 +1,13 @@
 import type { Language, RequestState } from '@/lib/types/request';
 import { headersArrayToObj } from './headers-array-to-obj';
 
-export const generateRequestCode = (lang: Language, request: RequestState) => {
+export function generateCode({
+  lang,
+  request,
+}: {
+  lang: Language;
+  request: RequestState;
+}) {
   switch (lang) {
     case 'cURL':
       return generateCurl(request);
@@ -22,7 +28,7 @@ export const generateRequestCode = (lang: Language, request: RequestState) => {
     default:
       return '// Unsupported language';
   }
-};
+}
 
 function generateCurl({ url, method, headers, body }: RequestState) {
   const h = headers.map(({ key, value }) => `-H "${key}: ${value}"`).join(' ');
