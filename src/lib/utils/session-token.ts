@@ -3,8 +3,6 @@ import { type JWTPayload, SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 import { type NextResponse } from 'next/server';
 
-export const SESSION_COOKIE = 'session';
-
 export function getSessionSecret(): Uint8Array {
   const secret = process.env.SESSION_SECRET;
   if (!secret) throw new Error('SESSION_SECRET is not set');
@@ -25,7 +23,7 @@ export async function createSessionToken(
 }
 
 export async function getSessionToken(): Promise<string | null> {
-  return (await cookies()).get(SESSION_COOKIE)?.value || null;
+  return (await cookies()).get(COOKIES.session)?.value || null;
 }
 
 export const setSessionToken = (

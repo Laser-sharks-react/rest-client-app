@@ -17,7 +17,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, logout } from '@/lib/firebase';
 import { ROUTES } from '@/lib/constants/routes';
 import { useSnackbar } from 'notistack';
-import { useEffect } from 'react';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -28,9 +27,7 @@ export default function Header() {
     threshold: 0,
     target: typeof window !== 'undefined' ? window : undefined,
   });
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+
   const appName = process.env.NEXT_PUBLIC_APP_NAME;
 
   const onLogout = () => {
