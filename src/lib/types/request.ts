@@ -5,6 +5,13 @@ export type RequestState = {
   headers: HttpHeader[];
 };
 
+export type RequestPayload = {
+  method: HttpMethod;
+  url: string;
+  body: string;
+  headers: Record<string, string>;
+};
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export interface HttpHeader {

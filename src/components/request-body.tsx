@@ -6,23 +6,27 @@ import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import JsonEditor from './json-editor';
-import { Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 export function RequestBody() {
   const params = useParams();
+  const t = useTranslations('RequestBody');
   const [_method, _url, bodyParam] = params.params ?? [];
 
   const { body, method, setBody } = useRequestStore();
 
   useEffect(() => {
     if (bodyParam) setBody(base64Decode(decodeURIComponent(bodyParam)));
-  }, []);
+  }, [bodyParam, setBody]);
 
   if (method === 'GET') return null;
   return (
-    <>
-      <Typography variant="h6">Body</Typography>
+    <Card sx={{ p: 2, gap: 2 }}>
+      <Typography variant="h5" mb={2}>
+        {t('body')}
+      </Typography>
       <JsonEditor initial={body} onValidChange={setBody} />
-    </>
+    </Card>
   );
 }

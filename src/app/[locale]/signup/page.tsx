@@ -37,14 +37,14 @@ export default function SignUp() {
   const handleSignUp = async ({ email, name, password }: SignUpFormValues) => {
     try {
       await registerUser(name, email, password);
-      enqueueSnackbar(t('signupUserSuccess'), { variant: 'success' });
+      enqueueSnackbar(t('signUpUserSuccess'), { variant: 'success' });
 
       await login(email, password);
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
       router.replace(ROUTES.home);
     } catch (err) {
       enqueueSnackbar(
-        `${t('signupUserError')} ${err instanceof Error ? err.message : ''}`,
+        `${t('signUpUserError')} ${err instanceof Error ? err.message : ''}`,
         { variant: 'error' }
       );
     }

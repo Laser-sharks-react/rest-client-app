@@ -27,9 +27,9 @@
   "SignUpPage": {
     "title": "Регистрация",
     "alreadyHaveAccount": "Уже есть аккаунт?",
-    "signupUser": "Регистрируем нового пользователя...",
-    "signupUserSuccess": "Пользователь успешно зарегистрирован.",
-    "signupUserError": "Ошибка регистрации пользователя.",
+    "signUpUser": "Регистрируем нового пользователя...",
+    "signUpUserSuccess": "Пользователь успешно зарегистрирован.",
+    "signUpUserError": "Ошибка регистрации пользователя.",
     "loginUserSuccess": "Вход выполнен успешно.",
     "loginUserError": "Ошибка входа пользователя."
   },
@@ -56,6 +56,12 @@
   "Footer": {
     "rss": "Rolling Scopes School",
     "github": "GitHub"
+  },
+
+  "RestClientLayout": {
+    "request": "Запрос",
+    "history": "История",
+    "variables": "Переменные"
   },
 
   "snackbar": {
@@ -94,19 +100,23 @@
       "strong": "Пароль должен содержать минимум 8 символов, хотя бы одну букву, одну цифру и один специальный символ"
     }
   },
-  "RestClientPage": {
-    "button": "Отправить",
-    "notEnoughData": "// Недостаточно данных для генерации кода"
-  },
-
-  "RestClientLayout": {
-    "request": "Запрос",
-    "history": "История",
-    "variables": "Переменные"
-  },
 
   "RequestSender": {
     "button": "Отправить",
     "notEnoughData": "// Недостаточно данных для генерации кода"
-  }
+  },
+  "JsonEditor": {
+    "format": "Форматировать JSON",
+    "invalid": "Невалидный JSON",
+    "valid": "Валидный JSON ✓"
+  },
+
+  "RequestBody": {
+    "body": "Тело запроса"
+  },
+
+  "RequestHeaders": {
+    "headers": "Заголовки"
+  },
+  "Response": { "response": "Ответ" }
 }
