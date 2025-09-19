@@ -34,7 +34,7 @@ export function VariablesList() {
   };
 
   return (
-    <Card sx={{ p: 3, m: 3 }}>
+    <Card sx={{ p: 3 }}>
       <Stack direction="row" gap={2} alignItems="center" mb={3}>
         <Typography variant="h5">Variables</Typography>
         <Button

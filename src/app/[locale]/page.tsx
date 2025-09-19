@@ -15,8 +15,8 @@ export default function Page() {
   const t = useTranslations('HomePage');
 
   return (
-    <Container className="h-[100dvh] flex flex-col justify-center items-center gap-8 py-6">
-      <Typography variant="h3" component="h1" className="text-center font-bold">
+    <Container className="flex flex-col justify-center items-center gap-8">
+      <Typography color="primary" variant="h2" component="h2">
         {t('title')}
       </Typography>
 

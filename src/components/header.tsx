@@ -49,7 +49,7 @@ export default function Header() {
     <AppBar position="sticky" elevation={0}>
       <Toolbar
         className={cx(
-          'flex justify-between transition-all duration-300 ease-in-out ',
+          'flex justify-between transition-all duration-300 ease-in-out',
           trigger ? 'bg-blue-200' : 'bg-white'
         )}
       >
