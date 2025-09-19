@@ -33,7 +33,7 @@ export default async function HistoryPage() {
           <Stack className="space-y-2">
             <MUILink
               component={NextLink}
-              href="/rest"
+              href="/request"
               underline="hover"
               className="text-blue-600"
             >
