@@ -2,12 +2,14 @@
 
 import {
   Button,
+  Card,
   Container,
   FormControl,
   FormHelperText,
   FormLabel,
   IconButton,
   InputAdornment,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
@@ -51,96 +53,74 @@ export default function SignUp() {
   };
 
   return (
-    <Container className="h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-4">
-        <Typography
-          variant="h4"
-          component="h2"
-          gutterBottom
-          className="text-[22px] leading-snug text-black"
-        >
-          {t('title')}
-        </Typography>
-        <form
-          className="rounded-xl border border-zinc-300 p-5 space-y-3"
-          onSubmit={handleSubmit(handleSignUp)}
-        >
-          <FormControl fullWidth>
-            <FormLabel htmlFor="name">{tForm('name')}</FormLabel>
-            <TextField
-              id="name"
-              variant="outlined"
-              size="small"
-              {...register('name')}
-              error={!!errors.name}
-            />
-            <FormHelperText
-              sx={{ minHeight: 24, m: 0, fontSize: '10px', lineHeight: '1.2' }}
-              error={!!errors.name}
-            >
-              {errors.name?.message ?? ' '}
-            </FormHelperText>
-          </FormControl>
+    <Container
+      sx={{
+        minHeight: '90dvh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Card
+        component="form"
+        sx={{ borderRadius: 2, p: 2, maxWidth: '400px' }}
+        onSubmit={handleSubmit(handleSignUp)}
+      >
+        <Stack gap={2}>
+          <Typography variant="h5" component="h2" gutterBottom>
+            {t('title')}
+          </Typography>
+          <TextField
+            id="name"
+            label={tForm('name')}
+            {...register('name')}
+            error={!!errors.name}
+            helperText={errors.name?.message}
+            size="small"
+          />
 
-          <FormControl fullWidth>
-            <FormLabel htmlFor="email">{tForm('e-mail')}</FormLabel>
-            <TextField
-              id="email"
-              type="email"
-              variant="outlined"
-              size="small"
-              {...register('email')}
-              error={!!errors.email}
-            />
-            <FormHelperText
-              sx={{ minHeight: 24, m: 0, fontSize: '10px', lineHeight: '1.2' }}
-              error={!!errors.email}
-            >
-              {errors.email?.message}
-            </FormHelperText>
-          </FormControl>
+          <TextField
+            id="email"
+            label={tForm('e-mail')}
+            type="email"
+            {...register('email')}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            size="small"
+          />
 
-          <FormControl fullWidth>
-            <FormLabel htmlFor="password">{tForm('password')}</FormLabel>
-            <TextField
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              variant="outlined"
-              size="small"
-              {...register('password')}
-              error={!!errors.password}
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        edge="end"
-                        aria-label={
-                          showPassword
-                            ? tForm('hidePassword')
-                            : tForm('showPassword')
-                        }
-                        onMouseDown={e => e.preventDefault()}
-                        onClick={() => setShowPassword(prev => !prev)}
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                },
-              }}
-            />
-            <FormHelperText
-              sx={{ minHeight: 24, m: 0, fontSize: '10px', lineHeight: '1.2' }}
-              error={!!errors.name}
-            >
-              {errors.password?.message ?? ' '}
-            </FormHelperText>
-          </FormControl>
+          <TextField
+            id="password"
+            label={tForm('password')}
+            type={showPassword ? 'text' : 'password'}
+            {...register('password')}
+            error={!!errors.password}
+            size="small"
+            helperText={errors.password?.message}
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      edge="end"
+                      aria-label={
+                        showPassword
+                          ? tForm('hidePassword')
+                          : tForm('showPassword')
+                      }
+                      onMouseDown={e => e.preventDefault()}
+                      onClick={() => setShowPassword(prev => !prev)}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
 
           <Button
             type="submit"
-            className="px-6 py-3 text-black rounded-lg shadow-md bg-grey"
             variant="contained"
             disabled={isSubmitting || !isValid}
           >
@@ -148,12 +128,12 @@ export default function SignUp() {
           </Button>
           <Typography>
             {t('alreadyHaveAccount')}
-            <Link component={IntlLink} href={ROUTES.login} className="ml-4">
+            <Link component={IntlLink} href={ROUTES.login} ml={1}>
               {tForm('login')}
             </Link>
           </Typography>
-        </form>
-      </div>
+        </Stack>
+      </Card>
     </Container>
   );
 }
