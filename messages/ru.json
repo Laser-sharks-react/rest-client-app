@@ -91,5 +91,19 @@
   "RequestSender": {
     "button": "Отправить",
     "notEnoughData": "// Недостаточно данных для генерации кода"
-  }
+  },
+  "JsonEditor": {
+    "format": "Форматировать JSON",
+    "invalid": "Невалидный JSON",
+    "valid": "Валидный JSON ✓"
+  },
+
+  "RequestBody": {
+    "body": "Тело запроса"
+  },
+
+  "RequestHeaders": {
+    "headers": "Заголовки"
+  },
+  "Response": { "response": "Ответ" }
 }

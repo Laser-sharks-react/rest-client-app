@@ -1,26 +1,18 @@
 import RequestPageClient from '@/components/request-page-client';
-import { parseUrlFromServer } from '@/lib/utils/parseUrlFromServer';
-import { fetchDataOnServer } from '@/lib/utils/fetchDataOnServer';
 
-export default async function RequestPage({
-  params,
-  searchParams,
-}: {
+import { parseUrlToRequestPayload } from '@/lib/utils/parse-url-to-requset-payload';
+import { fetchProxyRequest } from '@/lib/utils/fetch-proxy-request';
+interface Props {
   params: Promise<{ params?: string[] }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const { params: catchAllParams = [] } = await params;
-  const [methodRaw, endpointRaw, bodyRaw] =
-    catchAllParams.length > 0 ? catchAllParams : [];
+}
 
-  const parsedUrl = await parseUrlFromServer({
-    methodRaw,
-    endpointRaw,
-    bodyRaw,
+export default async function RequestPage({ params, searchParams }: Props) {
+  const request = await parseUrlToRequestPayload({
+    params,
     searchParams,
   });
-
-  const response = await fetchDataOnServer(parsedUrl);
+  const response = await fetchProxyRequest(request);
 
   return <RequestPageClient initialResponse={response} />;
 }

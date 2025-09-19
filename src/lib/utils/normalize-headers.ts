@@ -1,4 +1,4 @@
-export function normalizeHeaders(
+export function searchParamsToHeadersObj(
   searchParams: Record<string, string | string[] | undefined>
 ) {
   const headers: Record<string, string> = {};

@@ -1,19 +1,13 @@
-import type { HttpMethod } from '@/lib/types/request';
+import type { RequestPayload } from '@/lib/types/request';
 import { ROUTES } from '@/lib/constants/routes';
+import type { ApiResponse } from '../types/response';
 
-export type ParsedUrl = {
-  method: HttpMethod;
-  url: string;
-  body: string;
-  headers: Record<string, string>;
-};
-
-export const fetchDataOnServer = async ({
+export const fetchProxyRequest = async ({
   method,
   url,
   body,
   headers,
-}: ParsedUrl) => {
+}: RequestPayload): Promise<ApiResponse> => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URL}${ROUTES.proxy}`,
@@ -26,6 +20,10 @@ export const fetchDataOnServer = async ({
     const json = await res.json();
     return { status: res.status, ok: res.ok, json };
   } catch (e) {
-    return e instanceof Error ? { error: e.message } : { error: String(e) };
+    return {
+      status: 500,
+      ok: false,
+      json: { error: e instanceof Error ? e.message : String(e) },
+    };
   }
 };

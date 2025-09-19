@@ -1,15 +1,23 @@
 'use client';
 
-import { Card, IconButton, TextField } from '@mui/material';
+import { Card, IconButton, TextField, Typography } from '@mui/material';
 import { Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRequestStore } from '@/store/request-store';
+import { useTranslations } from 'next-intl';
 
 export const RequestHeaders = () => {
   const searchParams = useSearchParams();
-  const { headers, addHeader, removeHeader, updateHeader, clearHeaders } =
-    useRequestStore();
+  const t = useTranslations('RequestHeaders');
+  const {
+    headers,
+    addHeader,
+    removeHeader,
+    updateHeaderKey,
+    updateHeaderValue,
+    clearHeaders,
+  } = useRequestStore();
 
   useEffect(() => {
     const hasParams = searchParams.toString() !== '';
@@ -23,9 +31,9 @@ export const RequestHeaders = () => {
   }, [addHeader, clearHeaders, searchParams]);
 
   return (
-    <Card className="p-4 flex flex-col gap-2">
+    <Card sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
       <div className="flex justify-between items-center">
-        <span className="font-semibold">Headers</span>
+        <Typography variant="h5">{t('headers')}</Typography>
         <IconButton onClick={() => addHeader()}>
           <AddIcon />
         </IconButton>
@@ -37,13 +45,13 @@ export const RequestHeaders = () => {
             label="Key"
             name="Key"
             value={key}
-            onChange={e => updateHeader(id, 'key', e.target.value)}
+            onChange={e => updateHeaderKey({ id, key: e.target.value })}
           />
           <TextField
             label="Value"
             value={value}
             name="Value"
-            onChange={e => updateHeader(id, 'value', e.target.value)}
+            onChange={e => updateHeaderValue({ id, value: e.target.value })}
           />
           <IconButton onClick={() => removeHeader(id)}>
             <DeleteIcon />

@@ -24,9 +24,7 @@ export default function RequestPageClient({ initialResponse }: Props) {
   const { response, isLoading, fetchData, setResponse } = useProxyResponse();
 
   useEffect(() => {
-    if (initialResponse) {
-      setResponse(initialResponse);
-    }
+    if (initialResponse) setResponse(initialResponse);
   }, [initialResponse, setResponse]);
 
   async function sendRequest(e: FormEvent<HTMLFormElement>) {

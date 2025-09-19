@@ -22,16 +22,16 @@ export function LangSelector() {
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
-        {routing.locales.map(lng => (
+        {routing.locales.map(locale => (
           <MenuItem
             component={Link}
-            key={lng}
+            key={locale}
             onClick={() => setAnchorEl(null)}
             href={pathname}
             replace
-            locale={lng}
+            locale={locale}
           >
-            {lng}
+            {locale}
           </MenuItem>
         ))}
       </Menu>
