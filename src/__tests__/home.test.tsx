@@ -19,8 +19,6 @@ describe('HomePage', () => {
         <HomePage />
       </NextIntlClientProvider>
     );
-    expect(
-      screen.getByText(`${messagesEN.HomePage.title}!`)
-    ).toBeInTheDocument();
+    expect(screen.getByText(messagesEN.HomePage.title)).toBeInTheDocument();
   });
 });
