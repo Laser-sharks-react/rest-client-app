@@ -34,40 +34,38 @@ export function VariablesList() {
   };
 
   return (
-    <>
-      <Card sx={{ p: 3, m: 3 }}>
-        <Stack direction="row" gap={2} alignItems="center" mb={3}>
-          <Typography variant="h5">Variables</Typography>
-          <Button
-            onClick={onAdd}
-            variant="contained"
-            sx={{ minWidth: 0, p: 1, borderRadius: 5 }}
-          >
-            <Add />
-          </Button>
-        </Stack>
-        <Stack gap={2}>
-          {variables.map(({ id, key, value }, index) => (
-            <Stack key={index} direction="row" gap={2} alignItems="center">
-              <TextField
-                label="Key"
-                name="Key"
-                value={key}
-                onChange={e => onUpdateKey({ id, key: e.target.value })}
-              />
-              <TextField
-                label="Value"
-                value={value}
-                name="Value"
-                onChange={e => onUpdateValue({ id, value: e.target.value })}
-              />
-              <IconButton onClick={() => onRemove(id)} color="error">
-                <Delete />
-              </IconButton>
-            </Stack>
-          ))}
-        </Stack>
-      </Card>
-    </>
+    <Card sx={{ p: 3, m: 3 }}>
+      <Stack direction="row" gap={2} alignItems="center" mb={3}>
+        <Typography variant="h5">Variables</Typography>
+        <Button
+          onClick={onAdd}
+          variant="contained"
+          sx={{ minWidth: 0, p: 1, borderRadius: 5 }}
+        >
+          <Add />
+        </Button>
+      </Stack>
+      <Stack gap={2}>
+        {variables.map(({ id, key, value }, index) => (
+          <Stack key={index} direction="row" gap={2} alignItems="center">
+            <TextField
+              label="Key"
+              name="Key"
+              value={key}
+              onChange={e => onUpdateKey({ id, key: e.target.value })}
+            />
+            <TextField
+              label="Value"
+              value={value}
+              name="Value"
+              onChange={e => onUpdateValue({ id, value: e.target.value })}
+            />
+            <IconButton onClick={() => onRemove(id)} color="error">
+              <Delete />
+            </IconButton>
+          </Stack>
+        ))}
+      </Stack>
+    </Card>
   );
 }

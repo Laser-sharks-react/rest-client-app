@@ -6,8 +6,7 @@ export function getVariablesFromLS() {
     const variablesStateRaw = localStorage.getItem(LS_KEYS.variables) || '';
     const variablesState: { state: VariablesState } =
       JSON.parse(variablesStateRaw);
-    const variables = variablesState.state.variables;
-    return variables;
+    return variablesState.state.variables;
   } catch {
     return [];
   }
