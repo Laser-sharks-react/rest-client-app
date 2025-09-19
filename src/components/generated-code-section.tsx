@@ -8,9 +8,10 @@ import { LANGUAGES } from '@/lib/constants/request';
 import { transformRequestWithVariables } from '@/lib/utils/variables/transform-request-with-variables';
 
 export const GeneratedCodeSection = () => {
+  const t = useTranslations('RequestSender');
+
   const request = useRequestStore();
   const transformed = transformRequestWithVariables(request);
-  const t = useTranslations('RequestSender');
 
   const [lang, setLang] = useState<Language>('cURL');
 
@@ -30,8 +31,8 @@ export const GeneratedCodeSection = () => {
         variant="scrollable"
         scrollButtons="auto"
       >
-        {LANGUAGES.map(l => (
-          <Tab key={l} value={l} label={l} />
+        {LANGUAGES.map(lang => (
+          <Tab key={lang} value={lang} label={lang} />
         ))}
       </Tabs>
       <pre className="bg-zinc-100 p-3 mt-2 rounded text-sm overflow-x-auto">

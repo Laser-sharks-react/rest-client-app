@@ -1,18 +1,18 @@
 import type { HttpHeader, HttpMethod, RequestState } from '@/lib/types/request';
 import { create } from 'zustand';
 
-interface Store extends RequestState {
+type Actions = {
   setMethod: (m: HttpMethod) => void;
   setUrl: (u: string) => void;
   setBody: (b: string) => void;
 
   addHeader: (init?: Partial<HttpHeader>) => void;
-  updateHeader: (id: string, field: 'key' | 'value', value: string) => void;
+  updateHeaderKey: (p: { id: string; key: string }) => void;
+  updateHeaderValue: (p: { id: string; value: string }) => void;
   removeHeader: (id: string) => void;
-  clearHeaders: () => void;
 
   reset: () => void;
-}
+};
 
 const initialState: RequestState = {
   method: 'GET',
@@ -21,7 +21,7 @@ const initialState: RequestState = {
   headers: [],
 };
 
-export const useRequestStore = create<Store>(set => ({
+export const useRequestStore = create<RequestState & Actions>((set, get) => ({
   ...initialState,
 
   setMethod: method => set({ method }),
@@ -30,23 +30,33 @@ export const useRequestStore = create<Store>(set => ({
 
   addHeader: init => {
     const id = crypto.randomUUID();
-    const h: HttpHeader = {
+    const newHeader: HttpHeader = {
       id,
       key: init?.key ?? '',
       value: init?.value ?? '',
     };
-    set(s => ({ headers: [...s.headers, h] }));
+    set(state => ({ headers: [...state.headers, newHeader] }));
   },
 
-  updateHeader: (id, field, value) =>
-    set(s => ({
-      headers: s.headers.map(h => (h.id === id ? { ...h, [field]: value } : h)),
+  updateHeaderKey: ({ id, key }) =>
+    set(prevState => ({
+      headers: prevState.headers.map(header =>
+        header.id === id ? { ...header, key } : header
+      ),
     })),
 
-  removeHeader: id =>
-    set(s => ({ headers: s.headers.filter(h => h.id !== id) })),
+  updateHeaderValue: ({ id, value }) => {
+    set(state => ({
+      headers: state.headers.map(header =>
+        header.id === id ? { ...header, value } : header
+      ),
+    }));
+  },
 
-  clearHeaders: () => set({ headers: [] }),
+  removeHeader: id =>
+    set(state => ({
+      headers: state.headers.filter(header => header.id !== id),
+    })),
 
   reset: () => set(initialState),
 }));

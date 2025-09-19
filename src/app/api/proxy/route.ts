@@ -2,7 +2,6 @@ import { DEFAULT_HTTP_METHOD } from '@/lib/constants/request';
 
 export async function POST(req: Request) {
   const { url, method, body, headers } = await req.json();
-
   try {
     const res = await fetch(url, {
       method,

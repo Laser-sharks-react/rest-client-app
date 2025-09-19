@@ -13,6 +13,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   initial?: string;
@@ -22,13 +23,16 @@ type Props = {
 };
 
 export default function JsonEditor({
-  initial = '{\n  "hello": "world"\n}',
+  initial,
   onValidChange,
   indent = 2,
   minHeight = 180,
 }: Props) {
+  const t = useTranslations('JsonEditor');
   const theme = useTheme();
-  const [code, setCode] = useState<string>(initial);
+  const [code, setCode] = useState<string>(
+    initial || '{\n  "hello": "world"\n}'
+  );
   const [error, setError] = useState<string | null>(null);
 
   const highlight = useCallback(
@@ -103,7 +107,7 @@ export default function JsonEditor({
             variant="contained"
             size="small"
           >
-            Format JSON
+            {t('format')}
           </Button>
 
           <Typography
@@ -113,7 +117,7 @@ export default function JsonEditor({
               color: hasError ? 'error.main' : 'success.main',
             }}
           >
-            {hasError ? `Invalid JSON: ${error}` : 'Valid JSON ✓'}
+            {hasError ? `${t('invalid')}: ${error}` : t('valid')}
           </Typography>
         </Stack>
       </CardActions>

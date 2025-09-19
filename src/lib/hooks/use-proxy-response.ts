@@ -1,13 +1,12 @@
 import { headersArrayToObj } from '@/lib/utils/headers-array-to-obj';
-
-import { ROUTES } from '../constants/routes';
-import type { RequestState } from '../types/request';
 import { useState } from 'react';
 import type { ApiResponse } from '../types/response';
 import { transformRequestWithVariables } from '../utils/variables/transform-request-with-variables';
+import { fetchProxyRequest } from '../utils/fetch-proxy-request';
+import type { RequestState } from '../types/request';
 
 export function useProxyResponse() {
-  const [response, setResponse] = useState<ApiResponse>(null);
+  const [response, setResponse] = useState<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   async function fetchData(request: RequestState) {
@@ -17,27 +16,19 @@ export function useProxyResponse() {
       const { body, headers, method, url } =
         transformRequestWithVariables(request);
 
-      const res = await fetch(ROUTES.proxy, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          method,
-          url,
-          body,
-          headers: headersArrayToObj(headers),
-        }),
+      const res = await fetchProxyRequest({
+        url,
+        method,
+        body,
+        headers: headersArrayToObj(headers),
       });
-      const json = await res.json();
-
-      setResponse({ status: res.status, ok: res.ok, json });
+      setResponse(res);
     } catch (e) {
-      setResponse(
-        e instanceof Error ? { error: e.message } : { error: String(e) }
-      );
+      setResponse({ json: String(e), status: 400, ok: false });
     } finally {
       setIsLoading(false);
     }
   }
 
-  return { response, isLoading, fetchData };
+  return { response, isLoading, fetchData, setResponse };
 }
