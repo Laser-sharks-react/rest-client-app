@@ -19,10 +19,15 @@ import { ROUTES } from '@/lib/constants/routes';
 import { useSnackbar } from 'notistack';
 import Image from 'next/image';
 import AppLogo from '../../public/shark-bite-logo.svg';
+import { useRequestStore } from '@/store/request-store';
+import { useVariablesStore } from '@/store/variables-store';
 
 export default function Header() {
   const t = useTranslations('Header');
   const { enqueueSnackbar } = useSnackbar();
+  const { reset: resetRequest } = useRequestStore();
+  const { reset: resetVariables } = useVariablesStore();
+
   const [user] = useAuthState(auth);
 
   const trigger = useScrollTrigger({
@@ -36,6 +41,8 @@ export default function Header() {
   const onLogout = () => {
     try {
       logout();
+      resetRequest();
+      resetVariables();
       enqueueSnackbar(t('logoutSuccess'), { variant: 'success' });
     } catch (err) {
       enqueueSnackbar(
@@ -49,8 +56,8 @@ export default function Header() {
     <AppBar position="sticky" elevation={0}>
       <Toolbar
         className={cx(
-          'flex justify-between transition-all duration-300 ease-in-out',
-          trigger ? 'bg-blue-200' : 'bg-white'
+          'flex justify-between transition-all duration-300 ease-in-out bg-white',
+          { 'bg-blue-200': trigger }
         )}
       >
         <Typography

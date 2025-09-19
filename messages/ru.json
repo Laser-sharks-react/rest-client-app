@@ -118,5 +118,11 @@
   "RequestHeaders": {
     "headers": "Заголовки"
   },
-  "Response": { "response": "Ответ" }
+  "Response": { "response": "Ответ" },
+
+  "VariablesList": {
+    "variables": "Переменные",
+    "key": "Название",
+    "value": "Значение"
+  }
 }

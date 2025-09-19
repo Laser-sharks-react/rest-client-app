@@ -8,6 +8,7 @@ type Actions = {
   removeVariable: (id: string) => void;
   updateVariableKey: (variable: Omit<Variable, 'value'>) => void;
   updateVariableValue: (variable: Omit<Variable, 'key'>) => void;
+  reset: () => void;
 };
 
 export const useVariablesStore = create<VariablesState & Actions>()(
@@ -39,6 +40,7 @@ export const useVariablesStore = create<VariablesState & Actions>()(
             variable.id === id ? { ...variable, value } : variable
           ),
         })),
+      reset: () => set({ variables: [] }),
     }),
     {
       name: LS_KEYS.variables,

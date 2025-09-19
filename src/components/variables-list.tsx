@@ -11,8 +11,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 export function VariablesList() {
+  const t = useTranslations('VariablesList');
   const variables = useVariablesStore(s => s.variables);
   const add = useVariablesStore(s => s.addVariable);
   const remove = useVariablesStore(s => s.removeVariable);
@@ -36,7 +38,7 @@ export function VariablesList() {
   return (
     <Card sx={{ p: 3 }}>
       <Stack direction="row" gap={2} alignItems="center" mb={3}>
-        <Typography variant="h5">Variables</Typography>
+        <Typography variant="h5">{t('variables')}</Typography>
         <Button
           onClick={onAdd}
           variant="contained"
@@ -49,13 +51,13 @@ export function VariablesList() {
         {variables.map(({ id, key, value }, index) => (
           <Stack key={index} direction="row" gap={2} alignItems="center">
             <TextField
-              label="Key"
+              label={t('key')}
               name="Key"
               value={key}
               onChange={e => onUpdateKey({ id, key: e.target.value })}
             />
             <TextField
-              label="Value"
+              label={t('value')}
               value={value}
               name="Value"
               onChange={e => onUpdateValue({ id, value: e.target.value })}
