@@ -18,6 +18,8 @@ import { auth, logout } from '@/lib/firebase';
 import { ROUTES } from '@/lib/constants/routes';
 import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import AppLogo from '../../public/shark-bite-logo.svg';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -46,22 +48,25 @@ export default function Header() {
   };
 
   return (
-    <AppBar position="sticky" color="inherit" elevation={0}>
+    <AppBar position="sticky" elevation={0}>
       <Toolbar
         className={cx(
-          'flex justify-between transition-all duration-300 ease-in-out',
-          {
-            'bg-white': trigger,
-            'bg-blue-100': !trigger,
-          }
+          'flex justify-between transition-all duration-300 ease-in-out ',
+          trigger ? 'bg-blue-200' : 'bg-white'
         )}
       >
         <Typography
           component={NextLink}
           href={ROUTES.home}
-          sx={{ fontSize: '30px', fontWeight: 600 }}
-          className={cx('text-blue-900')}
+          color="primary"
+          sx={{
+            fontSize: 24,
+            display: 'inline-flex',
+            gap: 1,
+            alignItems: 'flex-end',
+          }}
         >
+          <Image height={40} src={AppLogo} alt={'logo'} />
           {appName}
         </Typography>
 
