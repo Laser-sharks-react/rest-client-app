@@ -33,7 +33,7 @@ export function RestClientNavbar() {
         transition: 'all 0.3ms ease-in-out',
       }}
       className={cx({
-        'bg-blue-100': trigger,
+        'bg-blue-300': trigger,
         'bg-blue-200': !trigger,
       })}
     >

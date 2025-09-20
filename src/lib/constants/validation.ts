@@ -3,3 +3,5 @@ export const EMAIL_REGEX =
 
 export const PASSWORD_REGEX =
   /^(?=.*\p{L})(?=.*\p{N})(?=.*[^\p{L}\p{N}\s]).{8,}$/u;
+
+export const VARIABLE_REGEX = /\{\{\s*([_\p{L}][\p{L}\p{N}_-]*)\s*\}\}/gu;

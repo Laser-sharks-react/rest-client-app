@@ -20,9 +20,11 @@ export default async function LocaleLayout({ children, params }: Props) {
       <ClientProviders />
       <Header />
       <RestClientNavbar />
-      <Container component="main" sx={{ bgcolor: 'aliceblue' }}>
-        {children}
-      </Container>
+      <div className="bg-blue-100">
+        <Container component="main" sx={{ minHeight: '80dvh', p: 2 }}>
+          {children}
+        </Container>
+      </div>
       <Footer />
     </NextIntlClientProvider>
   );

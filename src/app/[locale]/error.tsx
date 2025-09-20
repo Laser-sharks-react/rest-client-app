@@ -1,19 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Button } from '@mui/material';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
-export default function Error({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+export default function Error() {
   const t = useTranslations('ErrorPage');
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
 
   return (
     <div className="min-h-[60vh] grid place-items-center px-6 py-16">

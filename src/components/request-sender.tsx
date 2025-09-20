@@ -16,8 +16,8 @@ import { DEFAULT_HTTP_METHOD, HTTP_METHODS } from '@/lib/constants/request';
 
 export const RequestSender = () => {
   const t = useTranslations('RequestSender');
-  const params = useParams();
-  const [methodParam, urlParam] = params.params ?? [];
+  const { params } = useParams();
+  const [methodParam, urlParam] = params ?? [];
 
   const { setMethod, setUrl, method, url } = useRequestStore();
 
@@ -26,7 +26,7 @@ export const RequestSender = () => {
       setMethod(isHttpMethod(methodParam) ? methodParam : DEFAULT_HTTP_METHOD);
     if (urlParam)
       setUrl(urlParam ? base64Decode(decodeURIComponent(urlParam)) : '');
-  }, []);
+  }, [methodParam, setMethod, setUrl, urlParam]);
 
   return (
     <Card sx={{ p: 2 }}>
@@ -36,9 +36,9 @@ export const RequestSender = () => {
           value={method}
           onChange={e => setMethod(e.target.value)}
         >
-          {HTTP_METHODS.map(m => (
-            <MenuItem key={m} value={m}>
-              {m}
+          {HTTP_METHODS.map(method => (
+            <MenuItem key={method} value={method}>
+              {method}
             </MenuItem>
           ))}
         </Select>
