@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const res = await fetch(url, {
       method,
       headers,
-      body: method !== DEFAULT_HTTP_METHOD ? body : '',
+      ...(method !== DEFAULT_HTTP_METHOD ? { body } : {}),
     });
 
     const arrayBuffer = await res.arrayBuffer();
