@@ -6,7 +6,7 @@ import { ALG } from '@/lib/constants/cookie';
 export async function getUserIdFromRequest(
   req: NextRequest
 ): Promise<string | null> {
-  const token = getSessionToken(req);
+  const token = await getSessionToken();
   const secret = getSessionSecret();
   if (!token || !secret) return null;
 

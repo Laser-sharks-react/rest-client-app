@@ -87,4 +87,13 @@ async function saveRequest(log: RequestLog) {
   });
 }
 
-export { auth, db, login, register, resetPassword, logout, saveRequest };
+export {
+  auth,
+  db,
+  login,
+  register,
+  resetPassword,
+  logout,
+  saveRequest,
+  COLLECTIONS,
+};

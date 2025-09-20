@@ -1,6 +1,7 @@
 import { ALG, COOKIE_TIME, COOKIES } from '@/lib/constants/cookie';
 import { type JWTPayload, SignJWT } from 'jose';
-import { type NextResponse, type NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
+import { type NextResponse } from 'next/server';
 
 export function getSessionSecret(): Uint8Array {
   const secret = process.env.SESSION_SECRET;
@@ -21,8 +22,9 @@ export async function createSessionToken(
     .sign(secret);
 }
 
-export const getSessionToken = (req: NextRequest): string | null =>
-  req.cookies.get(COOKIES.session)?.value ?? null;
+export async function getSessionToken(): Promise<string | null> {
+  return (await cookies()).get(COOKIES.session)?.value || null;
+}
 
 export const setSessionToken = (
   res: NextResponse,
