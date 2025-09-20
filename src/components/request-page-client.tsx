@@ -33,8 +33,6 @@ export default function RequestPageClient({ initialResponse }: Props) {
 
     const newUrl = getNewUrl(transformRequestWithVariables(request));
     router.push(`${ROUTES.request}${newUrl}`);
-
-    await fetchData(request);
   }
 
   return (
