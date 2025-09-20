@@ -9,22 +9,6 @@ type Router = {
   back: () => void;
 };
 
-jest.mock('next/navigation', () => {
-  const router: Router = {
-    push: () => {},
-    replace: () => {},
-    back: () => {},
-  };
-
-  return {
-    useRouter: () => router,
-    usePathname: (): string => '/',
-    useSearchParams: (): URLSearchParams => new URLSearchParams(),
-    redirect: (_url: string): void => {},
-    notFound: (): void => {},
-  };
-});
-
 jest.mock('next-intl', () => {
   return {
     useTranslations:
@@ -47,7 +31,14 @@ jest.mock('@/i18n/navigation', () => {
       </a>
     );
   });
-  return { __esModule: true, Link };
+
+  const useRouter = (): Router => ({
+    push: () => {},
+    replace: () => {},
+    back: () => {},
+  });
+
+  return { __esModule: true as const, Link, useRouter };
 });
 
 jest.mock('next-intl/server', () => ({
@@ -55,3 +46,11 @@ jest.mock('next-intl/server', () => ({
     return (key: string) => `${namespace ? `${namespace}.` : ''}${key}`;
   }),
 }));
+
+jest.mock('@/lib/firebase', () => {
+  const login = jest.fn<Promise<void>, [string, string]>(() =>
+    Promise.resolve()
+  );
+  const getLoginMock = () => login;
+  return { __esModule: true as const, login, getLoginMock };
+});
