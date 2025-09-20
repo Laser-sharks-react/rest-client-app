@@ -20,16 +20,19 @@ const config = {
     '/out/',
     '/dist/',
     '/build/',
+    '<rootDir>/src/lib/constants/',
+    '<rootDir>/src/lib/types/',
   ],
   clearMocks: true,
   collectCoverage: true,
   coverageProvider: 'v8',
   coverageDirectory: 'coverage',
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/_*.{ts,tsx}',
-    '!src/**/types.{ts,tsx}',
-    '!src/**/index.{ts,tsx}',
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/src/lib/constants/',
+    '<rootDir>/src/lib/types/',
+    '\\.d\\.ts$',
   ],
 };
 
