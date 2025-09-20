@@ -37,8 +37,9 @@ jest.mock('@/i18n/navigation', () => {
     replace: () => {},
     back: () => {},
   });
+  const usePathname = () => '/foo';
 
-  return { __esModule: true as const, Link, useRouter };
+  return { __esModule: true, Link, useRouter, usePathname };
 });
 
 jest.mock('next-intl/server', () => ({
@@ -52,5 +53,21 @@ jest.mock('@/lib/firebase', () => {
     Promise.resolve()
   );
   const getLoginMock = () => login;
-  return { __esModule: true as const, login, getLoginMock };
+  return { __esModule: true, login, getLoginMock };
 });
+
+jest.mock('next/image', () => {
+  return function NextImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
+    return <img {...props} />;
+  };
+});
+
+jest.mock('@/i18n/routing', () => ({
+  __esModule: true,
+  routing: { locales: ['en', 'ru'], defaultLocale: 'en' },
+}));
+
+jest.mock('@/i18n/utils', () => ({
+  __esModule: true,
+  isLocale: (v: unknown) => v === 'en' || v === 'ru',
+}));

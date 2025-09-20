@@ -1,17 +1,5 @@
 import { describe, it, expect, jest } from '@jest/globals';
 
-jest.mock('@/i18n/utils', () => ({
-  __esModule: true,
-  isLocale: (v: unknown) => v === 'en' || v === 'ru',
-}));
-
-jest.mock('@/i18n/routing', () => ({
-  __esModule: true,
-  routing: {
-    defaultLocale: 'en',
-  },
-}));
-
 import { parsePath } from './parse-path';
 
 describe('parsePath', () => {
