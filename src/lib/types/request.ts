@@ -34,12 +34,7 @@ export interface RequestRecord {
   resBytes: number;
   error: string | null;
   time: number;
-  restore: {
-    url: string;
-    method: HttpMethod | null;
-    headers: HttpHeader[] | null;
-    body: string;
-  };
+  restore: RequestState;
 }
 
 export type RequestParams = Omit<RequestRecord, 'id'>;
