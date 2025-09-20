@@ -1,12 +1,6 @@
 import { afterEach, describe, expect, it, jest } from '@jest/globals';
-import type { Variable } from '@/lib/types/variable';
 import { replaceVariables } from './replace-variables';
-
-const TOKEN_VAR: Variable = { key: 'TOKEN', value: 'abc', id: '1' };
-const USER_VAR: Variable = { key: 'USER', value: 'Valera', id: '3' };
-const ID_VAR: Variable = { key: 'ID', value: '42', id: '2' };
-
-const DICTIONARY_MOCK: Variable[] = [TOKEN_VAR, USER_VAR, ID_VAR];
+import { DICTIONARY_MOCK, ID_VAR, TOKEN_VAR, USER_VAR } from '@/__mocks__';
 
 describe('replaceVariables', () => {
   afterEach(() => {

@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "test": "jest --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js  --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -32,6 +32,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-simple-code-editor": "^0.14.1",
     "react-syntax-highlighter": "^15.6.6",
+    "ts-jest": "^29.4.4",
     "typescript-eslint": "^8.42.0",
     "yup": "^1.7.0",
     "zustand": "^5.0.8"

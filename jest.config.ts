@@ -1,8 +1,9 @@
 import nextJest from 'next/jest.js';
+import type { Config } from 'jest';
 
 const createJestConfig = nextJest({ dir: './' });
 
-const config = {
+const config: Config = {
   testEnvironment: 'jsdom',
   injectGlobals: true,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
@@ -34,6 +35,12 @@ const config = {
     '<rootDir>/src/lib/types/',
     '\\.d\\.ts$',
   ],
+
+  // for es modules
+  transform: {},
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  transformIgnorePatterns: ['node_modules/(?!next-intl)/'],
 };
 
 export default createJestConfig(config);
