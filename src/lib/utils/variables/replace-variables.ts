@@ -2,12 +2,13 @@ import { VARIABLE_REGEX } from '../../constants/validation';
 import type { VariableMatch } from '../../types/variable';
 import { getVariablesFromLS } from './get-variables-from-ls';
 
-export function replaceVariables(input: string) {
+export function replaceVariables(
+  input: string,
+  dictionary = getVariablesFromLS()
+) {
   let res = input;
 
   const matches = findVariables(input);
-  const dictionary = getVariablesFromLS();
-
   matches.forEach(match => {
     const inDictionary = dictionary.find(dict => dict.key === match.name);
     if (inDictionary) {
