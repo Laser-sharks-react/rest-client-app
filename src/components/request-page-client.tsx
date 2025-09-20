@@ -22,7 +22,7 @@ type Props = {
 export default function RequestPageClient({ initialResponse }: Props) {
   const router = useRouter();
   const request = useRequestStore();
-  const { response, isLoading, fetchData, setResponse } = useProxyResponse();
+  const { response, isLoading, setResponse } = useProxyResponse();
 
   useEffect(() => {
     if (initialResponse) setResponse(initialResponse);
