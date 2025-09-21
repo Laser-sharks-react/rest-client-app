@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import 'cross-fetch/polyfill';
-
 import React, { forwardRef, type ReactNode } from 'react';
 
 type Router = {

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createSessionToken, setSessionToken } from '@/lib/utils/session-token';
+import { setSessionToken } from '@/lib/utils/session/set-session-token';
+import { createSessionToken } from '@/lib/utils/session/create-session-token';
 
 export async function POST(req: Request) {
   const { userId } = await req.json();

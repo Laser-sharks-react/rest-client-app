@@ -2,8 +2,8 @@ import { parseUrlToRequestPayload } from '@/lib/utils/parse-url-to-requset-paylo
 import { fetchProxyRequest } from '@/lib/utils/fetch-proxy-request';
 import { CircularProgress } from '@mui/material';
 import dynamic from 'next/dynamic';
-import { getSessionToken } from '@/lib/utils/session-token';
 import { COOKIES } from '@/lib/constants/cookie';
+import { getSessionToken } from '@/lib/utils/session/get-session-token';
 
 interface Props {
   params: Promise<{ params?: string[] }>;
