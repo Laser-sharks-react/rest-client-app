@@ -3,6 +3,7 @@ import { fetchProxyRequest } from '@/lib/utils/fetch-proxy-request';
 import { CircularProgress } from '@mui/material';
 import dynamic from 'next/dynamic';
 import { getSessionToken } from '@/lib/utils/session-token';
+import { COOKIES } from '@/lib/constants/cookie';
 
 interface Props {
   params: Promise<{ params?: string[] }>;
@@ -21,8 +22,11 @@ export default async function RequestPage({ params, searchParams }: Props) {
     params,
     searchParams,
   });
-  const sessionCookies = await getSessionToken();
-  request.headers = { ...request.headers, Cookie: `session=${sessionCookies}` };
+  const session = await getSessionToken();
+  request.headers = {
+    ...request.headers,
+    Cookie: `${COOKIES.session}=${session}`,
+  };
   const response = request.url ? await fetchProxyRequest(request) : undefined;
 
   return <RequestPageClient initialResponse={response} />;
