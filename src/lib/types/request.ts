@@ -5,6 +5,13 @@ export type RequestState = {
   headers: HttpHeader[];
 };
 
+export type RequestPayload = {
+  method: HttpMethod;
+  url: string;
+  body: string;
+  headers: Record<string, string>;
+};
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export interface HttpHeader {
@@ -22,3 +29,26 @@ export type Language =
   | 'Java'
   | 'C#'
   | 'Go';
+
+export interface RequestRecord {
+  id: string;
+  uid: string;
+  endpoint: string;
+  method: HttpMethod | null;
+  status: number | null;
+  latencyMs: number | null;
+  reqBytes: number;
+  resBytes: number;
+  error: string | null;
+  time: number;
+  restore: RequestState;
+}
+
+export type RequestParams = Omit<RequestRecord, 'id'>;
+export type RequestSuccessParams = Omit<RequestParams, 'error'>;
+export type RequestErrorParams = {
+  uid: RequestRecord['uid'];
+  error: string;
+} & Partial<Omit<RequestParams, 'uid' | 'error' | 'restore'>> & {
+    restore?: Partial<RequestRecord['restore']>;
+  };

@@ -1,11 +1,3 @@
-type SuccessResponse = {
-  status: number;
-  ok: boolean;
-  json: unknown;
-};
-
-type ErrorResponse = {
-  error: string;
-};
-
-export type ApiResponse = SuccessResponse | ErrorResponse | null;
+export type ApiResponse =
+  | { status: number; ok: true; json: unknown }
+  | { status: number; ok: false; json: { error: string } };

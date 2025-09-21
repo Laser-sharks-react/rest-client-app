@@ -1,11 +1,11 @@
 import { type NextRequest } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
-import { getUserIdFromRequest } from '@/lib/utils/get-user-id-from-request';
 import { isProtectedRoute, isPublicRoute } from '@/lib/utils/access-routes';
 import { redirectWithLocale } from '@/lib/utils/redirect';
 import { ROUTES } from '@/lib/constants/routes';
 import { parsePath } from '@/lib/utils/parse-path';
+import { getUserId } from '@/lib/utils/session/get-user-id';
 
 const handleI18n = createIntlMiddleware(routing);
 
@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest) {
 
   const [locale, path] = parsePath(req.nextUrl.pathname);
 
-  const userId = await getUserIdFromRequest(req);
+  const userId = await getUserId();
 
   const isProtected = isProtectedRoute(`/${path}`);
   const isPublic = isPublicRoute(`/${path}`);

@@ -6,6 +6,8 @@ import { Container } from '@mui/material';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { type ReactNode } from 'react';
+import { notFound } from 'next/navigation';
+import { VALID_LOCALES } from '@/i18n/routing';
 
 type Props = {
   children: ReactNode;
@@ -15,14 +17,21 @@ type Props = {
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
   const { messages } = await getMessages();
+
+  if (!VALID_LOCALES.has(locale)) {
+    notFound();
+  }
+
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <ClientProviders />
       <Header />
       <RestClientNavbar />
-      <Container component="main" sx={{ bgcolor: 'aliceblue' }}>
-        {children}
-      </Container>
+      <div className="bg-blue-100">
+        <Container component="main" sx={{ minHeight: '80dvh', p: 2 }}>
+          {children}
+        </Container>
+      </div>
       <Footer />
     </NextIntlClientProvider>
   );

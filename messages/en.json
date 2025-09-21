@@ -1,6 +1,20 @@
 {
   "HomePage": {
-    "title": "Welcome"
+    "unauthorizedTitle": "Welcome!",
+    "authorizedTitle": "Welcome back",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "aboutProjectTitle": "About the project",
+    "aboutProjectText": "Our project is a tool for working with APIs, inspired by Postman.",
+    "aboutTeamTitle": "Our team",
+    "teamLeadDescription": "She leads the process, distributes tasks, and inspires.",
+    "dev1Description": "Frontend developer, loves to come up with new features.",
+    "dev2Description": "Frontend developer, writes code and maintains stability.",
+    "aboutCourseTitle": "About the course",
+    "aboutCourseText": "We are developing this project as part of our training to improve our teamwork and development skills.",
+    "developer1": "Anastasiia",
+    "developer2": "Anastasiia",
+    "developer3": "Aizhan"
   },
 
   "LoginPage": {
@@ -14,9 +28,9 @@
   "SignUpPage": {
     "title": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
-    "signupUser": "Signing up user...",
-    "signupUserSuccess": "User signed up successfully.",
-    "signupUserError": "User sign up failed.",
+    "signUpUser": "Signing up user...",
+    "signUpUserSuccess": "User signed up successfully.",
+    "signUpUserError": "User sign up failed.",
     "loginUserSuccess": "User logged in successfully.",
     "loginUserError": "User login failed."
   },
@@ -87,5 +101,47 @@
   "RequestSender": {
     "button": "Send",
     "notEnoughData": "// Not enough details to generate code"
+  },
+
+  "JsonEditor": {
+    "format": "Format JSON",
+    "invalid": "Invalid JSON",
+    "valid": "Valid JSON ✓"
+  },
+
+  "RequestBody": {
+    "body": "Request body"
+  },
+
+  "RequestHeaders": {
+    "headers": "Headers"
+  },
+  "Response": { "response": "Response" },
+
+  "VariablesList": {
+    "variables": "Variables",
+    "key": "Name",
+    "value": "Value"
+  },
+
+  "HistoryPage": {
+    "unauthorized": "Unauthorized",
+    "title": "History & Analytics",
+    "noRequests": "You haven’t executed any requests yet.",
+    "restLink": " Open REST client"
+  },
+
+  "RequestList": {
+    "title": "Recent requests",
+    "method": "Method",
+    "endpoint": "Endpoint",
+    "status": "Status",
+    "latency": "Latency",
+    "sizes": "sizes",
+    "req": "req",
+    "res": "res",
+    "timestamp": "Timestamp",
+    "action": "Action",
+    "open": "Open"
   }
 }

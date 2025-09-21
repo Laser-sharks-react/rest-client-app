@@ -1,6 +1,20 @@
 {
   "HomePage": {
-    "title": "Добро пожаловать"
+    "unauthorizedTitle": "Добро пожаловать",
+    "authorizedTitle": "Добро пожаловать обратно",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться",
+    "aboutProjectTitle": "О проекте",
+    "aboutProjectText": "Наш проект — инструмент для работы с API, вдохновлённый Postman.",
+    "aboutTeamTitle": "Наша команда",
+    "teamLeadDescription": "Руководит процессом, распределяет задачи и вдохновляет.",
+    "dev1Description": "Frontend-разработчик, любит придумывать новые фичи.",
+    "dev2Description": "Frontend-разработчик, пишет код и поддерживает стабильность.",
+    "aboutCourseTitle": "О курсе",
+    "aboutCourseText": "Мы разрабатываем этот проект в рамках обучения, чтобы прокачать навыки командной работы и разработки.",
+    "developer1": "Анастасия",
+    "developer2": "Анастасия",
+    "developer3": "Айжан"
   },
 
   "LoginPage": {
@@ -14,9 +28,9 @@
   "SignUpPage": {
     "title": "Регистрация",
     "alreadyHaveAccount": "Уже есть аккаунт?",
-    "signupUser": "Регистрируем нового пользователя...",
-    "signupUserSuccess": "Пользователь успешно зарегистрирован.",
-    "signupUserError": "Ошибка регистрации пользователя.",
+    "signUpUser": "Регистрируем нового пользователя...",
+    "signUpUserSuccess": "Пользователь успешно зарегистрирован.",
+    "signUpUserError": "Ошибка регистрации пользователя.",
     "loginUserSuccess": "Вход выполнен успешно.",
     "loginUserError": "Ошибка входа пользователя."
   },
@@ -91,5 +105,46 @@
   "RequestSender": {
     "button": "Отправить",
     "notEnoughData": "// Недостаточно данных для генерации кода"
+  },
+  "JsonEditor": {
+    "format": "Форматировать JSON",
+    "invalid": "Невалидный JSON",
+    "valid": "Валидный JSON ✓"
+  },
+
+  "RequestBody": {
+    "body": "Тело запроса"
+  },
+
+  "RequestHeaders": {
+    "headers": "Заголовки"
+  },
+  "Response": { "response": "Ответ" },
+
+  "VariablesList": {
+    "variables": "Переменные",
+    "key": "Название",
+    "value": "Значение"
+  },
+
+  "HistoryPage": {
+    "unauthorized": "Нет доступа",
+    "title": "История и аналитика",
+    "noRequests": "Вы ещё не выполняли запросы.",
+    "restLink": "Открыть REST-клиент"
+  },
+
+  "RequestList": {
+    "title": "Последние запросы",
+    "method": "Метод",
+    "endpoint": "Эндпоинт",
+    "status": "Статус",
+    "latency": "Задержка",
+    "sizes": "Размеры",
+    "req": "запрос",
+    "res": "ответ",
+    "timestamp": "Время",
+    "action": "Действие",
+    "open": "Открыть"
   }
 }

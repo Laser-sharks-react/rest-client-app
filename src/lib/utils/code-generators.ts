@@ -1,13 +1,42 @@
-import type { RequestState } from '@/lib/types/request';
+import type { Language, RequestState } from '@/lib/types/request';
 import { headersArrayToObj } from './headers-array-to-obj';
 
-export function generateCurl({ url, method, headers, body }: RequestState) {
+export function generateCode({
+  lang,
+  request,
+}: {
+  lang: Language;
+  request: RequestState;
+}) {
+  switch (lang) {
+    case 'cURL':
+      return generateCurl(request);
+    case 'JavaScript Fetch':
+      return generateFetch(request);
+    case 'JavaScript XHR':
+      return generateXHR(request);
+    case 'NodeJS':
+      return generateNode(request);
+    case 'Python':
+      return generatePython(request);
+    case 'Java':
+      return generateJava(request);
+    case 'C#':
+      return generateCSharp(request);
+    case 'Go':
+      return generateGo(request);
+    default:
+      return '// Unsupported language';
+  }
+}
+
+function generateCurl({ url, method, headers, body }: RequestState) {
   const h = headers.map(({ key, value }) => `-H "${key}: ${value}"`).join(' ');
   const data = body ? `--data '${body}'` : '';
   return `curl -X ${method} "${url}" ${h} ${data}`.trim();
 }
 
-export function generateFetch({ url, method, headers, body }: RequestState) {
+function generateFetch({ url, method, headers, body }: RequestState) {
   return `fetch("${url}", {
   method: "${method}",
   headers: ${JSON.stringify(headersArrayToObj(headers), null, 2)},
@@ -15,7 +44,7 @@ export function generateFetch({ url, method, headers, body }: RequestState) {
 });`;
 }
 
-export function generateXHR({ url, method, headers, body }: RequestState) {
+function generateXHR({ url, method, headers, body }: RequestState) {
   return `var xhr = new XMLHttpRequest();
 xhr.open("${method}", "${url}");
 ${headers
@@ -27,7 +56,7 @@ xhr.onload = export function() {
 ${body ? `xhr.send(${JSON.stringify(body)});` : 'xhr.send();'}`;
 }
 
-export function generateNode({ url, method, headers, body }: RequestState) {
+function generateNode({ url, method, headers, body }: RequestState) {
   return `const fetch = require("node-fetch");
 
 fetch("${url}", {
@@ -39,7 +68,7 @@ fetch("${url}", {
   .then(console.log);`;
 }
 
-export function generatePython({ url, method, headers, body }: RequestState) {
+function generatePython({ url, method, headers, body }: RequestState) {
   return `import requests
 
 url = "${url}"
@@ -51,7 +80,7 @@ response = requests.request("${method}", url, headers=headers${
 print(response.text)`;
 }
 
-export function generateJava({ url, method, headers, body }: RequestState) {
+function generateJava({ url, method, headers, body }: RequestState) {
   return `import java.net.*;
 import java.io.*;
 
@@ -74,7 +103,7 @@ in.close();
 System.out.println(response.toString());`;
 }
 
-export function generateCSharp({ url, method, headers, body }: RequestState) {
+function generateCSharp({ url, method, headers, body }: RequestState) {
   return `using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -93,7 +122,7 @@ ${body ? `    request.Content = new StringContent("${body}");` : ''}
 }`;
 }
 
-export function generateGo({ url, method, headers, body }: RequestState) {
+function generateGo({ url, method, headers, body }: RequestState) {
   return `package main
 
 import (

@@ -6,7 +6,7 @@ export const HTTP_METHODS: HttpMethod[] = [
   'PUT',
   'PATCH',
   'DELETE',
-];
+] as const;
 
 export const DEFAULT_HTTP_METHOD: HttpMethod = 'GET';
 
