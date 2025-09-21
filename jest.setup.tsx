@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import 'cross-fetch/polyfill';
-import React, { forwardRef, type ReactNode } from 'react';
+import * as React from 'react';
 
 type Router = {
   push: (url: string) => void;
@@ -23,15 +23,30 @@ jest.mock('next-intl', () => {
       (key: string): string =>
         `${namespace ? `${namespace}.` : ''}${key}`,
 
-    NextIntlClientProvider: ({ children }: { children: ReactNode }) => children,
+    NextIntlClientProvider: ({ children }: { children: React.ReactNode }) =>
+      children,
   };
 });
 
 jest.mock('@/i18n/navigation', () => {
-  const Link = forwardRef<HTMLAnchorElement, LinkProps>(function LinkImpl({ href, children, ...rest }, ref) {
-    const { replace: _replace, prefetch: _prefetch, shallow: _shallow, scroll: _scroll, locale: _locale, ...anchorProps } = rest;
+  const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function LinkImpl(
+    { href, children, ...rest },
+    ref
+  ) {
+    const {
+      replace: _replace,
+      prefetch: _prefetch,
+      shallow: _shallow,
+      scroll: _scroll,
+      locale: _locale,
+      ...anchorProps
+    } = rest;
     return (
-      <a ref={ref} href={typeof href === 'string' ? href : undefined} {...anchorProps}>
+      <a
+        ref={ref}
+        href={typeof href === 'string' ? href : undefined}
+        {...anchorProps}
+      >
         {children}
       </a>
     );
@@ -58,8 +73,13 @@ jest.mock('@/lib/firebase', () => {
     Promise.resolve()
   );
   const getLoginMock = () => login;
-  return { __esModule: true, login, getLoginMock };
+  const auth = { currentUser: null };
+  return { __esModule: true, auth, login, getLoginMock };
 });
+
+jest.mock('react-firebase-hooks/auth', () => ({
+  useAuthState: () => [null, false, undefined],
+}));
 
 jest.mock('next/dynamic', () => () => {
   const MockComponent = (_props: unknown) => null;
@@ -83,6 +103,3 @@ jest.mock('@/i18n/utils', () => ({
 }));
 
 jest.mock('server-only', () => ({}));
-
-
-
