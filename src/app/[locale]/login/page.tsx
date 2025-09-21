@@ -62,7 +62,7 @@ export default function Login() {
     >
       <Card
         component="form"
-        sx={{ borderRadius: 2, p: 2, maxWidth: '400px' }}
+        sx={{ borderRadius: 2, p: 2, width: '320px' }}
         onSubmit={handleSubmit(handleLogin)}
       >
         <Stack gap={2}>
