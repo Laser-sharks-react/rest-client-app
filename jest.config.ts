@@ -21,6 +21,7 @@ const config = {
     '/dist/',
     '/build/',
     '<rootDir>/src/lib/constants/',
+    '<rootDir>/src/i18n/',
     '<rootDir>/src/lib/types/',
   ],
   clearMocks: true,
@@ -31,6 +32,7 @@ const config = {
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/src/lib/constants/',
+    '<rootDir>/src/i18n/',
     '<rootDir>/src/lib/types/',
     '\\.d\\.ts$',
   ],

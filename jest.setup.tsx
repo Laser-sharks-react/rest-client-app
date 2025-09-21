@@ -55,6 +55,11 @@ jest.mock('@/lib/firebase', () => {
   return { __esModule: true, login, getLoginMock };
 });
 
+jest.mock('next/dynamic', () => () => {
+  const MockComponent = (_props: unknown) => null;
+  return MockComponent;
+});
+
 jest.mock('next/image', () => {
   return function NextImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
     return <img {...props} />;
