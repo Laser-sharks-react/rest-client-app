@@ -1,9 +1,8 @@
 import { parseUrlToRequestPayload } from '@/lib/utils/parse-url-to-requset-payload';
 import { fetchProxyRequest } from '@/lib/utils/fetch-proxy-request';
-import { cookies } from 'next/headers';
-import { COOKIES } from '@/lib/constants/cookie';
 import { CircularProgress } from '@mui/material';
 import dynamic from 'next/dynamic';
+import { getSessionToken } from '@/lib/utils/session-token';
 
 interface Props {
   params: Promise<{ params?: string[] }>;
@@ -22,7 +21,7 @@ export default async function RequestPage({ params, searchParams }: Props) {
     params,
     searchParams,
   });
-  const sessionCookies = (await cookies()).get(COOKIES.session)?.value;
+  const sessionCookies = await getSessionToken();
   request.headers = { ...request.headers, Cookie: `session=${sessionCookies}` };
   const response = request.url ? await fetchProxyRequest(request) : undefined;
 

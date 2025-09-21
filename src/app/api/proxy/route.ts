@@ -1,10 +1,10 @@
 import { DEFAULT_HTTP_METHOD } from '@/lib/constants/request';
 import { setUserRequest } from '@/lib/firebase-admin';
-import { getUserIdFromRequest } from '@/lib/utils/get-user-id-from-request';
+import { getUserId } from '@/lib/utils/get-user-id';
 import { type NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const uid = await getUserIdFromRequest(req);
+  const uid = await getUserId();
   if (!uid) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
   const started = Date.now();
