@@ -1,4 +1,20 @@
-## Stack:
+# REST Client App
+
+A lightweight Postman-like REST client built with **Next.js (App Router)** and **TypeScript**.  
+The application allows users to send API requests, manage variables, view request history with analytics, and generate request code snippets.
+
+## 🚀 Features
+
+- 🔐 **Authentication** – Sign up, Sign in, Sign out (Firebase).
+- 🌐 **REST Client** – send requests with method selector, headers, body editor, and view responses.
+- 💻 **Code Generation** – export request as `cURL`, Fetch API, Node.js, Python, Java, C#, Go.
+- 📝 **Variables** – define and reuse variables in requests (`{{variableName}}`).
+- 📊 **History & Analytics** – track executed requests (method, URL, status, latency, sizes, timestamp).
+- 🌍 **Internationalization (i18n)** – multiple languages supported.
+- ⚡ **Error Handling** – user-friendly error messages.
+- 🎨 **UI/UX** – sticky header.
+
+## 🛠️ Tech Stack
 
 - Next.js (App Router)
 - Zustand
@@ -9,22 +25,17 @@
 - Vitest + React Testing Library
 - Firebase
 
-### Commits schema: [prefix] : text
+## Getting Started
 
-### Branch schema: [prefix]/card-name
+### 1. Clone repo
 
-## 📦 Scripts
+git clone https://github.com/<your-org>/rest-client-app.git
+cd rest-client-app
 
-The following commands are defined in `package.json`:
+### 2. Install dependencies
 
-| Command                | Description                                       |
-| ---------------------- | ------------------------------------------------- |
-| `npm run dev`          | Start the Next.js dev server with Turbopack       |
-| `npm run build`        | Build the Next.js project                         |
-| `npm start`            | Run the production build                          |
-| `npm run lint`         | Run ESLint to check code quality                  |
-| `npm run lint:fix`     | Automatically fix ESLint issues                   |
-| `npm run format`       | Automatically format code with Prettier           |
-| `npm run format:check` | Check code formatting with Prettier               |
-| `npm test`             | Run Jest tests with **coverage (coverage ≥ 80%)** |
-| `npm run prepare`      | Initialize Husky hooks                            |
+npm install
+
+### 3. Environment variables
+
+npm install
