@@ -24,15 +24,16 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <ClientProviders />
-      <Header />
-      <RestClientNavbar />
-      <div className="bg-blue-100">
-        <Container component="main" sx={{ minHeight: '80dvh', p: 2 }}>
-          {children}
-        </Container>
-      </div>
-      <Footer />
+      <ClientProviders>
+        <Header />
+        <RestClientNavbar />
+        <div className="bg-blue-100">
+          <Container component="main" sx={{ minHeight: '80dvh', p: 2 }}>
+            {children}
+          </Container>
+        </div>
+        <Footer />
+      </ClientProviders>
     </NextIntlClientProvider>
   );
 }

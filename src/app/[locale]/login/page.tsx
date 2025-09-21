@@ -44,6 +44,7 @@ export default function Login() {
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
       router.replace(ROUTES.home);
     } catch (err) {
+      console.log(err);
       enqueueSnackbar(
         `${t('loginUserError')} ${err instanceof Error ? err.message : ''}`,
         { variant: 'error' }
