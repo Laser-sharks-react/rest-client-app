@@ -24,7 +24,7 @@ export function useProxyResponse() {
       });
       setResponse(res);
     } catch (e) {
-      setResponse({ json: String(e), status: 400, ok: false });
+      setResponse({ json: { error: String(e) }, status: 400, ok: false });
     } finally {
       setIsLoading(false);
     }
