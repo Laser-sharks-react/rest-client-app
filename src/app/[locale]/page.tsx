@@ -24,7 +24,7 @@ export default function Page() {
       <Typography variant="h5" color="secondary">
         {!loading && user
           ? `${t('authorizedTitle')}, ${user.displayName ?? user.email}!`
-          : `${t('unauthorizedTitle')}!`}
+          : `${t('unauthorizedTitle')}`}
       </Typography>
       {!loading && !user && (
         <div className="flex gap-4">

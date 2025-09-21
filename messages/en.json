@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "unauthorizedTitle": "Welcome",
+    "unauthorizedTitle": "Welcome!",
     "authorizedTitle": "Welcome back",
     "signIn": "Sign in",
     "signUp": "Sign up",
