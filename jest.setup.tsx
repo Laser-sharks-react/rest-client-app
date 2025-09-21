@@ -71,3 +71,5 @@ jest.mock('@/i18n/utils', () => ({
   __esModule: true,
   isLocale: (v: unknown) => v === 'en' || v === 'ru',
 }));
+
+jest.mock('server-only', () => ({}));

@@ -3,8 +3,6 @@ import '@testing-library/jest-dom';
 import { RequestList } from './request-list';
 import type { RequestRecord } from '@/lib/types/request';
 
-jest.mock('server-only', () => ({}));
-
 jest.mock('@/lib/utils/format-bytes', () => ({
   formatBytes: (number: number) => `${number}b`,
 }));
