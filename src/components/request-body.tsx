@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import JsonEditor from './json-editor';
 import { Card, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { DEFAULT_HTTP_METHOD } from '@/lib/constants/request';
 
 export function RequestBody() {
   const params = useParams();
@@ -20,7 +21,7 @@ export function RequestBody() {
     if (bodyParam) setBody(base64Decode(decodeURIComponent(bodyParam)));
   }, [bodyParam, setBody]);
 
-  if (method === 'GET') return null;
+  if (method === DEFAULT_HTTP_METHOD) return null;
   return (
     <Card sx={{ p: 2, gap: 2 }}>
       <Typography variant="h5" mb={2}>

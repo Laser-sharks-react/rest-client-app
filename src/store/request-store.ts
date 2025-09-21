@@ -1,5 +1,6 @@
 import type { HttpHeader, HttpMethod, RequestState } from '@/lib/types/request';
 import { create } from 'zustand';
+import { DEFAULT_HTTP_METHOD } from '@/lib/constants/request';
 
 type Actions = {
   setMethod: (m: HttpMethod) => void;
@@ -24,7 +25,11 @@ const initialState: RequestState = {
 export const useRequestStore = create<RequestState & Actions>((set, get) => ({
   ...initialState,
 
-  setMethod: method => set({ method }),
+  setMethod: method =>
+    set(state => ({
+      method,
+      body: method === DEFAULT_HTTP_METHOD ? '' : state.body,
+    })),
   setUrl: url => set({ url }),
   setBody: body => set({ body }),
 
