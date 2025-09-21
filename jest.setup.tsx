@@ -8,6 +8,14 @@ type Router = {
   back: () => void;
 };
 
+type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  replace?: boolean;
+  prefetch?: boolean;
+  shallow?: boolean;
+  scroll?: boolean;
+  locale?: string;
+};
+
 jest.mock('next-intl', () => {
   return {
     useTranslations:
@@ -20,12 +28,10 @@ jest.mock('next-intl', () => {
 });
 
 jest.mock('@/i18n/navigation', () => {
-  const Link = forwardRef<
-    HTMLAnchorElement,
-    React.AnchorHTMLAttributes<HTMLAnchorElement>
-  >(function LinkImpl({ href, children, ...rest }, ref) {
+  const Link = forwardRef<HTMLAnchorElement, LinkProps>(function LinkImpl({ href, children, ...rest }, ref) {
+    const { replace: _replace, prefetch: _prefetch, shallow: _shallow, scroll: _scroll, locale: _locale, ...anchorProps } = rest;
     return (
-      <a ref={ref} href={typeof href === 'string' ? href : undefined} {...rest}>
+      <a ref={ref} href={typeof href === 'string' ? href : undefined} {...anchorProps}>
         {children}
       </a>
     );
@@ -77,3 +83,6 @@ jest.mock('@/i18n/utils', () => ({
 }));
 
 jest.mock('server-only', () => ({}));
+
+
+
