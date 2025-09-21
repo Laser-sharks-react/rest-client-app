@@ -5,3 +5,5 @@ export const routing = defineRouting({
   defaultLocale: 'en' as const,
   localePrefix: 'always',
 });
+
+export const VALID_LOCALES = new Set<string>(routing.locales);

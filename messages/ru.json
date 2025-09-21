@@ -1,8 +1,9 @@
 {
   "HomePage": {
-    "title": "Добро пожаловать!",
-    "signIn": "Sign in",
-    "signUp": "Sign up",
+    "unauthorizedTitle": "Добро пожаловать",
+    "authorizedTitle": "Добро пожаловать обратно",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться",
     "aboutProjectTitle": "О проекте",
     "aboutProjectText": "Наш проект — инструмент для работы с API, вдохновлённый Postman.",
     "aboutTeamTitle": "Наша команда",

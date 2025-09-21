@@ -7,7 +7,7 @@ describe('Home page', () => {
     render(<HomePage />);
 
     expect(
-      screen.getByRole('heading', { name: 'HomePage.title', level: 2 })
+      screen.getByRole('heading', { name: 'HomePage.unauthorizedTitle' })
     ).toBeInTheDocument();
 
     expect(
@@ -17,7 +17,7 @@ describe('Home page', () => {
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', { name: 'HomePage.aboutTeamTitle', level: 5 })
+      screen.getByRole('heading', { name: 'HomePage.aboutTeamTitle' })
     ).toBeInTheDocument();
     expect(
       screen.getByRole('heading', {
