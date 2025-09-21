@@ -47,6 +47,7 @@ describe('fetchProxyRequest (Jest)', () => {
     expect(calledInit?.method).toBe('POST');
     expect(calledInit?.headers).toEqual({
       'Content-Type': 'application/json',
+      Authorization: 'Bearer token',
     });
 
     const sentBody = JSON.parse(String(calledInit?.body));

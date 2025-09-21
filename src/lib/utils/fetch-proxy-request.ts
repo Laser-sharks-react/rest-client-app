@@ -13,7 +13,10 @@ export const fetchProxyRequest = async ({
       `${process.env.NEXT_PUBLIC_APP_URL}${ROUTES.proxy}`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
         body: JSON.stringify({ url, method, body, headers }),
       }
     );
