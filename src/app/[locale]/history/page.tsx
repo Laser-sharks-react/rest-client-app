@@ -1,7 +1,8 @@
 import 'server-only';
 import NextLink from 'next/link';
 import { Container, Stack, Typography, Link as MUILink } from '@mui/material';
-import { getUserId } from '@/lib/utils/get-user-id';
+
+import { getUserId } from '@/lib/utils/session/get-user-id';
 import { RequestList } from '@/components/request-list';
 import { getTranslations } from 'next-intl/server';
 import { getUserRequests } from '@/lib/firebase-admin';

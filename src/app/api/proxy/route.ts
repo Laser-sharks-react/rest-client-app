@@ -1,6 +1,6 @@
 import { DEFAULT_HTTP_METHOD } from '@/lib/constants/request';
 import { setUserRequest } from '@/lib/firebase-admin';
-import { getUserId } from '@/lib/utils/get-user-id';
+import { getUserId } from '@/lib/utils/session/get-user-id';
 import { type NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
