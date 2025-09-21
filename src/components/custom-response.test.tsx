@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { CustomResponse } from './custom-response';
+import type { ApiResponse } from '@/lib/types/response';
 
 jest.mock('react-syntax-highlighter', () => ({
   Prism: ({ children }: { children: React.ReactNode }) => (
@@ -34,7 +35,7 @@ jest.mock('@mui/material', () => {
 
 describe('CustomResponse', () => {
   test('renders title, status chip (primary) and JSON body', () => {
-    const response = {
+    const response: ApiResponse = {
       status: 200,
       ok: true,
       json: { data: 'testData' },
@@ -57,10 +58,10 @@ describe('CustomResponse', () => {
   });
 
   test('uses error color for status >= 400', () => {
-    const response = {
+    const response: ApiResponse = {
       status: 404,
       ok: false,
-      json: { message: 'Not Found' },
+      json: { error: 'Not Found' },
     };
 
     render(<CustomResponse response={response} />);
@@ -71,11 +72,11 @@ describe('CustomResponse', () => {
 
     const code = screen.getByTestId('code');
     expect(code).toHaveTextContent('"status": 404');
-    expect(code).toHaveTextContent('"message": "Not Found"');
+    expect(code).toHaveTextContent('"error": "Not Found"');
   });
 
   test('renders without chip when status is missing', () => {
-    const response = {
+    const response: ApiResponse = {
       status: 0,
       ok: true,
       json: {},
