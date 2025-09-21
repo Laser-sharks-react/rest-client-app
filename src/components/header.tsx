@@ -79,13 +79,22 @@ export default function Header() {
           <LangSelector />
 
           {!user && (
-            <Button
-              component={NextLink}
-              href={ROUTES.login}
-              startIcon={<LoginIcon />}
-            >
-              {t('login')}
-            </Button>
+            <>
+              <Button
+                component={NextLink}
+                href={ROUTES.login}
+                startIcon={<LoginIcon />}
+              >
+                {t('login')}
+              </Button>
+              <Button
+                component={NextLink}
+                href={ROUTES.signup}
+                startIcon={<LoginIcon />}
+              >
+                {t('signup')}
+              </Button>
+            </>
           )}
           {user && (
             <Button
