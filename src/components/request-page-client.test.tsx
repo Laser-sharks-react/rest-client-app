@@ -93,7 +93,6 @@ describe('RequestPageClient', () => {
 
     expect(getNewUrlMock).toHaveBeenCalledWith({ transformed: true });
     expect(pushMock).toHaveBeenCalledWith('/request?mocked=1');
-    // expect(fetchDataMock).toHaveBeenCalledWith(requestFromStore);
   });
 
   test('shows loader when isLoading=true', () => {
