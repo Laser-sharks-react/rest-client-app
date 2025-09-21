@@ -28,5 +28,4 @@ describe('access-routes utils', () => {
     expect(isPublicRoute(ROUTES.request)).toBe(false);
     expect(isPublicRoute(ROUTES.variables)).toBe(false);
   });
-
 });

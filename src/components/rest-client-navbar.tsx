@@ -39,6 +39,7 @@ export function RestClientNavbar() {
     >
       <Button
         component={Link}
+        prefetch={false}
         href={ROUTES.request}
         startIcon={<TabOutlined />}
       >
@@ -47,6 +48,7 @@ export function RestClientNavbar() {
 
       <Button
         component={Link}
+        prefetch={false}
         href={ROUTES.variables}
         startIcon={<InboxOutlined />}
       >
@@ -55,6 +57,7 @@ export function RestClientNavbar() {
 
       <Button
         component={Link}
+        prefetch={false}
         href={ROUTES.history}
         startIcon={<ScheduleOutlined />}
       >
