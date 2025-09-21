@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Container,
   Button,
@@ -10,34 +12,40 @@ import {
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/constants/routes';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/lib/firebase';
 
 export default function Page() {
   const t = useTranslations('HomePage');
+  const [user, loading] = useAuthState(auth);
 
   return (
     <Container className="flex flex-col justify-center items-center gap-8">
-      <Typography color="primary" variant="h2" component="h2">
-        {t('title')}
+      <Typography variant="h5" color="secondary">
+        {!loading && user
+          ? `${t('authorizedTitle')}, ${user.displayName ?? user.email}!`
+          : `${t('unauthorizedTitle')}!`}
       </Typography>
-
-      <div className="flex gap-4">
-        <Button
-          component={Link}
-          href={ROUTES.login}
-          variant="contained"
-          color="primary"
-        >
-          {t('signIn')}
-        </Button>
-        <Button
-          component={Link}
-          href={ROUTES.signup}
-          variant="outlined"
-          color="secondary"
-        >
-          {t('signUp')}
-        </Button>
-      </div>
+      {!loading && !user && (
+        <div className="flex gap-4">
+          <Button
+            component={Link}
+            href={ROUTES.login}
+            variant="contained"
+            color="primary"
+          >
+            {t('signIn')}
+          </Button>
+          <Button
+            component={Link}
+            href={ROUTES.signup}
+            variant="outlined"
+            color="secondary"
+          >
+            {t('signUp')}
+          </Button>
+        </div>
+      )}
 
       <Card className="w-full max-w-2xl shadow-md">
         <CardContent>
