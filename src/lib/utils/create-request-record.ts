@@ -2,6 +2,7 @@ import type { RequestRecord } from '../types/request';
 import { isHttpHeaderArray } from './is-http-header-array';
 import { isMethod } from './is-method';
 import { isRecord } from './is-record';
+import { DEFAULT_HTTP_METHOD } from '@/lib/constants/request';
 
 export function createRequestRecord(
   data: unknown,
@@ -11,7 +12,9 @@ export function createRequestRecord(
   const restoreRaw = isRecord(rawData.restore) ? rawData.restore : {};
 
   const method = isMethod(rawData.method) ? rawData.method : null;
-  const restoreMethod = isMethod(restoreRaw.method) ? restoreRaw.method : null;
+  const restoreMethod = isMethod(restoreRaw.method)
+    ? restoreRaw.method
+    : DEFAULT_HTTP_METHOD;
   const headers =
     'headers' in restoreRaw && isHttpHeaderArray(restoreRaw.headers)
       ? restoreRaw.headers

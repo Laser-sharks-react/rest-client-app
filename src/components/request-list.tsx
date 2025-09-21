@@ -22,8 +22,6 @@ import { isRequestState } from '@/lib/utils/is-request-state';
 export function RequestList({ rows }: { rows: RequestRecord[] }) {
   const t = useTranslations('RequestList');
 
-  console.log(rows);
-
   return (
     <section>
       <Typography variant="h6" className="mb-2">
