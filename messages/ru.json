@@ -52,7 +52,8 @@
     "login": "Войти",
     "logout": "Выйти",
     "logoutSuccess": "Выход выполнен успешно.",
-    "logoutError": "Ошибка выхода."
+    "logoutError": "Ошибка выхода.",
+    "main": "Главная"
   },
   "Footer": {
     "rss": "Rolling Scopes School",

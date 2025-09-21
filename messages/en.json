@@ -64,7 +64,8 @@
     "login": "Log In",
     "logout": "Log out",
     "logoutSuccess": "Logged out successfully.",
-    "logoutError": "Logout failed."
+    "logoutError": "Logout failed.",
+    "main": "Main"
   },
   "Footer": {
     "rss": "Rolling Scopes School",

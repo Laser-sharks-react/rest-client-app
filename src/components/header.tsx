@@ -21,6 +21,7 @@ import Image from 'next/image';
 import AppLogo from '../../public/shark-bite-logo.svg';
 import { useRequestStore } from '@/store/request-store';
 import { useVariablesStore } from '@/store/variables-store';
+import { Link } from '@/i18n/navigation';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -97,14 +98,19 @@ export default function Header() {
             </>
           )}
           {user && (
-            <Button
-              component={NextLink}
-              href={ROUTES.login}
-              onClick={onLogout}
-              startIcon={<LoginIcon />}
-            >
-              {t('logout')}
-            </Button>
+            <>
+              <Button component={NextLink} href={ROUTES.home}>
+                {t('main')}
+              </Button>
+              <Button
+                component={NextLink}
+                href={ROUTES.login}
+                onClick={onLogout}
+                startIcon={<LoginIcon />}
+              >
+                {t('logout')}
+              </Button>
+            </>
           )}
         </Stack>
       </Toolbar>
