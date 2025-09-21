@@ -4,7 +4,6 @@ import { CircularProgress } from '@mui/material';
 import dynamic from 'next/dynamic';
 import { COOKIES } from '@/lib/constants/cookie';
 import { getSessionToken } from '@/lib/utils/session/get-session-token';
-
 interface Props {
   params: Promise<{ params?: string[] }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
