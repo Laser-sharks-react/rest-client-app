@@ -44,6 +44,7 @@ export default function Login() {
       enqueueSnackbar(t('loginUserSuccess'), { variant: 'success' });
       router.replace(ROUTES.home);
     } catch (err) {
+      console.log(err);
       enqueueSnackbar(
         `${t('loginUserError')} ${err instanceof Error ? err.message : ''}`,
         { variant: 'error' }
@@ -62,7 +63,7 @@ export default function Login() {
     >
       <Card
         component="form"
-        sx={{ borderRadius: 2, p: 2, maxWidth: '400px' }}
+        sx={{ borderRadius: 2, p: 2, width: '320px' }}
         onSubmit={handleSubmit(handleLogin)}
       >
         <Stack gap={2}>
